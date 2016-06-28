@@ -46,7 +46,7 @@ GO
 
 CREATE TABLE OuterChange -- Õ¾Íâ»»³Ë
 (
-	Onter_Change_Id INT PRIMARY KEY,
+	Outer_Change_Id INT PRIMARY KEY,
 	From_Station_Line_Id INT FOREIGN KEY REFERENCES StationLine(Station_Line_Id),
 	To_Station_Line_Id INT FOREIGN KEY REFERENCES StationLine(Station_Line_Id),
 	Cost TIME,

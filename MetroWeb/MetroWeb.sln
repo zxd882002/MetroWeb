@@ -1,7 +1,72 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroWebTest", "MetroWebTest\MetroWebTest.csproj", "{530DA075-66C3-4A7F-9173-FDEBCEC67CDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA48E882-1FAD-4E77-BC4E-7A2F80F1890E}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		MetroWeb.vsmdi = MetroWeb.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccessLibrary", "DatabaseAccessLibrary\DatabaseAccessLibrary.csproj", "{44632D8B-C013-4D5A-90BE-F2D53E3448DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHelper", "ServiceHelper\ServiceHelper.csproj", "{1A74B481-4FB5-425B-97A5-BD9412251C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroWebWCFService", "MetroWebWCFService\MetroWebWCFService.csproj", "{F26A4C98-F159-415E-87FE-9FF5019468B7}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MetroWebSite", "..\MetroWebSite", "{DCE597F0-DE23-4AD1-800D-C4E7F0BFB4DE}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/MetroWebSite"
+		Debug.AspNetCompiler.PhysicalPath = "..\MetroWebSite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\MetroWebSite\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/MetroWebSite"
+		Release.AspNetCompiler.PhysicalPath = "..\MetroWebSite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\MetroWebSite\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "3301"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MetroWeb.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{530DA075-66C3-4A7F-9173-FDEBCEC67CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{530DA075-66C3-4A7F-9173-FDEBCEC67CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{530DA075-66C3-4A7F-9173-FDEBCEC67CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{530DA075-66C3-4A7F-9173-FDEBCEC67CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44632D8B-C013-4D5A-90BE-F2D53E3448DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44632D8B-C013-4D5A-90BE-F2D53E3448DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44632D8B-C013-4D5A-90BE-F2D53E3448DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44632D8B-C013-4D5A-90BE-F2D53E3448DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A74B481-4FB5-425B-97A5-BD9412251C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A74B481-4FB5-425B-97A5-BD9412251C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A74B481-4FB5-425B-97A5-BD9412251C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A74B481-4FB5-425B-97A5-BD9412251C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F26A4C98-F159-415E-87FE-9FF5019468B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F26A4C98-F159-415E-87FE-9FF5019468B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F26A4C98-F159-415E-87FE-9FF5019468B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F26A4C98-F159-415E-87FE-9FF5019468B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCE597F0-DE23-4AD1-800D-C4E7F0BFB4DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCE597F0-DE23-4AD1-800D-C4E7F0BFB4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCE597F0-DE23-4AD1-800D-C4E7F0BFB4DE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCE597F0-DE23-4AD1-800D-C4E7F0BFB4DE}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
