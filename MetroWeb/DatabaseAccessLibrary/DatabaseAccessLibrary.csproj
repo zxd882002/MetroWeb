@@ -41,11 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InterChange.cs" />
+    <Compile Include="Interface\IDatabase.cs" />
+    <Compile Include="Interface\ITable.cs" />
     <Compile Include="Line.cs" />
+    <Compile Include="MetroWebDatabase.cs" />
     <Compile Include="OuterChange.cs" />
     <Compile Include="Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interface\ITableObject.cs" />
+    <Compile Include="Interface\ITableRow.cs" />
     <Compile Include="StationLine.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
