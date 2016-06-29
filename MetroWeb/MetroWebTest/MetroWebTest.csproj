@@ -46,7 +46,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="DatabaseTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
+      <Project>{44632D8B-C013-4D5A-90BE-F2D53E3448DC}</Project>
+      <Name>DatabaseAccessLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroWebWCFService\MetroWebWCFService.csproj">
+      <Project>{F26A4C98-F159-415E-87FE-9FF5019468B7}</Project>
+      <Name>MetroWebWCFService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceHelper\ServiceHelper.csproj">
+      <Project>{1A74B481-4FB5-425B-97A5-BD9412251C3A}</Project>
+      <Name>ServiceHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

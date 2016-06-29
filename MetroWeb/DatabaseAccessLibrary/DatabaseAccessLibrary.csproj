@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connectors\SqlServerConnector.cs" />
     <Compile Include="InterChange.cs" />
+    <Compile Include="Interface\IConnector.cs" />
     <Compile Include="Interface\IDatabase.cs" />
     <Compile Include="Interface\ITable.cs" />
     <Compile Include="Line.cs" />
@@ -50,7 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interface\ITableRow.cs" />
     <Compile Include="StationLine.cs" />
+    <Compile Include="StationCollection.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

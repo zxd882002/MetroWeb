@@ -1,8 +1,13 @@
 ﻿
+using System.Collections.Generic;
+
 namespace DatabaseAccessLibrary.Interface
 {
-    interface IDatabase
+    public interface IDatabase
     {
-        string ConnectionString { get; set; }
+        string ConnectionString { get; }
+
+        List<T> Table<T>() where T : ITableRow;
+        List<T> Table<T>(T searchCriteria) where T : ITableRow;
     }
 }

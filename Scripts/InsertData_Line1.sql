@@ -1,7 +1,6 @@
 USE MetroWeb
 GO
 
-Delete from Station
 INSERT INTO Station VALUES
 	(101,'莘庄'),
 	(102,'外环路'),
@@ -33,15 +32,13 @@ INSERT INTO Station VALUES
 	(128,'富锦路')
 GO
 
-Delete from Line
 INSERT INTO Line VALUES
 	(101,'1号线',128, 101),
 	(102,'1号线',101, 128),
-	(103,'1号线',105, 116),
+	(103,'1号线',105, 116)
 GO
 
--- id, line, station, index, duration, last_station_cost, start, end
-Delete from StationLine
+-- id, line, station, duration, last_station_cost, start, end
 INSERT INTO StationLine VALUES
 	-- 富锦路 到 莘庄
 	(10100, 101, 128, '0:04:05', '00:00:00', '5:30', '22:30'),

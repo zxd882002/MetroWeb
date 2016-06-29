@@ -1,6 +1,12 @@
 USE master
+GO
+
 IF EXISTS(select * from sys.databases where name='MetroWeb')
+BEGIN
+EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = 'MetroWeb'
+ALTER DATABASE MetroWeb SET SINGLE_USER WITH ROLLBACK IMMEDIATE
 DROP DATABASE MetroWeb
+END
 GO
 
 CREATE DATABASE MetroWeb
@@ -54,7 +60,7 @@ CREATE TABLE OuterChange -- Õ¾Íâ»»³Ë
 GO
 
 CREATE VIEW V_StationLine AS
-SELECT l.Line_Name, s2.Station_Name AS 'From', s3.Station_Name AS 'To', s.Station_Name, sl.Index_Number, sl.Duration, sl.Cost_Arrived, sl.Start_Time, sl.End_Time
+SELECT l.Line_Name, s2.Station_Name AS 'From', s3.Station_Name AS 'To', s.Station_Name, sl.Duration, sl.Cost_Arrived, sl.Start_Time, sl.End_Time
 FROM StationLine sl 
 INNER JOIN Line l ON l.Line_Id = sl.Line_Id
 INNER JOIN Station s ON s.Station_Id = sl.Station_Id
