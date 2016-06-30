@@ -46,7 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DatabaseTest.cs" />
+    <Compile Include="StationTest.cs" />
+    <Compile Include="LineTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">

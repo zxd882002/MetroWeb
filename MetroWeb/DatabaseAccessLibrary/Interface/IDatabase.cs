@@ -7,7 +7,6 @@ namespace DatabaseAccessLibrary.Interface
     {
         string ConnectionString { get; }
 
-        List<T> Table<T>() where T : ITableRow;
-        List<T> Table<T>(T searchCriteria) where T : ITableRow;
+        ITable<T> Table<T>() where T : ITableRow;
     }
 }

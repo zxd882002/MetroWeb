@@ -8,6 +8,6 @@ namespace DatabaseAccessLibrary.Interface
         List<T> Select(T searchCriteria);
         bool Insert(T tableRow);
         bool Delete(T searchCriteria);
-        bool Update(T searchCriteria, T tableRow);
+        bool Update(T searchCriteria, T newTableRow);
     }
 }

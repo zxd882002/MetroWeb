@@ -16,13 +16,13 @@ namespace DatabaseAccessLibrary.Connectors
             ConnectionString = connectionString;
         }
 
-        public void ExecuteReader(string query, Dictionary<string, object> parameter, DataReaderHandler dataReaderHandler)
+        public void ExecuteReader(string query, Dictionary<string, object> parameters, DataReaderHandler dataReaderHandler)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    foreach (var nameValue in parameter)
+                    foreach (var nameValue in parameters)
                     {
                         command.Parameters.Add(new SqlParameter(nameValue.Key, nameValue.Value));
                     }
@@ -33,6 +33,26 @@ namespace DatabaseAccessLibrary.Connectors
                     connection.Close();
                 }
             }
+        }
+
+        public int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
+        {
+            int affectedRowCount = 0;
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    foreach (var nameValue in parameters)
+                    {
+                        command.Parameters.Add(new SqlParameter(nameValue.Key, nameValue.Value));
+                    }
+
+                    connection.Open();
+                    affectedRowCount = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            return affectedRowCount;
         }
     }
 }

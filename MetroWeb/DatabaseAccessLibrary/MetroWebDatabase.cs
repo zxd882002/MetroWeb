@@ -16,33 +16,17 @@ namespace DatabaseAccessLibrary
             }
         }
 
-        private StationCollection stationTable;
-
-        public List<T> Table<T>() where T : ITableRow
-        {
-            var table = GetTable<T>();
-            if (table == null)
-                throw new Exception(string.Format("Type {0} is not found in MetroWebDatabase", typeof(T)));
-            return table.Select();
-        }
-
-        public List<T> Table<T>(T searchCriteria) where T : ITableRow
-        {
-            var table = GetTable<T>();
-            if (table == null)
-                throw new Exception(string.Format("Type {0} is not found in MetroWebDatabase", typeof(T)));
-
-            return table.Select(searchCriteria);
-        }
-
-        private ITable<T> GetTable<T>() where T : ITableRow
+        public ITable<T> Table<T>() where T : ITableRow
         {
             ITable<T> table = null;
             IConnector connector = new SqlServerConnector(ConnectionString);
             if (typeof(T) == typeof(Station))
             {
-                stationTable = new StationCollection(connector);
-                table = stationTable as ITable<T>;
+                table = new StationTable(connector) as ITable<T>;
+            }
+            else if (typeof(T) == typeof(Line))
+            {
+                table = new LineTable(this, connector) as ITable<T>;
             }
             return table;
         }
