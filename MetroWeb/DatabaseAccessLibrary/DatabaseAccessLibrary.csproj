@@ -54,6 +54,9 @@
     <Compile Include="StationLine.cs" />
     <Compile Include="StationTable.cs" />
     <Compile Include="LineTable.cs" />
+    <Compile Include="InterChangeTable.cs" />
+    <Compile Include="OuterChangeTable.cs" />
+    <Compile Include="StationLineTable.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
