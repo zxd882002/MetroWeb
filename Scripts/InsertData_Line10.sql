@@ -32,7 +32,7 @@ INSERT INTO Station VALUES
 --(202 , '虹桥火车站'),
   (1021, '龙柏新村'),
   (1022, '紫藤路'),
-  (1023, '航中路'),  
+  (1023, '航中路')
 GO
 
 INSERT INTO Line VALUES

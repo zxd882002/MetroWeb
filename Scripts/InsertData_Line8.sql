@@ -35,8 +35,8 @@ INSERT INTO Station VALUES
 GO
 
 INSERT INTO Line VALUES
-	(801,'8号线',801,827),
-	(802,'8号线',827,801)
+	(801,'8号线',801,825),
+	(802,'8号线',825,801)
 GO
 
 -- id, line, station, duration, last_station_cost, start, end
