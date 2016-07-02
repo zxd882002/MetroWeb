@@ -1,7 +1,4 @@
-﻿
-using System.Collections.Generic;
-
-namespace DatabaseAccessLibrary.Interface
+﻿namespace DatabaseAccessLibrary.Interface
 {
     public interface IDatabase
     {

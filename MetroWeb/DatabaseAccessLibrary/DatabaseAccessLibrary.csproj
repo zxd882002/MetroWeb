@@ -41,22 +41,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connectors\SqlServerConnector.cs" />
-    <Compile Include="InterChange.cs" />
+    <Compile Include="Model\InterChange.cs" />
     <Compile Include="Interface\IConnector.cs" />
     <Compile Include="Interface\IDatabase.cs" />
     <Compile Include="Interface\ITable.cs" />
-    <Compile Include="Line.cs" />
-    <Compile Include="MetroWebDatabase.cs" />
-    <Compile Include="OuterChange.cs" />
-    <Compile Include="Station.cs" />
+    <Compile Include="Model\Line.cs" />
+    <Compile Include="Database\MetroWebDatabase.cs" />
+    <Compile Include="Model\OuterChange.cs" />
+    <Compile Include="Model\Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interface\ITableRow.cs" />
-    <Compile Include="StationLine.cs" />
-    <Compile Include="StationTable.cs" />
-    <Compile Include="LineTable.cs" />
-    <Compile Include="InterChangeTable.cs" />
-    <Compile Include="OuterChangeTable.cs" />
-    <Compile Include="StationLineTable.cs" />
+    <Compile Include="Model\StationLine.cs" />
+    <Compile Include="Table\StationTable.cs" />
+    <Compile Include="Table\LineTable.cs" />
+    <Compile Include="Table\InterChangeTable.cs" />
+    <Compile Include="Table\OuterChangeTable.cs" />
+    <Compile Include="Table\StationLineTable.cs" />
+    <Compile Include="Table\TableBase.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

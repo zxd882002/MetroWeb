@@ -1,7 +1,7 @@
 ﻿using System;
 using DatabaseAccessLibrary.Interface;
 
-namespace DatabaseAccessLibrary
+namespace DatabaseAccessLibrary.Model
 {
     public class StationLine :ITableRow
     {

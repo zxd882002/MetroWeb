@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DatabaseAccessLibrary;
+using DatabaseAccessLibrary.Database;
 using DatabaseAccessLibrary.Interface;
+using DatabaseAccessLibrary.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MetroWebTest

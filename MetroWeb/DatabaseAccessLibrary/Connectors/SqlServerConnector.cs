@@ -16,8 +16,9 @@ namespace DatabaseAccessLibrary.Connectors
             ConnectionString = connectionString;
         }
 
-        public void ExecuteReader(string query, Dictionary<string, object> parameters, DataReaderHandler dataReaderHandler)
+        public List<T> ExecuteReader<T>(string query, Dictionary<string, object> parameters, DataReaderHandler dataReaderHandler) where T : ITableRow
         {
+            List<ITableRow> result;
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -29,10 +30,12 @@ namespace DatabaseAccessLibrary.Connectors
 
                     connection.Open();
                     Reader = command.ExecuteReader();
-                    dataReaderHandler();
+                    result = dataReaderHandler();
                     connection.Close();
                 }
             }
+
+            return result as List<T>;
         }
 
         public int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
@@ -54,5 +57,6 @@ namespace DatabaseAccessLibrary.Connectors
             }
             return affectedRowCount;
         }
+
     }
 }

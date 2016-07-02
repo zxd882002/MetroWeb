@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using DatabaseAccessLibrary.Interface;
+using DatabaseAccessLibrary.Model;
 
-namespace DatabaseAccessLibrary
+namespace DatabaseAccessLibrary.Table
 {
     public class InterChangeTable : ITable<InterChange>
     {

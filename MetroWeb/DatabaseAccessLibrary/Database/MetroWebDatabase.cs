@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using DatabaseAccessLibrary.Connectors;
+﻿using DatabaseAccessLibrary.Connectors;
 using DatabaseAccessLibrary.Interface;
+using DatabaseAccessLibrary.Model;
+using DatabaseAccessLibrary.Table;
 
-namespace DatabaseAccessLibrary
+namespace DatabaseAccessLibrary.Database
 {
     public class MetroWebDatabase : IDatabase
     {
@@ -26,7 +26,7 @@ namespace DatabaseAccessLibrary
             }
             else if (typeof(T) == typeof(Line))
             {
-                table = new LineTable(this, connector) as ITable<T>;
+                table = new LineTable(connector) as ITable<T>;
             }
             return table;
         }

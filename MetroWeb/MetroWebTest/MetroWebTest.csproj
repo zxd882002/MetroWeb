@@ -61,10 +61,6 @@
       <Project>{F26A4C98-F159-415E-87FE-9FF5019468B7}</Project>
       <Name>MetroWebWCFService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceHelper\ServiceHelper.csproj">
-      <Project>{1A74B481-4FB5-425B-97A5-BD9412251C3A}</Project>
-      <Name>ServiceHelper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

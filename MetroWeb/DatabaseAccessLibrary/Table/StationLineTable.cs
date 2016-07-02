@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Text;
 using DatabaseAccessLibrary.Interface;
+using DatabaseAccessLibrary.Model;
 
-namespace DatabaseAccessLibrary
+namespace DatabaseAccessLibrary.Table
 {
     public class StationLineTable : ITable<StationLine>
     {
