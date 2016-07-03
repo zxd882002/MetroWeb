@@ -49,7 +49,6 @@
     <Compile Include="StationTest.cs" />
     <Compile Include="LineTest.cs" />
     <Compile Include="InterChangeTest.cs" />
-    <Compile Include="OuterChangeTest.cs" />
     <Compile Include="StationLineTest.cs" />
   </ItemGroup>
   <ItemGroup>

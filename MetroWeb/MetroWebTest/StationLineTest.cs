@@ -11,63 +11,69 @@ namespace MetroWebTest
     public class StationLineTest
     {
         [TestMethod]
-        public void GetLine101()
+        public void GetStationLine10101()
         {
             IDatabase metroWebDatabase = new MetroWebDatabase();
-            List<Line> lineList = metroWebDatabase.Table<Line>().Select(new Line { LineId = 101 });
-            Assert.AreEqual(lineList.Count, 1);
-            Assert.AreEqual(lineList[0].LineId, 101);
-            Assert.AreEqual(lineList[0].LineName, "1号线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            List<StationLine> stationLineList = metroWebDatabase.Table<StationLine>().Select(new StationLine { StationLineId = 10101 });
+            Assert.AreEqual(stationLineList.Count, 1);
+            Assert.AreEqual(stationLineList[0].StationLineId, 10101);
+            Assert.AreEqual(stationLineList[0].StationId, 128);
+            Assert.AreEqual(stationLineList[0].LineId, 101);
+            Assert.AreEqual(stationLineList[0].Duration, new TimeSpan(0, 4, 5));
+            Assert.AreEqual(stationLineList[0].CostArrived, new TimeSpan(0, 0, 0));
+            Assert.AreEqual(stationLineList[0].StartTime, DateTime.Today.Add(new TimeSpan(5, 30, 0)));
+            Assert.AreEqual(stationLineList[0].EndTime, DateTime.Today.Add(new TimeSpan(22, 30, 0)));
         }
 
         [TestMethod]
-        public void InsertUpdateAndDeleteLine()
+        public void InsertUpdateAndDeleteStationLine()
         {
-            int randomLineId = 990000 + new Random().Next(10000);
+            int randomStationLineId = 990000 + new Random().Next(10000);
             IDatabase metroWebDatabase = new MetroWebDatabase();
-            bool inserted = metroWebDatabase.Table<Line>().Insert(
-                new Line
+            bool inserted = metroWebDatabase.Table<StationLine>().Insert(
+                new StationLine
                 {
-                    LineId = randomLineId,
-                    LineName = "专线",
-                    LineFromStation = new Station { StationId = 128 },
-                    LineToStation = new Station { StationId = 101 }
+                    StationLineId = randomStationLineId,
+                    StationId = 128,
+                    LineId = 101,
+                    Duration = new TimeSpan(1, 0, 0),
+                    CostArrived = new TimeSpan(2, 0, 0),
+                    StartTime = DateTime.Today.Add(new TimeSpan(1, 00, 0)),
+                    EndTime = DateTime.Today.Add(new TimeSpan(3, 0, 0))
                 });
             Assert.IsTrue(inserted);
 
-            List<Line> lineList = metroWebDatabase.Table<Line>().Select(new Line { LineId = randomLineId });
-            Assert.AreEqual(lineList.Count, 1);
-            Assert.AreEqual(lineList[0].LineId, randomLineId);
-            Assert.AreEqual(lineList[0].LineName, "专线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            List<StationLine> stationLineList = metroWebDatabase.Table<StationLine>().Select(new StationLine { StationLineId = randomStationLineId });
+            Assert.AreEqual(stationLineList.Count, 1);
+            Assert.AreEqual(stationLineList[0].StationLineId, randomStationLineId);
+            Assert.AreEqual(stationLineList[0].StationId, 128);
+            Assert.AreEqual(stationLineList[0].LineId, 101);
+            Assert.AreEqual(stationLineList[0].Duration, new TimeSpan(1, 0, 0));
+            Assert.AreEqual(stationLineList[0].CostArrived, new TimeSpan(2, 0, 0));
+            Assert.AreEqual(stationLineList[0].StartTime, DateTime.Today.Add(new TimeSpan(1, 00, 0)));
+            Assert.AreEqual(stationLineList[0].EndTime, DateTime.Today.Add(new TimeSpan(3, 0, 0)));
 
-            bool updated = metroWebDatabase.Table<Line>().Update(
-                new Line { LineId = randomLineId },
-                new Line { LineName = "不是专线" }
+            bool updated = metroWebDatabase.Table<StationLine>().Update(
+                new StationLine { StationLineId = randomStationLineId },
+                new StationLine { EndTime = DateTime.Today.Add(new TimeSpan(23, 0, 0)) }
                 );
             Assert.IsTrue(updated);
 
-            lineList = metroWebDatabase.Table<Line>().Select(new Line { LineId = randomLineId });
-            Assert.AreEqual(lineList.Count, 1);
-            Assert.AreEqual(lineList[0].LineId, randomLineId);
-            Assert.AreEqual(lineList[0].LineName, "不是专线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            stationLineList = metroWebDatabase.Table<StationLine>().Select(new StationLine { StationLineId = randomStationLineId });
+            Assert.AreEqual(stationLineList.Count, 1);
+            Assert.AreEqual(stationLineList[0].StationLineId, randomStationLineId);
+            Assert.AreEqual(stationLineList[0].StationId, 128);
+            Assert.AreEqual(stationLineList[0].LineId, 101);
+            Assert.AreEqual(stationLineList[0].Duration, new TimeSpan(1, 0, 0));
+            Assert.AreEqual(stationLineList[0].CostArrived, new TimeSpan(2, 0, 0));
+            Assert.AreEqual(stationLineList[0].StartTime, DateTime.Today.Add(new TimeSpan(1, 00, 0)));
+            Assert.AreEqual(stationLineList[0].EndTime, DateTime.Today.Add(new TimeSpan(23, 0, 0)));
 
-            bool deleted = metroWebDatabase.Table<Line>().Delete(new Line { LineId = randomLineId });
+            bool deleted = metroWebDatabase.Table<StationLine>().Delete(new StationLine { StationLineId = randomStationLineId });
             Assert.IsTrue(deleted);
 
-            lineList = metroWebDatabase.Table<Line>().Select(new Line { LineId = randomLineId });
-            Assert.AreEqual(lineList.Count, 0);
+            stationLineList = metroWebDatabase.Table<StationLine>().Select(new StationLine { StationLineId = randomStationLineId });
+            Assert.AreEqual(stationLineList.Count, 0);
         }
     }
 }

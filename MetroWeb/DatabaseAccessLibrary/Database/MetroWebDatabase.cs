@@ -28,6 +28,14 @@ namespace DatabaseAccessLibrary.Database
             {
                 table = new LineTable(connector) as ITable<T>;
             }
+            else if (typeof (T) == typeof (StationLine))
+            {
+                table = new StationLineTable(connector) as ITable<T>;
+            }
+            else if (typeof (T) == typeof (InterChange))
+            {
+                table = new InterChangeTable(connector) as ITable<T>;
+            }
             return table;
         }
     }

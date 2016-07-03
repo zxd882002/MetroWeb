@@ -11,63 +11,57 @@ namespace MetroWebTest
     public class InterChangeTest
     {
         [TestMethod]
-        public void GetLine101()
+        public void GetInterChange101020101()
         {
             IDatabase metroWebDatabase = new MetroWebDatabase();
-            List<Line> lineList = metroWebDatabase.Table<Line>().Select(new Line { LineId = 101 });
-            Assert.AreEqual(lineList.Count, 1);
-            Assert.AreEqual(lineList[0].LineId, 101);
-            Assert.AreEqual(lineList[0].LineName, "1号线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            List<InterChange> interChangeList = metroWebDatabase.Table<InterChange>().Select(new InterChange { InterChangeId = 101020101 });
+            Assert.AreEqual(interChangeList.Count, 1);
+            Assert.AreEqual(interChangeList[0].InterChangeId, 101020101);
+            Assert.AreEqual(interChangeList[0].FromStationLineId, 10115);
+            Assert.AreEqual(interChangeList[0].ToStationLineId, 20109);
+            Assert.AreEqual(interChangeList[0].Cost, new TimeSpan(0, 3, 0));
         }
 
         [TestMethod]
-        public void InsertUpdateAndDeleteLine()
+        public void InsertUpdateAndDeleteInterChange()
         {
-            int randomLineId = 990000 + new Random().Next(10000);
+            int randomInterChangeId = 990000 + new Random().Next(10000);
             IDatabase metroWebDatabase = new MetroWebDatabase();
-            bool inserted = metroWebDatabase.Table<Line>().Insert(
-                new Line
+            bool inserted = metroWebDatabase.Table<InterChange>().Insert(
+                new InterChange
                 {
-                    LineId = randomLineId,
-                    LineName = "专线",
-                    LineFromStation = new Station { StationId = 128 },
-                    LineToStation = new Station { StationId = 101 }
+                    InterChangeId = randomInterChangeId,
+                    FromStationLineId = 10115,
+                    ToStationLineId = 20109,
+                    Cost = new TimeSpan(1, 0, 0)
                 });
             Assert.IsTrue(inserted);
 
-            List<Line> lineList = metroWebDatabase.Table<Line>().Select(new Line { LineId = randomLineId });
-            Assert.AreEqual(lineList.Count, 1);
-            Assert.AreEqual(lineList[0].LineId, randomLineId);
-            Assert.AreEqual(lineList[0].LineName, "专线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            List<InterChange> interChangeList = metroWebDatabase.Table<InterChange>().Select(new InterChange { InterChangeId = randomInterChangeId });
+            Assert.AreEqual(interChangeList.Count, 1);
+            Assert.AreEqual(interChangeList[0].InterChangeId, randomInterChangeId);
+            Assert.AreEqual(interChangeList[0].FromStationLineId, 10115);
+            Assert.AreEqual(interChangeList[0].ToStationLineId, 20109);
+            Assert.AreEqual(interChangeList[0].Cost, new TimeSpan(1, 0, 0));
 
-            bool updated = metroWebDatabase.Table<Line>().Update(
-                new Line { LineId = randomLineId },
-                new Line { LineName = "不是专线" }
+            bool updated = metroWebDatabase.Table<InterChange>().Update(
+                new InterChange { InterChangeId = randomInterChangeId },
+                new InterChange { FromStationLineId = 20109, ToStationLineId = 10115 }
                 );
             Assert.IsTrue(updated);
 
-            lineList = metroWebDatabase.Table<Line>().Select(new Line { LineId = randomLineId });
-            Assert.AreEqual(lineList.Count, 1);
-            Assert.AreEqual(lineList[0].LineId, randomLineId);
-            Assert.AreEqual(lineList[0].LineName, "不是专线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            interChangeList = metroWebDatabase.Table<InterChange>().Select(new InterChange { InterChangeId = randomInterChangeId });
+            Assert.AreEqual(interChangeList.Count, 1);
+            Assert.AreEqual(interChangeList[0].InterChangeId, randomInterChangeId);
+            Assert.AreEqual(interChangeList[0].FromStationLineId, 20109);
+            Assert.AreEqual(interChangeList[0].ToStationLineId, 10115);
+            Assert.AreEqual(interChangeList[0].Cost, new TimeSpan(1, 0, 0));
 
-            bool deleted = metroWebDatabase.Table<Line>().Delete(new Line { LineId = randomLineId });
+            bool deleted = metroWebDatabase.Table<InterChange>().Delete(new InterChange { InterChangeId = randomInterChangeId });
             Assert.IsTrue(deleted);
 
-            lineList = metroWebDatabase.Table<Line>().Select(new Line { LineId = randomLineId });
-            Assert.AreEqual(lineList.Count, 0);
+            interChangeList = metroWebDatabase.Table<InterChange>().Select(new InterChange { InterChangeId = randomInterChangeId });
+            Assert.AreEqual(interChangeList.Count, 0);
         }
     }
 }

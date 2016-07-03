@@ -47,7 +47,6 @@
     <Compile Include="Interface\ITable.cs" />
     <Compile Include="Model\Line.cs" />
     <Compile Include="Database\MetroWebDatabase.cs" />
-    <Compile Include="Model\OuterChange.cs" />
     <Compile Include="Model\Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interface\ITableRow.cs" />
@@ -55,7 +54,6 @@
     <Compile Include="Table\StationTable.cs" />
     <Compile Include="Table\LineTable.cs" />
     <Compile Include="Table\InterChangeTable.cs" />
-    <Compile Include="Table\OuterChangeTable.cs" />
     <Compile Include="Table\StationLineTable.cs" />
     <Compile Include="Table\TableBase.cs" />
   </ItemGroup>

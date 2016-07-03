@@ -12,7 +12,7 @@ namespace DatabaseAccessLibrary.Table
         protected string InsertQuery { get; set; }
         protected string DeleteQuery { get; set; }
         protected string UpdateQuery { get; set; }
-        protected DataReaderHandler DataReaderHandler { get; set; }
+        protected DataReaderHandler<T> DataReaderHandler { get; set; }
 
         public TableBase(IConnector connector)
         {
@@ -30,7 +30,7 @@ namespace DatabaseAccessLibrary.Table
             Dictionary<string, object> parameters = SetParameters(searchCriteria);
             string whereClause = GenerateWhereClause(parameters, ref queryParameters);
             string query = SelectQuery + whereClause;
-            List<T> tableList = Connector.ExecuteReader<T>(query, queryParameters, DataReaderHandler);
+            List<T> tableList = Connector.ExecuteReader(query, queryParameters, DataReaderHandler);
             return tableList;
         }
 
@@ -54,9 +54,13 @@ namespace DatabaseAccessLibrary.Table
         public bool Update(T searchCriteria, T newTableRow)
         {
             Dictionary<string, object> queryParameters = new Dictionary<string, object>();
-            Dictionary<string, object> parameters = SetParameters(searchCriteria);
-            string setClause = GenerateSetClause(parameters, ref queryParameters);
-            string whereClause = GenerateWhereClause(parameters, ref queryParameters);
+
+            Dictionary<string, object> setParameters = SetParameters(newTableRow);
+            string setClause = GenerateSetClause(setParameters, ref queryParameters);
+
+            Dictionary<string, object> whereParameters = SetParameters(searchCriteria);
+            string whereClause = GenerateWhereClause(whereParameters, ref queryParameters);
+
             string query = UpdateQuery + setClause + whereClause;
             int affectedRowCount = Connector.ExecuteNonQuery(query, queryParameters);
             return affectedRowCount > 0;
@@ -92,12 +96,14 @@ namespace DatabaseAccessLibrary.Table
             {
                 if (oneParameter.Value != null && !IsDefaultValue(oneParameter.Value))
                 {
+                    string newKey = oneParameter.Key.Replace("@","@new_");
+
                     if (needAnd)
                         setClause.Append(" , ");
                     else
                         setClause.Append(" SET ");
-                    setClause.Append(oneParameter.Key.Substring(1) + " = " + oneParameter.Key);
-                    parameters.Add(oneParameter.Key, oneParameter.Value);
+                    setClause.Append(oneParameter.Key.Substring(1) + " = " + newKey);
+                    parameters.Add(newKey, oneParameter.Value);
                     needAnd = true;
                 }
             }

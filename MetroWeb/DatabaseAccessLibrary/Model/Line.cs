@@ -6,7 +6,7 @@ namespace DatabaseAccessLibrary.Model
     {
         public int LineId { get; set; }
         public string LineName { get; set; }
-        public Station LineFromStation { get; set; }
-        public Station LineToStation { get; set; }
+        public int LineFromStationId { get; set; }
+        public int LineToStationId { get; set; }
     }
 }

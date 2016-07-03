@@ -17,7 +17,7 @@ namespace DatabaseAccessLibrary.Table
             UpdateQuery = "UPDATE Station";
             DataReaderHandler = () =>
             {
-                List<ITableRow> stationList = new List<ITableRow>();
+                List<Station> stationList = new List<Station>();
                 IDataReader reader = connector.Reader;
                 while (reader.Read())
                 {

@@ -18,10 +18,8 @@ namespace MetroWebTest
             Assert.AreEqual(lineList.Count, 1);
             Assert.AreEqual(lineList[0].LineId, 101);
             Assert.AreEqual(lineList[0].LineName, "1号线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            Assert.AreEqual(lineList[0].LineFromStationId, 128);
+            Assert.AreEqual(lineList[0].LineToStationId, 101);
         }
 
         [TestMethod]
@@ -34,8 +32,8 @@ namespace MetroWebTest
                 {
                     LineId = randomLineId,
                     LineName = "专线",
-                    LineFromStation = new Station { StationId = 128 },
-                    LineToStation = new Station { StationId = 101 }
+                    LineFromStationId = 128,
+                    LineToStationId = 101
                 });
             Assert.IsTrue(inserted);
 
@@ -43,10 +41,8 @@ namespace MetroWebTest
             Assert.AreEqual(lineList.Count, 1);
             Assert.AreEqual(lineList[0].LineId, randomLineId);
             Assert.AreEqual(lineList[0].LineName, "专线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            Assert.AreEqual(lineList[0].LineFromStationId, 128);
+            Assert.AreEqual(lineList[0].LineToStationId, 101);
 
             bool updated = metroWebDatabase.Table<Line>().Update(
                 new Line { LineId = randomLineId },
@@ -58,10 +54,8 @@ namespace MetroWebTest
             Assert.AreEqual(lineList.Count, 1);
             Assert.AreEqual(lineList[0].LineId, randomLineId);
             Assert.AreEqual(lineList[0].LineName, "不是专线");
-            Assert.AreEqual(lineList[0].LineFromStation.StationId, 128);
-            Assert.AreEqual(lineList[0].LineFromStation.StationName, "富锦路");
-            Assert.AreEqual(lineList[0].LineToStation.StationId, 101);
-            Assert.AreEqual(lineList[0].LineToStation.StationName, "莘庄");
+            Assert.AreEqual(lineList[0].LineFromStationId, 128);
+            Assert.AreEqual(lineList[0].LineToStationId, 101);
 
             bool deleted = metroWebDatabase.Table<Line>().Delete(new Line { LineId = randomLineId });
             Assert.IsTrue(deleted);
