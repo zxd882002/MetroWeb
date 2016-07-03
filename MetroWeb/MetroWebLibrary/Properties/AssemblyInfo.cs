@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("ServiceHelper")]
+[assembly: AssemblyTitle("MetroWebLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ServiceHelper")]
+[assembly: AssemblyProduct("MetroWebLibrary")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("2c6c3d9b-fc7d-4caa-86f3-10989a9a9fc9")]
+[assembly: Guid("2b56ce4b-faf8-4d37-884e-967fc01401e6")]
 
 // 程序集的版本信息由下面四个值组成:
 //
