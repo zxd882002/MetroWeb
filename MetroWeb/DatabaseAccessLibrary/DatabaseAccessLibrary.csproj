@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connectors\SqlServerConnector.cs" />
-    <Compile Include="Model\InterChange.cs" />
+    <Compile Include="Model\MetroTransfer.cs" />
     <Compile Include="Interface\IConnector.cs" />
     <Compile Include="Interface\IDatabase.cs" />
     <Compile Include="Interface\ITable.cs" />
@@ -53,7 +53,7 @@
     <Compile Include="Model\StationLine.cs" />
     <Compile Include="Table\StationTable.cs" />
     <Compile Include="Table\LineTable.cs" />
-    <Compile Include="Table\InterChangeTable.cs" />
+    <Compile Include="Table\MetroTransferTable.cs" />
     <Compile Include="Table\StationLineTable.cs" />
     <Compile Include="Table\TableBase.cs" />
   </ItemGroup>

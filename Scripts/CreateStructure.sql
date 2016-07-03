@@ -34,33 +34,25 @@ CREATE TABLE StationLine -- Õ¾Ì¨ÐÅÏ¢
 	Station_Line_Id INT PRIMARY KEY,
 	Line_Id INT FOREIGN KEY REFERENCES Line(Line_Id),
 	Station_Id INT FOREIGN KEY REFERENCES Station(Station_Id),
-	Duration TIME,
-	Cost_Arrived TIME,
+	Time_Wait TIME,
+	Time_Arrived TIME,
 	Start_Time TIME,
 	End_Time TIME,
 )
 GO
 
-CREATE TABLE InterChange -- Õ¾ÄÚ»»³Ë
+CREATE TABLE MetroTransfer -- »»³Ë
 (
-	Inter_Change_Id BIGINT PRIMARY KEY,
+	Transfer_Id BIGINT PRIMARY KEY,
 	From_Station_Line_Id INT FOREIGN KEY REFERENCES StationLine(Station_Line_Id),
 	To_Station_Line_Id INT FOREIGN KEY REFERENCES StationLine(Station_Line_Id),
-	Cost TIME,
-)
-GO
-
-CREATE TABLE OuterChange -- Õ¾Íâ»»³Ë
-(
-	Outer_Change_Id BIGINT PRIMARY KEY,
-	From_Station_Line_Id INT FOREIGN KEY REFERENCES StationLine(Station_Line_Id),
-	To_Station_Line_Id INT FOREIGN KEY REFERENCES StationLine(Station_Line_Id),
-	Cost TIME,
+	Time_Transfer TIME,
+	Inter_Change BIT
 )
 GO
 
 CREATE VIEW V_StationLine AS
-SELECT l.Line_Name, s2.Station_Name AS 'From', s3.Station_Name AS 'To', s.Station_Name, sl.Duration, sl.Cost_Arrived, sl.Start_Time, sl.End_Time
+SELECT l.Line_Name, s2.Station_Name AS 'From', s3.Station_Name AS 'To', s.Station_Name, sl.Time_Wait, sl.Time_Arrived, sl.Start_Time, sl.End_Time
 FROM StationLine sl 
 INNER JOIN Line l ON l.Line_Id = sl.Line_Id
 INNER JOIN Station s ON s.Station_Id = sl.Station_Id

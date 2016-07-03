@@ -19,8 +19,8 @@ namespace MetroWebTest
             Assert.AreEqual(stationLineList[0].StationLineId, 10101);
             Assert.AreEqual(stationLineList[0].StationId, 128);
             Assert.AreEqual(stationLineList[0].LineId, 101);
-            Assert.AreEqual(stationLineList[0].Duration, new TimeSpan(0, 4, 5));
-            Assert.AreEqual(stationLineList[0].CostArrived, new TimeSpan(0, 0, 0));
+            Assert.AreEqual(stationLineList[0].TimeWait, new TimeSpan(0, 4, 5));
+            Assert.AreEqual(stationLineList[0].TimeArrived, new TimeSpan(0, 0, 0));
             Assert.AreEqual(stationLineList[0].StartTime, DateTime.Today.Add(new TimeSpan(5, 30, 0)));
             Assert.AreEqual(stationLineList[0].EndTime, DateTime.Today.Add(new TimeSpan(22, 30, 0)));
         }
@@ -36,8 +36,8 @@ namespace MetroWebTest
                     StationLineId = randomStationLineId,
                     StationId = 128,
                     LineId = 101,
-                    Duration = new TimeSpan(1, 0, 0),
-                    CostArrived = new TimeSpan(2, 0, 0),
+                    TimeWait = new TimeSpan(1, 0, 0),
+                    TimeArrived = new TimeSpan(2, 0, 0),
                     StartTime = DateTime.Today.Add(new TimeSpan(1, 00, 0)),
                     EndTime = DateTime.Today.Add(new TimeSpan(3, 0, 0))
                 });
@@ -48,8 +48,8 @@ namespace MetroWebTest
             Assert.AreEqual(stationLineList[0].StationLineId, randomStationLineId);
             Assert.AreEqual(stationLineList[0].StationId, 128);
             Assert.AreEqual(stationLineList[0].LineId, 101);
-            Assert.AreEqual(stationLineList[0].Duration, new TimeSpan(1, 0, 0));
-            Assert.AreEqual(stationLineList[0].CostArrived, new TimeSpan(2, 0, 0));
+            Assert.AreEqual(stationLineList[0].TimeWait, new TimeSpan(1, 0, 0));
+            Assert.AreEqual(stationLineList[0].TimeArrived, new TimeSpan(2, 0, 0));
             Assert.AreEqual(stationLineList[0].StartTime, DateTime.Today.Add(new TimeSpan(1, 00, 0)));
             Assert.AreEqual(stationLineList[0].EndTime, DateTime.Today.Add(new TimeSpan(3, 0, 0)));
 
@@ -64,8 +64,8 @@ namespace MetroWebTest
             Assert.AreEqual(stationLineList[0].StationLineId, randomStationLineId);
             Assert.AreEqual(stationLineList[0].StationId, 128);
             Assert.AreEqual(stationLineList[0].LineId, 101);
-            Assert.AreEqual(stationLineList[0].Duration, new TimeSpan(1, 0, 0));
-            Assert.AreEqual(stationLineList[0].CostArrived, new TimeSpan(2, 0, 0));
+            Assert.AreEqual(stationLineList[0].TimeWait, new TimeSpan(1, 0, 0));
+            Assert.AreEqual(stationLineList[0].TimeArrived, new TimeSpan(2, 0, 0));
             Assert.AreEqual(stationLineList[0].StartTime, DateTime.Today.Add(new TimeSpan(1, 00, 0)));
             Assert.AreEqual(stationLineList[0].EndTime, DateTime.Today.Add(new TimeSpan(23, 0, 0)));
 

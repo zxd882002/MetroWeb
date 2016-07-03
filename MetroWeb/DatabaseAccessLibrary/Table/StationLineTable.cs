@@ -12,7 +12,7 @@ namespace DatabaseAccessLibrary.Table
             : base(connector)
         {
             SelectQuery = "SELECT * FROM StationLine";
-            InsertQuery = "INSERT INTO StationLine VALUES (@Station_Line_Id, @Line_Id, @Station_Id, @Duration, @Cost_Arrived, @Start_Time, @End_Time)";
+            InsertQuery = "INSERT INTO StationLine VALUES (@Station_Line_Id, @Line_Id, @Station_Id, @Time_Wait, @Time_Arrived, @Start_Time, @End_Time)";
             DeleteQuery = "DELETE FROM StationLine";
             UpdateQuery = "UPDATE StationLine";
             DataReaderHandler = () =>
@@ -24,8 +24,8 @@ namespace DatabaseAccessLibrary.Table
                     int stationLineId = Convert.ToInt32(reader["Station_Line_Id"]);
                     int lineId = Convert.ToInt32(reader["Line_Id"]);
                     int stationId = Convert.ToInt32(reader["Station_Id"]);
-                    TimeSpan duration = (TimeSpan)reader["Duration"];
-                    TimeSpan costArrived = (TimeSpan)reader["Cost_Arrived"];
+                    TimeSpan timeWait = (TimeSpan)reader["Time_Wait"];
+                    TimeSpan timeArrived = (TimeSpan)reader["Time_Arrived"];
                     DateTime startTime = DateTime.Today.Add((TimeSpan)reader["Start_Time"]);
                     DateTime endTime = DateTime.Today.Add((TimeSpan)reader["End_Time"]);
 
@@ -34,8 +34,8 @@ namespace DatabaseAccessLibrary.Table
                         StationLineId = stationLineId,
                         LineId = lineId,
                         StationId = stationId,
-                        Duration = duration,
-                        CostArrived = costArrived,
+                        TimeWait = timeWait,
+                        TimeArrived = timeArrived,
                         StartTime = startTime,
                         EndTime = endTime
                     });
@@ -50,8 +50,8 @@ namespace DatabaseAccessLibrary.Table
             parameters.Add("@Station_Line_Id", tableRow.StationLineId);
             parameters.Add("@Line_Id", tableRow.LineId);
             parameters.Add("@Station_Id", tableRow.StationId);
-            parameters.Add("@Duration", tableRow.Duration);
-            parameters.Add("@Cost_Arrived", tableRow.CostArrived);
+            parameters.Add("@Time_Wait", tableRow.TimeWait);
+            parameters.Add("@Time_Arrived", tableRow.TimeArrived);
             parameters.Add("@Start_Time", tableRow.StartTime);
             parameters.Add("@End_Time", tableRow.EndTime);
             return parameters;

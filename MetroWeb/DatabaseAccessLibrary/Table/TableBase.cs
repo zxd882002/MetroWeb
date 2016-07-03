@@ -74,7 +74,7 @@ namespace DatabaseAccessLibrary.Table
             bool needAnd = false;
             foreach (KeyValuePair<string, object> oneCriteria in searchCriteria)
             {
-                if (oneCriteria.Value != null && !IsDefaultValue(oneCriteria.Value))
+                if (oneCriteria.Value != null)
                 {
                     if (needAnd)
                         whereClause.Append(" AND ");
@@ -94,9 +94,9 @@ namespace DatabaseAccessLibrary.Table
             bool needAnd = false;
             foreach (KeyValuePair<string, object> oneParameter in newTableRow)
             {
-                if (oneParameter.Value != null && !IsDefaultValue(oneParameter.Value))
+                if (oneParameter.Value != null)
                 {
-                    string newKey = oneParameter.Key.Replace("@","@new_");
+                    string newKey = oneParameter.Key.Replace("@", "@new_");
 
                     if (needAnd)
                         setClause.Append(" , ");
@@ -108,28 +108,6 @@ namespace DatabaseAccessLibrary.Table
                 }
             }
             return setClause.ToString();
-        }
-
-        private bool IsDefaultValue(object value)
-        {
-            Type valueType = value.GetType();
-            if (valueType == typeof(int))
-            {
-                return (int)value == default(int);
-            }
-            if (valueType == typeof(long))
-            {
-                return (long)value == default(long);
-            }
-            if (valueType == typeof(DateTime))
-            {
-                return (DateTime)value == default(DateTime);
-            }
-            if (valueType == typeof(TimeSpan))
-            {
-                return (TimeSpan)value == default(TimeSpan);
-            }
-            return false;
         }
     }
 }

@@ -32,9 +32,9 @@ namespace DatabaseAccessLibrary.Database
             {
                 table = new StationLineTable(connector) as ITable<T>;
             }
-            else if (typeof (T) == typeof (InterChange))
+            else if (typeof (T) == typeof (MetroTransfer))
             {
-                table = new InterChangeTable(connector) as ITable<T>;
+                table = new MetroTransferTable(connector) as ITable<T>;
             }
             return table;
         }
