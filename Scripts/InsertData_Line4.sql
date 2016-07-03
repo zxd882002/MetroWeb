@@ -31,8 +31,8 @@ INSERT INTO Station VALUES
 GO
 
 INSERT INTO Line VALUES
-	(401,'4号线-外圈',304,305),
-	(402,'4号线-内圈',305,304)
+	(401,'4号线',304,305),
+	(402,'4号线',305,304)
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

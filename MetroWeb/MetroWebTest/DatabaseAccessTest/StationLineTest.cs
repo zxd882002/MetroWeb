@@ -5,7 +5,7 @@ using DatabaseAccessLibrary.Interface;
 using DatabaseAccessLibrary.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MetroWebTest
+namespace MetroWebTest.DatabaseAccessTest
 {
     [TestClass]
     public class StationLineTest

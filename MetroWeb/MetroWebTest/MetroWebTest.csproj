@@ -45,16 +45,21 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MetroWebLibraryTest\StationInfoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StationTest.cs" />
-    <Compile Include="LineTest.cs" />
-    <Compile Include="MetroTransferTest.cs" />
-    <Compile Include="StationLineTest.cs" />
+    <Compile Include="DatabaseAccessTest\StationTest.cs" />
+    <Compile Include="DatabaseAccessTest\LineTest.cs" />
+    <Compile Include="DatabaseAccessTest\MetroTransferTest.cs" />
+    <Compile Include="DatabaseAccessTest\StationLineTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
       <Project>{44632D8B-C013-4D5A-90BE-F2D53E3448DC}</Project>
       <Name>DatabaseAccessLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroWebLibrary\MetroWebLibrary.csproj">
+      <Project>{1A253E99-3E65-4849-ACD2-957D3D600E7E}</Project>
+      <Name>MetroWebLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\MetroWebWCFService\MetroWebWCFService.csproj">
       <Project>{F26A4C98-F159-415E-87FE-9FF5019468B7}</Project>
