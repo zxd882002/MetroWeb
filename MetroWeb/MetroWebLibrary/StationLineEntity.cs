@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DatabaseAccessLibrary.Model;
 
 namespace MetroWebLibrary
@@ -15,6 +16,10 @@ namespace MetroWebLibrary
         private TimeSpan timeArrived;
         private DateTime startTime;
         private DateTime endTime;
+        private List<MetroTransferEntity> transferToList;
+        private List<MetroTransferEntity> transferFromList;
+        private StationLineEntity previousStationLine;
+        private StationLineEntity nextStationLine;
 
         internal StationLineEntity(MetroWebEntity metroWeb, StationLine stationLine)
         {
@@ -75,6 +80,38 @@ namespace MetroWebLibrary
         public DateTime EndTime
         {
             get { return endTime; }
+        }
+
+        public List<MetroTransferEntity> TransferToList
+        {
+            get
+            {
+                
+            }
+        }
+
+        public List<MetroTransferEntity> TransferFromList
+        {
+            get
+            {
+                
+            }
+        }
+
+        public StationLineEntity PreviousStationLine
+        {
+            get
+            {
+                
+            }
+        }
+
+        public StationLineEntity NextStationLine
+        {
+            get
+            {
+                
+            }
         }
     }
 }

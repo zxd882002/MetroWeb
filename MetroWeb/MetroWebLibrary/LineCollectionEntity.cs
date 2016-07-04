@@ -14,6 +14,14 @@ namespace MetroWebLibrary
             this.metroWeb = metroWeb;
         }
 
+        public List<LineEntity> All
+        {
+            get
+            {
+                
+            }
+        }
+
         #region Get Line list by line name
         public List<LineEntity> this[string lineName]
         {

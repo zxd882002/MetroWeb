@@ -20,6 +20,59 @@ namespace MetroWebLibrary
             this.metroWeb = metroWeb;
         }
 
+        public List<StationLineEntity> All
+        {
+            get
+            {
+
+            }
+        }
+
+        #region Get StationLine By stationline id
+        public StationLineEntity this[int stationLineId]
+        {
+            get
+            {
+                if (stationLineList == null)
+                    stationLineList = new List<StationLineEntity>();
+
+                StationLineEntity matchedStationLine = SearchStationLineFromStationLineListByStationLineId(stationLineId);
+
+                if (matchedStationLine == null)
+                {
+                    try
+                    {
+                        matchedStationLine = SeachStationLineByStationLineIdQuery(stationLineId);
+                        stationLineList.Add(matchedStationLine);
+                    }
+                    catch (Exception exception)
+                    {
+                        throw exception;
+                    }
+                }
+
+                return matchedStationLine;
+            }
+        }
+
+        private StationLineEntity SearchStationLineFromStationLineListByStationLineId(int stationLineId)
+        {
+            return stationLineList.Find(stationLine => stationLine.StationLineId == stationLineId);
+        }
+
+        private StationLineEntity SeachStationLineByStationLineIdQuery(int stationLineId)
+        {
+            List<StationLine> matchedStationLineList =
+               metroWeb.MetroWebDatabase.Table<StationLine>().Select(new StationLine { StationLineId = stationLineId});
+
+            if (matchedStationLineList.Count == 0)
+                throw new Exception(string.Format("The station line id {0} is not found.", stationLineId));
+
+            StationLineEntity matchedStationLineEntityEntity = new StationLineEntity(metroWeb, matchedStationLineList[0]);
+            return matchedStationLineEntityEntity;
+        }
+        #endregion
+
         #region Get StationLine list By station id or line id
         public List<StationLineEntity> this[int id, IDType idType]
         {

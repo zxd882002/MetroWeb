@@ -15,6 +15,14 @@ namespace MetroWebLibrary
             this.metroWeb = metroWeb;
         }
 
+        public List<StationEntity> All
+        {
+            get
+            {
+
+            }
+        }
+
         #region Get Station List By Station Name
         public List<StationEntity> this[string stationName]
         {
