@@ -14,13 +14,36 @@ namespace MetroWebLibrary
             this.metroWeb = metroWeb;
         }
 
+        #region Get all line list
         public List<LineEntity> All
         {
             get
             {
-                
+                if (lineList == null)
+                    lineList = new List<LineEntity>();
+
+                lineList.AddRange(SeachLineByQuery());
+                return lineList;
             }
         }
+
+        private List<LineEntity> SeachLineByQuery()
+        {
+            List<Line> matchedLineList =
+                metroWeb.MetroWebDatabase.Table<Line>().Select();
+
+            List<LineEntity> matchedLineEntityList = new List<LineEntity>();
+            foreach (Line matchedLine in matchedLineList)
+            {
+                if (!lineList.Exists(line => line.LineId == matchedLine.LineId))
+                {
+                    LineEntity lineEntity = new LineEntity(metroWeb, matchedLine);
+                    matchedLineEntityList.Add(lineEntity);
+                }
+            }
+            return matchedLineEntityList;
+        }
+        #endregion
 
         #region Get Line list by line name
         public List<LineEntity> this[string lineName]

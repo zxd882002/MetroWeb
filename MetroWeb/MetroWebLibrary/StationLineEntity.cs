@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using DatabaseAccessLibrary.Model;
 
 namespace MetroWebLibrary
@@ -86,7 +89,12 @@ namespace MetroWebLibrary
         {
             get
             {
-                
+                if (transferToList == null)
+                {
+                    transferToList = new List<MetroTransferEntity>();
+                    
+                }
+                return transferToList;
             }
         }
 
@@ -94,7 +102,7 @@ namespace MetroWebLibrary
         {
             get
             {
-                
+
             }
         }
 
@@ -102,7 +110,20 @@ namespace MetroWebLibrary
         {
             get
             {
-                
+                if (previousStationLine == null)
+                {
+                    if (timeArrived != new TimeSpan(0, 0, 0))
+                    {
+                        previousStationLine = metroWeb.StationLineList[stationLineId - 1];
+                    }
+                    else if (lineId % 100 == 1) // cycle line
+                    {
+                        List<StationLineEntity> allStationLineList = metroWeb.StationLineList[lineId, IDType.LineId];
+                        int maxStationLineId = allStationLineList.Max(stationLine => stationLine.StationLineId);
+                        previousStationLine = allStationLineList.Find(stationLine => stationLine.stationId == maxStationLineId);
+                    }
+                }
+                return previousStationLine;
             }
         }
 
@@ -110,7 +131,26 @@ namespace MetroWebLibrary
         {
             get
             {
-                
+                if (nextStationLine == null)
+                {
+                    List<StationLineEntity> allStationLineList = metroWeb.StationLineList[lineId, IDType.LineId];
+                    int maxStationLineId = allStationLineList.Max(stationLine => stationLine.StationLineId);
+
+                    if (stationLineId != maxStationLineId)
+                    {
+                        nextStationLine = metroWeb.StationLineList[stationLineId + 1];
+                    }
+                    else // cycle line
+                    {
+                        int minStationLinId = allStationLineList.Min(stationLine => stationLine.StationLineId);
+                        StationLineEntity firstStationLine = allStationLineList.Find(stationLine => stationLine.stationId == minStationLinId);
+                        if (firstStationLine.timeArrived != new TimeSpan(0, 0, 0))
+                        {
+                            nextStationLine = firstStationLine;
+                        }
+                    }
+                }
+                return nextStationLine;
             }
         }
     }

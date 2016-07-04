@@ -20,13 +20,36 @@ namespace MetroWebLibrary
             this.metroWeb = metroWeb;
         }
 
+        #region Get all station list
         public List<StationLineEntity> All
         {
             get
             {
+                if (stationLineList == null)
+                    stationLineList = new List<StationLineEntity>();
 
+                stationLineList.AddRange(SeachStationLineByQuery());
+                return stationLineList;
             }
         }
+
+        private List<StationLineEntity> SeachStationLineByQuery()
+        {
+            List<StationLine> matchedStationLineList =
+                metroWeb.MetroWebDatabase.Table<StationLine>().Select();
+
+            List<StationLineEntity> matchedStationLineEntityList = new List<StationLineEntity>();
+            foreach (StationLine matchedStationLine in matchedStationLineList)
+            {
+                if (!stationLineList.Exists(stationLine => stationLine.StationLineId == matchedStationLine.StationLineId))
+                {
+                    StationLineEntity stationLineEntity = new StationLineEntity(metroWeb, matchedStationLine);
+                    matchedStationLineEntityList.Add(stationLineEntity);
+                }
+            }
+            return matchedStationLineEntityList;
+        }
+        #endregion
 
         #region Get StationLine By stationline id
         public StationLineEntity this[int stationLineId]
