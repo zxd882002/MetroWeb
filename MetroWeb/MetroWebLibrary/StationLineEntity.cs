@@ -27,7 +27,7 @@ namespace MetroWebLibrary
         internal StationLineEntity(MetroWebEntity metroWeb, StationLine stationLine)
         {
             this.metroWeb = metroWeb;
-            this.stationLineId = stationLine.StationId.Value;
+            this.stationLineId = stationLine.StationLineId.Value;
             this.lineId = stationLine.LineId.Value;
             this.stationId = stationLine.StationId.Value;
             this.timeWait = stationLine.TimeWait.Value;
@@ -92,7 +92,7 @@ namespace MetroWebLibrary
                 if (transferToList == null)
                 {
                     transferToList = new List<MetroTransferEntity>();
-                    
+                    transferToList = metroWeb.MetroTransferList[stationLineId, StationLineIdType.FromStationLineId];
                 }
                 return transferToList;
             }
@@ -102,7 +102,12 @@ namespace MetroWebLibrary
         {
             get
             {
-
+                if (transferFromList == null)
+                {
+                    transferFromList = new List<MetroTransferEntity>();
+                    transferFromList = metroWeb.MetroTransferList[stationLineId, StationLineIdType.ToStationLineId];
+                }
+                return transferFromList;
             }
         }
 

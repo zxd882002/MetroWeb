@@ -10,6 +10,7 @@ namespace MetroWebLibrary
         private StationCollectionEntity stationList;
         private LineCollectionEntity lineList;
         private StationLineCollectionEntity stationLineList;
+        private MetroTransferCollectionEntity metroTransferList;
 
         internal MetroWebEntity()
         {
@@ -57,6 +58,16 @@ namespace MetroWebLibrary
                 if (stationLineList == null)
                     stationLineList = new StationLineCollectionEntity(this);
                 return stationLineList;
+            }
+        }
+
+        public MetroTransferCollectionEntity MetroTransferList
+        {
+            get
+            {
+                if (metroTransferList == null)
+                    metroTransferList = new MetroTransferCollectionEntity(this);
+                return metroTransferList;
             }
         }
     }
