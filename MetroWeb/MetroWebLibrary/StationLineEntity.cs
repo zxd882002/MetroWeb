@@ -117,16 +117,17 @@ namespace MetroWebLibrary
             {
                 if (previousStationLine == null)
                 {
-                    if (timeArrived != new TimeSpan(0, 0, 0))
-                    {
-                        previousStationLine = metroWeb.StationLineList[stationLineId - 1];
-                    }
-                    else if (lineId % 100 == 1) // cycle line
+                    if (lineId % 100 == 1 && timeArrived != new TimeSpan(0, 0, 0)) // cycle line
                     {
                         List<StationLineEntity> allStationLineList = metroWeb.StationLineList[lineId, IDType.LineId];
                         int maxStationLineId = allStationLineList.Max(stationLine => stationLine.StationLineId);
-                        previousStationLine = allStationLineList.Find(stationLine => stationLine.stationId == maxStationLineId);
+                        previousStationLine = allStationLineList.Find(stationLine => stationLine.stationLineId == maxStationLineId);
                     }
+                    else if (timeArrived != new TimeSpan(0, 0, 0))
+                    {
+                        previousStationLine = metroWeb.StationLineList[stationLineId - 1];
+                    }
+                    
                 }
                 return previousStationLine;
             }
@@ -147,8 +148,8 @@ namespace MetroWebLibrary
                     }
                     else // cycle line
                     {
-                        int minStationLinId = allStationLineList.Min(stationLine => stationLine.StationLineId);
-                        StationLineEntity firstStationLine = allStationLineList.Find(stationLine => stationLine.stationId == minStationLinId);
+                        int minStationLineId = allStationLineList.Min(stationLine => stationLine.StationLineId);
+                        StationLineEntity firstStationLine = allStationLineList.Find(stationLine => stationLine.stationLineId == minStationLineId);
                         if (firstStationLine.timeArrived != new TimeSpan(0, 0, 0))
                         {
                             nextStationLine = firstStationLine;

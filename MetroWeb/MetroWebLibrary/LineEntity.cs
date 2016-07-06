@@ -70,7 +70,7 @@ namespace MetroWebLibrary
             }
         }
 
-        public List<StationEntity> LineStationList {
+        public List<StationEntity> StationList {
             get
             {
                 if (stationList == null)

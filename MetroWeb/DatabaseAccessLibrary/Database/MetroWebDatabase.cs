@@ -1,4 +1,5 @@
-﻿using DatabaseAccessLibrary.Connectors;
+﻿using System.Configuration;
+using DatabaseAccessLibrary.Connectors;
 using DatabaseAccessLibrary.Interface;
 using DatabaseAccessLibrary.Model;
 using DatabaseAccessLibrary.Table;
@@ -11,8 +12,7 @@ namespace DatabaseAccessLibrary.Database
         {
             get
             {
-                return
-                    @"Data Source=.\sqlexpress;Initial Catalog=MetroWeb;Persist Security Info=True;User ID=sa;Pwd=abc123";
+                return ConfigurationManager.ConnectionStrings["MetroWebDatabase"].ConnectionString;
             }
         }
 

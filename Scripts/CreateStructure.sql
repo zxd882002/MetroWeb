@@ -1,4 +1,4 @@
-USE master
+锘縐SE master
 GO
 
 IF EXISTS(select * from sys.databases where name='MetroWeb')
@@ -13,23 +13,23 @@ CREATE DATABASE MetroWeb
 GO
 
 USE MetroWeb
-CREATE TABLE Station -- 车站信息
+CREATE TABLE Station -- 杞︾珯淇℃伅
 (
 	Station_Id	INT PRIMARY KEY,
-	Station_Name VARCHAR(50),
+	Station_Name NVARCHAR(50),
 )
 GO
 
-CREATE TABLE Line -- 线路信息
+CREATE TABLE Line -- 绾胯矾淇℃伅
 (
 	Line_Id INT PRIMARY KEY,
-	Line_Name VARCHAR(20),
+	Line_Name NVARCHAR(20),
 	Line_From_Station_Id INT FOREIGN KEY REFERENCES Station(Station_Id),
 	Line_To_Station_Id INT FOREIGN KEY REFERENCES Station(Station_Id)
 )
 GO
 
-CREATE TABLE StationLine -- 站台信息
+CREATE TABLE StationLine -- 绔欏彴淇℃伅
 (
 	Station_Line_Id INT PRIMARY KEY,
 	Line_Id INT FOREIGN KEY REFERENCES Line(Line_Id),
@@ -41,7 +41,7 @@ CREATE TABLE StationLine -- 站台信息
 )
 GO
 
-CREATE TABLE MetroTransfer -- 换乘
+CREATE TABLE MetroTransfer -- 鎹箻
 (
 	Transfer_Id BIGINT PRIMARY KEY,
 	From_Station_Line_Id INT FOREIGN KEY REFERENCES StationLine(Station_Line_Id),

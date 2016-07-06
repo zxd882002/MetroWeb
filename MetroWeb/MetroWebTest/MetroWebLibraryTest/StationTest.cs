@@ -6,7 +6,7 @@ using MetroWebLibrary;
 namespace MetroWebTest.MetroWebLibraryTest
 {
     [TestClass]
-    public class StationInfoTest
+    public class StationTest
     {
         [TestMethod]
         public void GetAllStationList()

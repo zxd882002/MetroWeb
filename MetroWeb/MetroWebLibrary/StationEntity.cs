@@ -59,5 +59,10 @@ namespace MetroWebLibrary
                 return lineList;
             }
         }
+
+        public List<StationLineEntity> GetTheNearestWayToTargetStation(StationEntity targetStation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
