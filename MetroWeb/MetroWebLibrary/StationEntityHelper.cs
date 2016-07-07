@@ -9,49 +9,85 @@ namespace MetroWebLibrary
     {
         internal TimeSpan MinimumArrivedTime { get; set; }
         internal Stack<StationEntityExtender> MinimumRouteList { get; set; }
-        internal List<StationLine> ExcludedStationLines { get; set; }
 
         internal StationEntityExtender(MetroWebEntity webEntity, Station station) : base(webEntity, station) { }
 
         internal void GetTheMinimumRouter(StationEntityExtender fromStationExtender)
         {
-            List<StationEntityExtender> previousStationList = GetPreviousStationList();
+            // if the station has already been in the stack, exlude it
+            if (MinimumRouteList.Contains(this))
+            {
+                return;
+            }
+            else
+            {
+                MinimumRouteList.Push(this);
+            }
+
+            // find one route
+            if (this == fromStationExtender)
+            {
+                return;
+            }
 
             // this way is not correct
-            if (previousStationList.Count == 0)
+            List<StationEntityExtender> previousStationList = GetPreviousStationList();
+            List<StationEntityExtender> transferStationList = GetTransferStattionList();
+            if (previousStationList.Count == 0 && transferStationList.Count == 0)
             {
                 MinimumArrivedTime = TimeSpan.MaxValue;
                 MinimumRouteList = null;
                 return;
             }
 
-            // find one route
-            if (previousStationList.Contains(fromStationExtender))
-            {
-                MinimumRouteList.Push(fromStationExtender);
-                MinimumArrivedTime += GetTimeArrived(this, fromStationExtender);
-                return;
-            }
-
             // other situation
             foreach (StationEntityExtender previousStation in previousStationList)
             {
-                previousStation.GetTheMinimumRouter(this);
                 // get current route arrived time
                 // if is minimum then
                 // log time
                 // log route
+                previousStation.GetTheMinimumRouter(this);
             }
         }
 
         private List<StationEntityExtender> GetPreviousStationList()
         {
-            // add exclusion station line here
-            throw new NotImplementedException();
+            List<StationEntityExtender> previouStationLineList = new List<StationEntityExtender>();
+
+            List<StationLineEntity> currentStationLineList = this.StationLineList;
+            foreach (StationLineEntity currentStationLine in currentStationLineList)
+            {
+                StationLineEntity previousStationLine = currentStationLine.PreviousStationLine;
+                StationEntityExtender previousStationExtender = previousStationLine.Station as StationEntityExtender;
+
+                if (!previouStationLineList.Contains(previousStationExtender))
+                    previouStationLineList.Add(previousStationExtender);
+            }
+            return previouStationLineList;
         }
 
-        private TimeSpan GetTimeArrived(StationEntityExtender toStationExtender, StationEntityExtender fromStationExtender)
+        private List<StationEntityExtender> GetTransferStattionList()
         {
+            List<StationEntityExtender> previouStationLineList = new List<StationEntityExtender>();
+
+            List<StationLineEntity> currentStationLineList = this.StationLineList;
+            foreach (StationLineEntity currentStationLine in currentStationLineList)
+            {
+                List<MetroTransferEntity> transferStationList = currentStationLine.TransferFromList;
+                foreach (var transferStation in transferStationList)
+                {
+                    StationEntityExtender transferStationExtender = transferStation.FromStationLine.Station as StationEntityExtender;
+                    if (!previouStationLineList.Contains(transferStationExtender))
+                        previouStationLineList.Add(transferStationExtender);
+                }
+            }
+            return previouStationLineList;
+        }
+
+        private TimeSpan GetTimeArrived(StationEntityExtender fromStationExtender, StationEntityExtender toStationExtender, bool calculateWaitTime)
+        {
+            // calculate the possible 
             throw new NotImplementedException();
         }
     }
