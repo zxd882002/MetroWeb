@@ -65,7 +65,7 @@ namespace MetroWebLibrary
             return metroTransferEntityList.FindAll(metroTransfer => metroTransfer.FromStationLine.StationLineId == stationLineId);
         }
 
-        private IEnumerable<MetroTransferEntity> SeachMetroTransferByFromStationLineIdQuery(int stationLineId)
+        private List<MetroTransferEntity> SeachMetroTransferByFromStationLineIdQuery(int stationLineId)
         {
             List<MetroTransfer> matchedMetroTransferList =
                metroWeb.MetroWebDatabase.Table<MetroTransfer>().Select(new MetroTransfer { FromStationLineId = stationLineId });
@@ -76,7 +76,7 @@ namespace MetroWebLibrary
             List<MetroTransferEntity> matchedMetroTransferEntityList = new List<MetroTransferEntity>();
             foreach (MetroTransfer matchedMetroTransfer in matchedMetroTransferList)
             {
-                if (!matchedMetroTransferEntityList.Exists(metroTransfer => metroTransfer.TranferId == matchedMetroTransfer.TransferId))
+                if (!matchedMetroTransferEntityList.Exists(metroTransfer => metroTransfer.TransferId == matchedMetroTransfer.TransferId))
                 {
                     MetroTransferEntity matchedMetroTransferEntity = new MetroTransferEntity(metroWeb, matchedMetroTransfer);
                     matchedMetroTransferEntityList.Add(matchedMetroTransferEntity);
@@ -86,7 +86,7 @@ namespace MetroWebLibrary
         }
         #endregion
 
-        #region Get MetroTransfer list by from station line id
+        #region Get MetroTransfer list by to station line id
         private List<MetroTransferEntity> GetMetroTransferListByToStationLineId(int stationLineId)
         {
             if (metroTransferEntityList == null)
@@ -103,7 +103,7 @@ namespace MetroWebLibrary
             {
                 throw exception;
             }
-
+            
             return matchedMetroTransferList;
         }
 
@@ -112,7 +112,7 @@ namespace MetroWebLibrary
             return metroTransferEntityList.FindAll(metroTransfer => metroTransfer.ToStationLine.StationLineId == stationLineId);
         }
 
-        private IEnumerable<MetroTransferEntity> SeachMetroTransferByToStationLineIdQuery(int stationLineId)
+        private List<MetroTransferEntity> SeachMetroTransferByToStationLineIdQuery(int stationLineId)
         {
             List<MetroTransfer> matchedMetroTransferList =
                metroWeb.MetroWebDatabase.Table<MetroTransfer>().Select(new MetroTransfer { ToStationLineId = stationLineId });
@@ -123,7 +123,7 @@ namespace MetroWebLibrary
             List<MetroTransferEntity> matchedMetroTransferEntityList = new List<MetroTransferEntity>();
             foreach (MetroTransfer matchedMetroTransfer in matchedMetroTransferList)
             {
-                if (!matchedMetroTransferEntityList.Exists(metroTransfer => metroTransfer.TranferId == matchedMetroTransfer.TransferId))
+                if (!matchedMetroTransferEntityList.Exists(metroTransfer => metroTransfer.TransferId == matchedMetroTransfer.TransferId))
                 {
                     MetroTransferEntity matchedMetroTransferEntity = new MetroTransferEntity(metroWeb, matchedMetroTransfer);
                     matchedMetroTransferEntityList.Add(matchedMetroTransferEntity);

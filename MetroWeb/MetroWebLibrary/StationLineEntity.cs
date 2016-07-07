@@ -92,7 +92,16 @@ namespace MetroWebLibrary
                 if (transferToList == null)
                 {
                     transferToList = new List<MetroTransferEntity>();
-                    transferToList = metroWeb.MetroTransferList[stationLineId, StationLineIdType.FromStationLineId];
+
+                    try
+                    {
+                        transferToList = metroWeb.MetroTransferList[stationLineId, StationLineIdType.FromStationLineId];
+                    }
+                    catch
+                    {
+                        transferToList = new List<MetroTransferEntity>();
+                    }
+
                 }
                 return transferToList;
             }
@@ -105,7 +114,15 @@ namespace MetroWebLibrary
                 if (transferFromList == null)
                 {
                     transferFromList = new List<MetroTransferEntity>();
-                    transferFromList = metroWeb.MetroTransferList[stationLineId, StationLineIdType.ToStationLineId];
+
+                    try
+                    {
+                        transferFromList = metroWeb.MetroTransferList[stationLineId, StationLineIdType.ToStationLineId];
+                    }
+                    catch
+                    {
+                        transferFromList = new List<MetroTransferEntity>();
+                    }
                 }
                 return transferFromList;
             }
@@ -127,7 +144,7 @@ namespace MetroWebLibrary
                     {
                         previousStationLine = metroWeb.StationLineList[stationLineId - 1];
                     }
-                    
+
                 }
                 return previousStationLine;
             }

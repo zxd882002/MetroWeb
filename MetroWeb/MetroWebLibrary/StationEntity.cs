@@ -60,10 +60,11 @@ namespace MetroWebLibrary
             }
         }
 
-        public List<StationEntity> GetTheNearestWayToTargetStation(StationEntity targetStation)
+        public Tuple<List<StationEntity>, TimeSpan> GetTheNearestWayToTargetStation(StationEntity targetStation)
         {
             StationEntityHelper helper = new StationEntityHelper();
-            List<StationEntity> nearestRoute = helper.GetTheNearestRouteBetween(this, targetStation);
+            Tuple<List<StationEntity>, TimeSpan> nearestRouteAndTimeSpan = helper.GetTheNearestRouteBetween(this, targetStation);
+            return nearestRouteAndTimeSpan;
         }
     }
 }

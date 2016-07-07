@@ -123,8 +123,9 @@ namespace MetroWebLibrary
 
             try
             {
-                matchedStationLineList.AddRange(SeachStationLineByStationIdQuery(stationId));
-                stationLineList.AddRange(matchedStationLineList);
+                List<StationLineEntity> matchedStationLineFromQueryList = SeachStationLineByStationIdQuery(stationId);
+                matchedStationLineList.AddRange(matchedStationLineFromQueryList);
+                stationLineList.AddRange(matchedStationLineFromQueryList);
             }
             catch (Exception exception)
             {
@@ -170,8 +171,9 @@ namespace MetroWebLibrary
 
             try
             {
-                matchedStationLineList.AddRange(SeachStationLineByLineIdQuery(lineId));
-                stationLineList.AddRange(matchedStationLineList);
+                List<StationLineEntity> matchedStationLineFromQueryList = SeachStationLineByLineIdQuery(lineId);
+                matchedStationLineList.AddRange(matchedStationLineFromQueryList);
+                stationLineList.AddRange(matchedStationLineFromQueryList);
             }
             catch (Exception exception)
             {

@@ -58,8 +58,9 @@ namespace MetroWebLibrary
 
                 try
                 {
-                    matchedStationList.AddRange(SeachStationByQuery(stationName));
-                    stationList.AddRange(matchedStationList);
+                    List<StationEntity> matchedStationFromQueryList = SeachStationByQuery(stationName);
+                    matchedStationList.AddRange(matchedStationFromQueryList);
+                    stationList.AddRange(matchedStationFromQueryList);
                 }
                 catch (Exception exception)
                 {

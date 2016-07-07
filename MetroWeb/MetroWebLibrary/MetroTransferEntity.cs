@@ -24,7 +24,7 @@ namespace MetroWebLibrary
             this.interChange = metroTransfer.InterChange.Value;
         }
 
-        public long TranferId
+        public long TransferId
         {
             get { return this.transferId; }
         }

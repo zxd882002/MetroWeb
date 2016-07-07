@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MetroWebLibraryTest\LineTest.cs" />
+    <Compile Include="MetroWebLibraryTest\MetroTransferTest.cs" />
     <Compile Include="MetroWebLibraryTest\StationLineTest.cs" />
     <Compile Include="MetroWebLibraryTest\StationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

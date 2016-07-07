@@ -57,8 +57,9 @@ namespace MetroWebLibrary
 
                 try
                 {
-                    matchedLineList.AddRange(SeachLineByQuery(lineName));
-                    lineList.AddRange(matchedLineList);
+                    List<LineEntity> matchedLineFromQueryList = SeachLineByQuery(lineName);
+                    matchedLineList.AddRange(matchedLineFromQueryList);
+                    lineList.AddRange(matchedLineFromQueryList);
                 }
                 catch (Exception exception)
                 {
