@@ -103,7 +103,7 @@ namespace MetroWebLibrary
             {
                 throw exception;
             }
-            
+
             return matchedMetroTransferList;
         }
 
@@ -132,5 +132,10 @@ namespace MetroWebLibrary
             return matchedMetroTransferEntityList;
         }
         #endregion
+
+        public MetroTransferEntity this[int fromStationLineId, int toStationLineId]
+        {
+            get { return null; } // todo; 
+        }
     }
 }
