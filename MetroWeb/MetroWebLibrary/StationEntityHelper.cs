@@ -162,12 +162,16 @@ namespace MetroWebLibrary
             if (calculateWaitTime)
             {
                 TimeSpan minTransferTime = new TimeSpan(TimeSpan.MaxValue.Ticks / 2);
-                foreach (var possibleCurrentStationLine in PossibleCurrentStationLineList)
+
+                foreach (MetroTransferEntity transferTo in stationLine.TransferToList)
                 {
-                    TimeSpan transferTime = MetroWebEntity.Instance().MetroTransferList[stationLine.StationLineId, possibleCurrentStationLine.StationLineId].TimeTransfer;
-                    if (transferTime < minTransferTime)
+                    if (PossibleCurrentStationLineList.Contains(transferTo.ToStationLine))
                     {
-                        minTransferTime = transferTime;
+                        TimeSpan transferTime = transferTo.TimeTransfer;
+                        if (transferTime < minTransferTime)
+                        {
+                            minTransferTime = transferTime;
+                        }
                     }
                 }
 
