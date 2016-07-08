@@ -134,7 +134,7 @@ namespace MetroWebLibrary
             {
                 if (previousStationLine == null)
                 {
-                    if (lineId % 100 == 1 && timeArrived != new TimeSpan(0, 0, 0)) // cycle line
+                    if (StationLineId % 100 == 1 && timeArrived != new TimeSpan(0, 0, 0)) // cycle line
                     {
                         List<StationLineEntity> allStationLineList = metroWeb.StationLineList[lineId, IDType.LineId];
                         int maxStationLineId = allStationLineList.Max(stationLine => stationLine.StationLineId);

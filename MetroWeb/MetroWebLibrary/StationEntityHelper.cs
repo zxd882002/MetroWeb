@@ -11,12 +11,39 @@ namespace MetroWebLibrary
         internal TimeSpan MinimumArrivedTime { get; set; }
         internal Queue<StationEntityExtender> MinimumRouteList { get; set; }
 
-        internal StationEntityExtender(MetroWebEntity webEntity, Station station) : base(webEntity, station) { }
-
-        internal void GetTheMinimumRouter(StationEntityExtender fromStationExtender, Stack<StationEntityExtender> StationStack)
+        internal StationEntityExtender(StationEntity station)
+            : base(station.MetroWeb, station.Station)
         {
+            PossibleCurrentStationLineList = new List<StationLineEntity>();
+            MinimumRouteList = new Queue<StationEntityExtender>();
+        }
+
+        internal static StationEntityExtender Convert(StationEntity station, List<StationEntityExtender> stationExterderCacheList)
+        {
+            StationEntityExtender stationExtender = stationExterderCacheList.Find(stationExterderCache => stationExterderCache.StationId == station.StationId);
+            if (stationExtender == null)
+            {
+                stationExtender = new StationEntityExtender(station);
+                stationExterderCacheList.Add(stationExtender);
+            }
+            return stationExtender;
+        }
+
+        internal void GetTheMinimumRouter(StationEntityExtender fromStationExtender, Stack<StationEntityExtender> StationStack, List<StationEntityExtender> stationExtenderCacheList)
+        {
+            if(this.StationId == 106)
+            {}//debug
+
             // if the station has already been in the stack, exlude it
             if (StationStack.Contains(this))
+            {
+                MinimumArrivedTime = new TimeSpan(TimeSpan.MaxValue.Ticks / 2);
+                MinimumRouteList = null;
+                return;
+            }
+
+            // if the StationStack count is greater than 50, this route is definitly not a nearest route
+            if(StationStack.Count >= 50)
             {
                 MinimumArrivedTime = new TimeSpan(TimeSpan.MaxValue.Ticks / 2);
                 MinimumRouteList = null;
@@ -26,11 +53,10 @@ namespace MetroWebLibrary
             // get current stationLine
             if (StationStack.Count > 0)
             {
-                PossibleCurrentStationLineList = new List<StationLineEntity>();
                 List<StationLineEntity> currentStationLineList = this.StationLineList;
                 foreach (StationLineEntity currentStationLine in currentStationLineList)
                 {
-                    if (currentStationLine.NextStationLine.Station as StationEntityExtender == StationStack.Peek())
+                    if (currentStationLine.NextStationLine != null && currentStationLine.NextStationLine.Station.StationId == StationStack.Peek().StationId)
                     {
                         PossibleCurrentStationLineList.Add(currentStationLine);
                     }
@@ -52,22 +78,22 @@ namespace MetroWebLibrary
             // this way is not correct
             if (previousStationLineList.Count == 0 && transferStationLineList.Count == 0)
             {
-                MinimumArrivedTime = TimeSpan.MaxValue;
+                MinimumArrivedTime = new TimeSpan(TimeSpan.MaxValue.Ticks / 2);
                 MinimumRouteList = null;
                 return;
             }
 
             // find the minimum route from previous station line list
-            MinimumArrivedTime = TimeSpan.MaxValue;
+            MinimumArrivedTime = new TimeSpan(TimeSpan.MaxValue.Ticks / 2);
             foreach (StationLineEntity previousStationLine in previousStationLineList)
             {
                 StationStack.Push(this);
-                StationEntityExtender previousStationExtender = previousStationLine.Station as StationEntityExtender;
-                previousStationExtender.GetTheMinimumRouter(fromStationExtender, StationStack);
+                StationEntityExtender previousStationExtender = Convert(previousStationLine.Station, stationExtenderCacheList);
+                previousStationExtender.GetTheMinimumRouter(fromStationExtender, StationStack, stationExtenderCacheList);
                 StationStack.Pop();
 
                 // get current route arrived time
-                TimeSpan timeArrivedToCurrentStation = GetTimeArrived(previousStationLine, false);
+                TimeSpan timeArrivedToCurrentStation = previousStationExtender.MinimumArrivedTime + GetTimeArrived(previousStationLine.NextStationLine, false);
 
                 // if is minimum then
                 if (timeArrivedToCurrentStation < MinimumArrivedTime)
@@ -85,12 +111,12 @@ namespace MetroWebLibrary
             foreach (StationLineEntity transferStationLine in transferStationLineList)
             {
                 StationStack.Push(this);
-                StationEntityExtender transferStationExtender = transferStationLine.Station as StationEntityExtender;
-                transferStationExtender.GetTheMinimumRouter(fromStationExtender, StationStack);
+                StationEntityExtender transferStationExtender = Convert(transferStationLine.Station, stationExtenderCacheList);
+                transferStationExtender.GetTheMinimumRouter(fromStationExtender, StationStack, stationExtenderCacheList);
                 StationStack.Pop();
 
                 // get current route arrived time
-                TimeSpan timeArrivedToCurrentStation = GetTimeArrived(transferStationLine, true);
+                TimeSpan timeArrivedToCurrentStation = transferStationExtender.MinimumArrivedTime + GetTimeArrived(transferStationLine.NextStationLine, true);
 
                 // if is minimum then
                 if (timeArrivedToCurrentStation < MinimumArrivedTime)
@@ -116,7 +142,7 @@ namespace MetroWebLibrary
                 {
                     StationLineEntity previousStationLine = currentStationLine.PreviousStationLine;
 
-                    if (!previouStationLineList.Contains(previousStationLine))
+                    if (previousStationLine != null && !previouStationLineList.Contains(previousStationLine))
                         previouStationLineList.Add(previousStationLine);
                 }
             }
@@ -126,7 +152,7 @@ namespace MetroWebLibrary
                 {
                     StationLineEntity previousStationLine = possibleCurrentStationLine.PreviousStationLine;
 
-                    if (!previouStationLineList.Contains(previousStationLine))
+                    if (previousStationLine != null && !previouStationLineList.Contains(previousStationLine))
                         previouStationLineList.Add(previousStationLine);
                 }
             }
@@ -142,13 +168,13 @@ namespace MetroWebLibrary
                 List<StationLineEntity> currentStationLineList = this.StationLineList;
                 foreach (StationLineEntity currentStationLine in currentStationLineList)
                 {
-                    if (!PossibleCurrentStationLineList.Contains(currentStationLine))
+                    if (PossibleCurrentStationLineList.Contains(currentStationLine))
                     {
                         List<MetroTransferEntity> transferStationList = currentStationLine.TransferFromList;
                         foreach (var transferStation in transferStationList)
                         {
-                            StationLineEntity transferStationLine = transferStation.FromStationLine;
-                            if (!transferStationLineList.Contains(transferStationLine))
+                            StationLineEntity transferStationLine = transferStation.FromStationLine.PreviousStationLine;
+                            if (transferStationLine != null && !transferStationLineList.Contains(transferStationLine))
                                 transferStationLineList.Add(transferStationLine);
                         }
                     }
@@ -189,11 +215,13 @@ namespace MetroWebLibrary
     {
         private List<StationEntityExtender> stationEntityExtenderList;
 
-        internal Tuple<List<StationEntity>, TimeSpan> GetTheNearestRouteBetween(StationEntity fromStation, StationEntity toStation)
+        public Tuple<List<StationEntity>, TimeSpan> GetTheNearestRouteBetween(StationEntity fromStation, StationEntity toStation)
         {
-            StationEntityExtender fromStationExtender = fromStation as StationEntityExtender;
-            StationEntityExtender toStationExtender = toStation as StationEntityExtender;
-            toStationExtender.GetTheMinimumRouter(fromStationExtender, new Stack<StationEntityExtender>());
+            List<StationEntityExtender> stationExtenderList = new List<StationEntityExtender>();
+            StationEntityExtender fromStationExtender = StationEntityExtender.Convert(fromStation, stationExtenderList);
+            StationEntityExtender toStationExtender = StationEntityExtender.Convert(toStation, stationExtenderList);
+
+            toStationExtender.GetTheMinimumRouter(fromStationExtender, new Stack<StationEntityExtender>(), stationExtenderList);
 
             return new Tuple<List<StationEntity>, TimeSpan>(
                 toStationExtender.MinimumRouteList.Select(route => route as StationEntity).ToList(),
