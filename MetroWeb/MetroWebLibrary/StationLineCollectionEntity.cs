@@ -14,10 +14,12 @@ namespace MetroWebLibrary
     {
         private MetroWebEntity metroWeb;
         private List<StationLineEntity> stationLineList;
+        private bool needCheckQuery;
 
         internal StationLineCollectionEntity(MetroWebEntity metroWeb)
         {
             this.metroWeb = metroWeb;
+            this.needCheckQuery = true;
         }
 
         #region Get all station list
@@ -29,6 +31,7 @@ namespace MetroWebLibrary
                     stationLineList = new List<StationLineEntity>();
 
                 stationLineList.AddRange(SeachStationLineByQuery());
+                needCheckQuery = false;
                 return stationLineList;
             }
         }
@@ -61,16 +64,19 @@ namespace MetroWebLibrary
 
                 StationLineEntity matchedStationLine = SearchStationLineFromStationLineListByStationLineId(stationLineId);
 
-                if (matchedStationLine == null)
+                if (needCheckQuery)
                 {
-                    try
+                    if (matchedStationLine == null)
                     {
-                        matchedStationLine = SeachStationLineByStationLineIdQuery(stationLineId);
-                        stationLineList.Add(matchedStationLine);
-                    }
-                    catch (Exception exception)
-                    {
-                        throw exception;
+                        try
+                        {
+                            matchedStationLine = SeachStationLineByStationLineIdQuery(stationLineId);
+                            stationLineList.Add(matchedStationLine);
+                        }
+                        catch (Exception exception)
+                        {
+                            throw exception;
+                        }
                     }
                 }
 
@@ -86,7 +92,7 @@ namespace MetroWebLibrary
         private StationLineEntity SeachStationLineByStationLineIdQuery(int stationLineId)
         {
             List<StationLine> matchedStationLineList =
-               metroWeb.MetroWebDatabase.Table<StationLine>().Select(new StationLine { StationLineId = stationLineId});
+               metroWeb.MetroWebDatabase.Table<StationLine>().Select(new StationLine { StationLineId = stationLineId });
 
             if (matchedStationLineList.Count == 0)
                 throw new Exception(string.Format("The station line id {0} is not found.", stationLineId));
@@ -121,15 +127,18 @@ namespace MetroWebLibrary
 
             List<StationLineEntity> matchedStationLineList = SearchStationLineFromStationLineListByStationId(stationId);
 
-            try
+            if (needCheckQuery)
             {
-                List<StationLineEntity> matchedStationLineFromQueryList = SeachStationLineByStationIdQuery(stationId);
-                matchedStationLineList.AddRange(matchedStationLineFromQueryList);
-                stationLineList.AddRange(matchedStationLineFromQueryList);
-            }
-            catch (Exception exception)
-            {
-                throw exception;
+                try
+                {
+                    List<StationLineEntity> matchedStationLineFromQueryList = SeachStationLineByStationIdQuery(stationId);
+                    matchedStationLineList.AddRange(matchedStationLineFromQueryList);
+                    stationLineList.AddRange(matchedStationLineFromQueryList);
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
             }
 
             return matchedStationLineList;
@@ -169,15 +178,18 @@ namespace MetroWebLibrary
 
             List<StationLineEntity> matchedStationLineList = SearchStationLineFromStationLineListByLineId(lineId);
 
-            try
+            if (needCheckQuery)
             {
-                List<StationLineEntity> matchedStationLineFromQueryList = SeachStationLineByLineIdQuery(lineId);
-                matchedStationLineList.AddRange(matchedStationLineFromQueryList);
-                stationLineList.AddRange(matchedStationLineFromQueryList);
-            }
-            catch (Exception exception)
-            {
-                throw exception;
+                try
+                {
+                    List<StationLineEntity> matchedStationLineFromQueryList = SeachStationLineByLineIdQuery(lineId);
+                    matchedStationLineList.AddRange(matchedStationLineFromQueryList);
+                    stationLineList.AddRange(matchedStationLineFromQueryList);
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
             }
 
             return matchedStationLineList;
@@ -220,16 +232,19 @@ namespace MetroWebLibrary
 
                 StationLineEntity matchedStationLine = SearchStationLineFromStationLineList(stationId, lineId);
 
-                if (matchedStationLine == null)
+                if (needCheckQuery)
                 {
-                    try
+                    if (matchedStationLine == null)
                     {
-                        matchedStationLine = SeachStationLineByQuery(stationId, lineId);
-                        stationLineList.Add(matchedStationLine);
-                    }
-                    catch (Exception exception)
-                    {
-                        throw exception;
+                        try
+                        {
+                            matchedStationLine = SeachStationLineByQuery(stationId, lineId);
+                            stationLineList.Add(matchedStationLine);
+                        }
+                        catch (Exception exception)
+                        {
+                            throw exception;
+                        }
                     }
                 }
 

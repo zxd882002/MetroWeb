@@ -52,7 +52,7 @@ CREATE TABLE MetroTransfer -- 换乘
 GO
 
 CREATE VIEW V_StationLine AS
-SELECT l.Line_Name, s2.Station_Name AS 'From', s3.Station_Name AS 'To', s.Station_Name, sl.Time_Wait, sl.Time_Arrived, sl.Start_Time, sl.End_Time
+SELECT l.Line_From_Station_Id, l.Line_Name, s2.Station_Name AS 'From', s3.Station_Name AS 'To', s.Station_Name, sl.Time_Wait, sl.Time_Arrived, sl.Start_Time, sl.End_Time
 FROM StationLine sl 
 INNER JOIN Line l ON l.Line_Id = sl.Line_Id
 INNER JOIN Station s ON s.Station_Id = sl.Station_Id

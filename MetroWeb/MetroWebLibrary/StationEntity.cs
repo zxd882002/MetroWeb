@@ -74,7 +74,7 @@ namespace MetroWebLibrary
 
         public Tuple<List<StationEntity>, TimeSpan> GetTheNearestWayToTargetStation(StationEntity targetStation)
         {
-            StationEntityHelper helper = new StationEntityHelper();
+            RouteFinder helper = new RouteFinder();
             Tuple<List<StationEntity>, TimeSpan> nearestRouteAndTimeSpan = helper.GetTheNearestRouteBetween(this, targetStation);
             return nearestRouteAndTimeSpan;
         }

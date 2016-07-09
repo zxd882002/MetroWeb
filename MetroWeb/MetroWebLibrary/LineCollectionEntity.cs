@@ -8,10 +8,12 @@ namespace MetroWebLibrary
     {
         private List<LineEntity> lineList;
         private MetroWebEntity metroWeb;
+        private bool needCheckQuery;
 
         public LineCollectionEntity(MetroWebEntity metroWeb)
         {
             this.metroWeb = metroWeb;
+            this.needCheckQuery = true;
         }
 
         #region Get all line list
@@ -23,6 +25,7 @@ namespace MetroWebLibrary
                     lineList = new List<LineEntity>();
 
                 lineList.AddRange(SeachLineByQuery());
+                needCheckQuery = false;
                 return lineList;
             }
         }
@@ -55,15 +58,18 @@ namespace MetroWebLibrary
 
                 List<LineEntity> matchedLineList = SearchLineFromLineList(lineName);
 
-                try
+                if (needCheckQuery)
                 {
-                    List<LineEntity> matchedLineFromQueryList = SeachLineByQuery(lineName);
-                    matchedLineList.AddRange(matchedLineFromQueryList);
-                    lineList.AddRange(matchedLineFromQueryList);
-                }
-                catch (Exception exception)
-                {
-                    throw exception;
+                    try
+                    {
+                        List<LineEntity> matchedLineFromQueryList = SeachLineByQuery(lineName);
+                        matchedLineList.AddRange(matchedLineFromQueryList);
+                        lineList.AddRange(matchedLineFromQueryList);
+                    }
+                    catch (Exception exception)
+                    {
+                        throw exception;
+                    }
                 }
                 return matchedLineList;
             }
@@ -106,16 +112,19 @@ namespace MetroWebLibrary
 
                 LineEntity matchedLine = SearchLineFromLineList(lineId);
 
-                if (matchedLine == null)
+                if (needCheckQuery)
                 {
-                    try
+                    if (matchedLine == null)
                     {
-                        matchedLine = SeachLineByQuery(lineId);
-                        lineList.Add(matchedLine);
-                    }
-                    catch (Exception exception)
-                    {
-                        throw exception;
+                        try
+                        {
+                            matchedLine = SeachLineByQuery(lineId);
+                            lineList.Add(matchedLine);
+                        }
+                        catch (Exception exception)
+                        {
+                            throw exception;
+                        }
                     }
                 }
                 return matchedLine;

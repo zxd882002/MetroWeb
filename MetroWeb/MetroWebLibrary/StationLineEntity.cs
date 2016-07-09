@@ -23,6 +23,7 @@ namespace MetroWebLibrary
         private List<MetroTransferEntity> transferFromList;
         private StationLineEntity previousStationLine;
         private StationLineEntity nextStationLine;
+        private List<StationLineEntity> nextStationLineList; 
 
         internal StationLineEntity(MetroWebEntity metroWeb, StationLine stationLine)
         {
