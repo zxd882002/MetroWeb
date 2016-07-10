@@ -10,42 +10,47 @@ public class RouteFinder
         List<StationLineEntityExtender> toStationlineList = StationLineEntityExtender.Convert(toStation, stationLineListCache);
 
         // Quick find a route so that the full find will not reach the time limit
-        bool found = false;
+        bool finalFound = false;
         TimeSpan arrivedTimeLimit = new TimeSpan();
         foreach (StationLineEntityExtender toStationline in toStationlineList)
         {
-            toStationline.Initialize();
-            found = toStationline.QuickGetRoute(fromStation, stationLineListCache);
+            stationLineListCache.ForEach(stationLine => stationLine.Initialize());
+            bool found = toStationline.QuickGetRoute(fromStation, stationLineListCache);
             if (found)
             {
                 arrivedTimeLimit = toStationline.MinimumTime;
+                finalFound = true;
                 break;
             }
         }
 
-        if (!found)
+        if (!finalFound)
         {
             throw new Exception("Quick get route not found!");
         }
 
         // Fully find a route so that
-        found = false;
-        TimeSpan arrivedTime = new TimeSpan();
+        finalFound = false;
+        TimeSpan arrivedTime = new TimeSpan(TimeSpan.MaxValue.Ticks / 2);
         List<StationLineEntity> route = new List<StationLineEntity>();
         foreach (StationLineEntityExtender toStationline in toStationlineList)
         {
-            toStationline.Initialize();
-            found = toStationline.FullyGetRoute(fromStation, stationLineListCache, arrivedTimeLimit);
+            stationLineListCache.ForEach(stationLine => stationLine.Initialize());
+            bool found = toStationline.FullyGetRoute(fromStation, stationLineListCache, arrivedTimeLimit, new Stack<StationLineEntityExtender>());
             if (found)
             {
-                arrivedTime = toStationline.MinimumTime;
-                route = toStationline.MinimumRoute;
+                if (toStationline.MinimumTime < arrivedTime)
+                {
+                    arrivedTime = toStationline.MinimumTime;
+                    route = toStationline.MinimumRoute;
+                }
+                finalFound = true;
             }
         }
 
-        if (!found)
+        if (!finalFound)
         {
-            throw new Exception("Quick get route not found!");
+            throw new Exception("Full get route not found!");
         }
 
         Tuple<List<StationLineEntity>, TimeSpan> result = new Tuple<List<StationLineEntity>, TimeSpan>(route, arrivedTime);
