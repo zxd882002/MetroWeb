@@ -44,8 +44,8 @@ namespace MetroWebTest.MetroWebLibraryTest
 
             // TransferToList
             List<MetroTransferEntity> transferToList = yiShangRoad.TransferToList;
-            Assert.AreEqual(4, transferToList.Count);
-            List<long> expectedTransferToId = new List<long>(new[] { 401030101L, 401030201L, 401090102L, 401090202L });
+            Assert.AreEqual(3, transferToList.Count);
+            List<long> expectedTransferToId = new List<long>(new[] { 401030201L, 401090102L, 401090202L });
             List<long> actualTransferToId = transferToList.Select(metroTransfer => metroTransfer.TransferId).ToList();
             actualTransferToId.Sort();
             for (int i = 0; i < transferToList.Count; i++)

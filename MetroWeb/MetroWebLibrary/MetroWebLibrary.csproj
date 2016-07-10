@@ -53,6 +53,7 @@
     <Compile Include="LineCollectionEntity.cs" />
     <Compile Include="MetroTransferCollectionEntity.cs" />
     <Compile Include="StationLineCollectionEntity.cs" />
+    <Compile Include="StationLineEntityExtender.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">

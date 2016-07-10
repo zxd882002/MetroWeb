@@ -4,19 +4,54 @@ using MetroWebLibrary;
 
 public class RouteFinder
 {
-    public Tuple<List<StationEntity>, TimeSpan> GetTheNearestRouteBetween(StationEntity fromStation, StationEntity toStation)
+    public Tuple<List<StationLineEntity>, TimeSpan> GetTheNearestRouteBetween(StationEntity fromStation, StationEntity toStation)
     {
-        return null;
+        List<StationLineEntityExtender> stationLineListCache = new List<StationLineEntityExtender>();
+        List<StationLineEntityExtender> toStationlineList = StationLineEntityExtender.Convert(toStation, stationLineListCache);
+
+        // Quick find a route so that the full find will not reach the time limit
+        bool found = false;
+        TimeSpan arrivedTimeLimit = new TimeSpan();
+        foreach (StationLineEntityExtender toStationline in toStationlineList)
+        {
+            toStationline.Initialize();
+            found = toStationline.QuickGetRoute(fromStation, stationLineListCache);
+            if (found)
+            {
+                arrivedTimeLimit = toStationline.MinimumTime;
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            throw new Exception("Quick get route not found!");
+        }
+
+        // Fully find a route so that
+        found = false;
+        TimeSpan arrivedTime = new TimeSpan();
+        List<StationLineEntity> route = new List<StationLineEntity>();
+        foreach (StationLineEntityExtender toStationline in toStationlineList)
+        {
+            toStationline.Initialize();
+            found = toStationline.FullyGetRoute(fromStation, stationLineListCache, arrivedTimeLimit);
+            if (found)
+            {
+                arrivedTime = toStationline.MinimumTime;
+                route = toStationline.MinimumRoute;
+            }
+        }
+
+        if (!found)
+        {
+            throw new Exception("Quick get route not found!");
+        }
+
+        Tuple<List<StationLineEntity>, TimeSpan> result = new Tuple<List<StationLineEntity>, TimeSpan>(route, arrivedTime);
+        return result;
     }
 }
-
-
-
-
-
-
-
-
 
 
 //using System;

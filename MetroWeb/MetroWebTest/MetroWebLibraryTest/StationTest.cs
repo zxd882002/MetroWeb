@@ -53,7 +53,7 @@ namespace MetroWebTest.MetroWebLibraryTest
             // station line list
             Assert.AreEqual(7, peopleSquare.StationLineList.Count);
             List<int> stationLineIdList = peopleSquare.StationLineList.Select(stationLine => stationLine.StationLineId).ToList();
-            List<int> expectedStationLineIdList = new List<int>(new[] { 10116, 10213, 10308, 20111, 20212, 80116, 80215 });
+            List<int> expectedStationLineIdList = new List<int>(new[] { 10116, 10213, 10309, 20111, 20212, 80116, 80215 });
             stationLineIdList.Sort();
             for (int i = 0; i < lineIdList.Count; i++)
             {
@@ -85,7 +85,7 @@ namespace MetroWebTest.MetroWebLibraryTest
             // station line list
             Assert.AreEqual(7, peopleSquare.StationLineList.Count);
             List<int> stationLineIdList = peopleSquare.StationLineList.Select(stationLine => stationLine.StationLineId).ToList();
-            List<int> expectedStationLineIdList = new List<int>(new[] { 10116, 10213, 10308, 20111, 20212, 80116, 80215 });
+            List<int> expectedStationLineIdList = new List<int>(new[] { 10116, 10213, 10309, 20111, 20212, 80116, 80215 });
             stationLineIdList.Sort();
             for (int i = 0; i < lineIdList.Count; i++)
             {

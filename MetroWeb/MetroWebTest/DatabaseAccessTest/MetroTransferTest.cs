@@ -17,8 +17,8 @@ namespace MetroWebTest.DatabaseAccessTest
             List<MetroTransfer> metroTransferList = metroWebDatabase.Table<MetroTransfer>().Select(new MetroTransfer { TransferId = 101020101 });
             Assert.AreEqual(metroTransferList.Count, 1);
             Assert.AreEqual(metroTransferList[0].TransferId, 101020101);
-            Assert.AreEqual(metroTransferList[0].FromStationLineId, 10115);
-            Assert.AreEqual(metroTransferList[0].ToStationLineId, 20109);
+            Assert.AreEqual(metroTransferList[0].FromStationLineId, 10116);
+            Assert.AreEqual(metroTransferList[0].ToStationLineId, 20111);
             Assert.AreEqual(metroTransferList[0].TimeTransfer, new TimeSpan(0, 3, 0));
             Assert.AreEqual(metroTransferList[0].InterChange, true);
         }

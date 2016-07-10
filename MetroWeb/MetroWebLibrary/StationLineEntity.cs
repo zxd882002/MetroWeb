@@ -8,6 +8,7 @@ namespace MetroWebLibrary
     public class StationLineEntity
     {
         private MetroWebEntity metroWeb;
+        private StationLine stationLine;
         private int stationLineId;
         private int lineId;
         private LineEntity line;
@@ -20,11 +21,14 @@ namespace MetroWebLibrary
         private List<MetroTransferEntity> transferToList;
         private List<MetroTransferEntity> transferFromList;
         private StationLineEntity previousStationLine;
-        private StationLineEntity nextStationLine; 
+        private List<StationLineEntity> previousStationLineList;
+        private StationLineEntity nextStationLine;
+        private List<StationLineEntity> nextStationLineList;
 
         internal StationLineEntity(MetroWebEntity metroWeb, StationLine stationLine)
         {
             this.metroWeb = metroWeb;
+            this.stationLine = stationLine;
             this.stationLineId = stationLine.StationLineId.Value;
             this.lineId = stationLine.LineId.Value;
             this.stationId = stationLine.StationId.Value;
@@ -32,6 +36,16 @@ namespace MetroWebLibrary
             this.timeArrived = stationLine.TimeArrived.Value;
             this.startTime = stationLine.StartTime.Value;
             this.endTime = stationLine.EndTime.Value;
+        }
+
+        public MetroWebEntity MetroWeb
+        {
+            get { return this.metroWeb; }
+        }
+
+        public StationLine StationLine
+        {
+            get { return this.stationLine; }
         }
 
         public int StationLineId
@@ -148,6 +162,24 @@ namespace MetroWebLibrary
             }
         }
 
+        public List<StationLineEntity> PreviousStationLineList // todo ut
+        {
+            get
+            {
+                if (previousStationLineList == null)
+                {
+                    previousStationLineList = new List<StationLineEntity>();
+                    StationLineEntity currentPreviousStationLine = PreviousStationLine;
+                    while (currentPreviousStationLine != null && !previousStationLineList.Contains(currentPreviousStationLine))
+                    {
+                        previousStationLineList.Add(currentPreviousStationLine);
+                        currentPreviousStationLine = currentPreviousStationLine.PreviousStationLine;
+                    }
+                }
+                return previousStationLineList;
+            }
+        }
+
         public StationLineEntity NextStationLine
         {
             get
@@ -172,6 +204,24 @@ namespace MetroWebLibrary
                     }
                 }
                 return nextStationLine;
+            }
+        }
+
+        public List<StationLineEntity> NextStationLineList // todo ut
+        {
+            get
+            {
+                if (nextStationLineList == null)
+                {
+                    nextStationLineList = new List<StationLineEntity>();
+                    StationLineEntity currentNextStationLine = NextStationLine;
+                    while (currentNextStationLine != null && !nextStationLineList.Contains(currentNextStationLine))
+                    {
+                        nextStationLineList.Add(currentNextStationLine);
+                        currentNextStationLine = currentNextStationLine.NextStationLine;
+                    }
+                }
+                return nextStationLineList;
             }
         }
     }
