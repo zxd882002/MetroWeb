@@ -96,6 +96,7 @@ namespace MetroWebTest.MetroWebLibraryTest
             Tuple<List<StationEntity>, TimeSpan> result1 = helper.GetTheNearestRouteBetween(fromStation, toStation);
             Assert.AreEqual(11, result1.Item1.Count);
 
+            helper = new RouteFinder();
             Tuple<List<StationEntity>, TimeSpan> result2 = helper.GetTheNearestRouteBetween(toStation, fromStation);
             Assert.AreEqual(11, result2.Item1.Count);
         }

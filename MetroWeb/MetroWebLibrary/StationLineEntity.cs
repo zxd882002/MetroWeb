@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography;
 using DatabaseAccessLibrary.Model;
 
 namespace MetroWebLibrary
@@ -22,8 +20,7 @@ namespace MetroWebLibrary
         private List<MetroTransferEntity> transferToList;
         private List<MetroTransferEntity> transferFromList;
         private StationLineEntity previousStationLine;
-        private StationLineEntity nextStationLine;
-        private List<StationLineEntity> nextStationLineList; 
+        private StationLineEntity nextStationLine; 
 
         internal StationLineEntity(MetroWebEntity metroWeb, StationLine stationLine)
         {
