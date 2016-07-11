@@ -49,8 +49,9 @@ namespace MetroWebLibrary
 
             try
             {
-                matchedMetroTransferList.AddRange(SeachMetroTransferByFromStationLineIdQuery(stationLineId));
-                metroTransferEntityList.AddRange(matchedMetroTransferList);
+                List<MetroTransferEntity> metroTransferList = SeachMetroTransferByFromStationLineIdQuery(stationLineId);
+                matchedMetroTransferList.AddRange(metroTransferList);
+                metroTransferEntityList.AddRange(metroTransferList);
             }
             catch (Exception exception)
             {
@@ -96,8 +97,9 @@ namespace MetroWebLibrary
 
             try
             {
-                matchedMetroTransferList.AddRange(SeachMetroTransferByToStationLineIdQuery(stationLineId));
-                metroTransferEntityList.AddRange(matchedMetroTransferList);
+                List<MetroTransferEntity> metroTransferList = SeachMetroTransferByToStationLineIdQuery(stationLineId);
+                matchedMetroTransferList.AddRange(metroTransferList);
+                metroTransferEntityList.AddRange(metroTransferList);
             }
             catch (Exception exception)
             {
