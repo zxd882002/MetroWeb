@@ -77,7 +77,7 @@ namespace MetroWebLibrary
             List<MetroTransferEntity> matchedMetroTransferEntityList = new List<MetroTransferEntity>();
             foreach (MetroTransfer matchedMetroTransfer in matchedMetroTransferList)
             {
-                if (!matchedMetroTransferEntityList.Exists(metroTransfer => metroTransfer.TransferId == matchedMetroTransfer.TransferId))
+                if (!metroTransferEntityList.Exists(metroTransfer => metroTransfer.TransferId == matchedMetroTransfer.TransferId))
                 {
                     MetroTransferEntity matchedMetroTransferEntity = new MetroTransferEntity(metroWeb, matchedMetroTransfer);
                     matchedMetroTransferEntityList.Add(matchedMetroTransferEntity);
@@ -125,7 +125,7 @@ namespace MetroWebLibrary
             List<MetroTransferEntity> matchedMetroTransferEntityList = new List<MetroTransferEntity>();
             foreach (MetroTransfer matchedMetroTransfer in matchedMetroTransferList)
             {
-                if (!matchedMetroTransferEntityList.Exists(metroTransfer => metroTransfer.TransferId == matchedMetroTransfer.TransferId))
+                if (!metroTransferEntityList.Exists(metroTransfer => metroTransfer.TransferId == matchedMetroTransfer.TransferId))
                 {
                     MetroTransferEntity matchedMetroTransferEntity = new MetroTransferEntity(metroWeb, matchedMetroTransfer);
                     matchedMetroTransferEntityList.Add(matchedMetroTransferEntity);

@@ -94,11 +94,11 @@ namespace MetroWebTest.MetroWebLibraryTest
 
             finder = new RouteFinder();
             Tuple<List<StationLineEntity>, TimeSpan> result1 = finder.GetTheNearestRouteBetween(fromStation, toStation);
-            Assert.AreEqual(11, result1.Item1.Count);
+            Assert.AreEqual(26, result1.Item1.Count);
 
             finder = new RouteFinder();
             Tuple<List<StationLineEntity>, TimeSpan> result2 = finder.GetTheNearestRouteBetween(toStation, fromStation);
-            Assert.AreEqual(11, result2.Item1.Count);
+            Assert.AreEqual(25, result2.Item1.Count);
         }
     }
 }
