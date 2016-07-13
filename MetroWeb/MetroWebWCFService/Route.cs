@@ -3,7 +3,7 @@
 namespace MetroWebWCFService
 {
     [DataContract]
-    public class RouteAndPrice
+    public class Route
     {
     }
 }

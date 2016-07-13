@@ -6,9 +6,9 @@ namespace MetroWebWCFService
     public interface IMetroWebService
     {
         [OperationContract]
-        StationInfo GetStationInformation(int value);
+        SimpleStationInfo GetSimpleStationInformation(int stationId);
 
         [OperationContract]
-        RouteAndPrice GetTwoStationsRouteAndPrice(int value);
+        Route GetTwoStationsRoute(int fromStationId, int toStationId);
     }
 }

@@ -80,11 +80,31 @@ namespace MetroWebTest.MetroWebLibraryTest
 
         [TestMethod]
         public void SameStations()
-        { }
+        {
+            StationEntity fromStation = MetroWebEntity.Instance().StationList["宜山路", "4号线"];
+            StationEntity toStation = MetroWebEntity.Instance().StationList["宝山路", "3号线"];
+
+            finder = new RouteFinder();
+            Tuple<List<StationLineEntity>, TimeSpan> result1 = finder.GetTheNearestRouteBetween(fromStation, toStation);
+            Assert.AreEqual(10, result1.Item1.Count);
+
+            Tuple<List<StationLineEntity>, TimeSpan> result2 = finder.GetTheNearestRouteBetween(toStation, fromStation);
+            Assert.AreEqual(10, result2.Item1.Count);
+        }
 
         [TestMethod]
         public void CycleStations()
-        { }
+        {
+            StationEntity fromStation = MetroWebEntity.Instance().StationList["海伦路", "4号线"];
+            StationEntity toStation = MetroWebEntity.Instance().StationList["漕溪路", "3号线"];
+
+            finder = new RouteFinder();
+            Tuple<List<StationLineEntity>, TimeSpan> result1 = finder.GetTheNearestRouteBetween(fromStation, toStation);
+            Assert.AreEqual(12, result1.Item1.Count);
+
+            Tuple<List<StationLineEntity>, TimeSpan> result2 = finder.GetTheNearestRouteBetween(toStation, fromStation);
+            Assert.AreEqual(12, result2.Item1.Count);
+        }
 
         [TestMethod]
         public void ComplexTransfer()

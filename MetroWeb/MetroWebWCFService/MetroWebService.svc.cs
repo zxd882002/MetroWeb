@@ -1,16 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MetroWebLibrary;
 
 namespace MetroWebWCFService
 {
-    // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码、svc 和配置文件中的类名“Service1”。
-    public class Service1 : IMetroWebService
+    public class MetroWebService : IMetroWebService
     {
-        public StationInfo GetStationInformation(int value)
+        public SimpleStationInfo GetSimpleStationInformation(int stationId)
         {
-            throw new NotImplementedException();
+            StationEntity stationEntity = MetroWebEntity.Instance().StationList[stationId];
+            SimpleStationInfo simpleStationInfo = new SimpleStationInfo();
+            simpleStationInfo.StationName = stationEntity.StationName;
+            simpleStationInfo.Lines = stationEntity.LineList.Select(line => line.LineName).Distinct().ToArray();
+            return simpleStationInfo;
         }
 
-        public RouteAndPrice GetTwoStationsRouteAndPrice(int value)
+        public Route GetTwoStationsRoute(int fromStationId, int toStationId)
         {
             throw new NotImplementedException();
         }
