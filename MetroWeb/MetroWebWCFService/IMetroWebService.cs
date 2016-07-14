@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 
 namespace MetroWebWCFService
 {
@@ -6,9 +7,9 @@ namespace MetroWebWCFService
     public interface IMetroWebService
     {
         [OperationContract]
-        SimpleStationInfo GetSimpleStationInformation(int stationId);
+        String GetSimpleStationInformation(int stationId);
 
         [OperationContract]
-        Route GetTwoStationsRoute(int fromStationId, int toStationId);
+        String GetTwoStationsRoute(int fromStationId, int toStationId);
     }
 }

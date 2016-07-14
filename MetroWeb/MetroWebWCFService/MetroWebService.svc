@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="MetroWebWCFService.Service1" CodeBehind="MetroWebService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="MetroWebWCFService.MetroWebService" CodeBehind="MetroWebService.svc.cs" %>

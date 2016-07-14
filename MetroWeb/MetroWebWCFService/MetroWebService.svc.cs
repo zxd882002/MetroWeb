@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Activation;
+using System.Web.Script.Serialization;
 using MetroWebLibrary;
 
 namespace MetroWebWCFService
 {
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]  
     public class MetroWebService : IMetroWebService
     {
-        public SimpleStationInfo GetSimpleStationInformation(int stationId)
+        public String GetSimpleStationInformation(int stationId)
         {
             StationEntity stationEntity = MetroWebEntity.Instance().StationList[stationId];
             SimpleStationInfo simpleStationInfo = new SimpleStationInfo();
             simpleStationInfo.StationName = stationEntity.StationName;
             simpleStationInfo.Lines = stationEntity.LineList.Select(line => line.LineName).Distinct().ToArray();
-            return simpleStationInfo;
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            return serializer.Serialize(simpleStationInfo);
         }
 
-        public Route GetTwoStationsRoute(int fromStationId, int toStationId)
+        public String GetTwoStationsRoute(int fromStationId, int toStationId)
         {
             throw new NotImplementedException();
         }
