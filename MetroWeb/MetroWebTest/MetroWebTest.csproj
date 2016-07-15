@@ -65,10 +65,6 @@
       <Project>{1A253E99-3E65-4849-ACD2-957D3D600E7E}</Project>
       <Name>MetroWebLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MetroWebWCFService\MetroWebWCFService.csproj">
-      <Project>{F26A4C98-F159-415E-87FE-9FF5019468B7}</Project>
-      <Name>MetroWebWCFService</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\DatabaseAccessLibrary\App.config">
