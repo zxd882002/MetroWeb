@@ -1,1 +1,40 @@
-﻿
+﻿html, body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+    display: block; 
+}
+
+.header
+{
+    height: 9%;
+    background: blue;
+}
+
+.title 
+{
+    position:relative; 
+    top: 10px;
+    bottom: 0;
+    left: 30px;
+    font-family: "SimSun";
+    font-size: 150%;
+    color: white;
+}
+
+.canvasContainer {
+    height: 86%;
+}
+
+.canvasClass {
+    background: #000000
+}
+
+.footer
+{
+    height: 5%;
+    background: #00fa9a;
+}

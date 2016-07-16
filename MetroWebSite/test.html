@@ -1,22 +1,17 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>测试页</title>
     <link rel="stylesheet" type="text/css" href="style/StyleSheet.css" />
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/16.7.3/jcanvas.min.js"></script>
-    <script type="text/javascript" src="script/MetroWeb.js"></script>
-    <script type="text/javascript" src="script/MetroStationArray.js"></script>
-    <script type="text/javascript" src="script/stationLineArray.js"></script>
+    <script type="text/javascript" src="script/test.js"></script>
 </head>
 <body>
-    <div class="header">
-        <span class ="title">上海地铁图</span>
-        </div>
-    <div class="canvasContainer">
-        <canvas class="canvasClass" id="metroCanvas"></canvas>
+    <div>
+        StationId：<input type="text" id="StationId" value="401" />
+        <input type="button" value="获取站名" onclick=" getStationName(); "/>
+        <span id="StationName"></span>
     </div>
-    <div class="footer">
-        This is footer</div>
 </body>
 </html>
