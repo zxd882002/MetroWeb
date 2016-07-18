@@ -50,6 +50,8 @@
     <Compile Include="MetroWebLibraryTest\RouteFinderTest.cs" />
     <Compile Include="MetroWebLibraryTest\StationLineTest.cs" />
     <Compile Include="MetroWebLibraryTest\StationTest.cs" />
+    <Compile Include="MetroWebWcfServiceTest\GetStationByStationIdTest.cs" />
+    <Compile Include="MetroWebWcfServiceTest\GetNearestRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DatabaseAccessTest\StationTest.cs" />
     <Compile Include="DatabaseAccessTest\LineTest.cs" />

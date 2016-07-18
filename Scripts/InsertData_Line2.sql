@@ -37,8 +37,8 @@ GO
 INSERT INTO Line VALUES
 	(201,'2号线',221,201),
 	(202,'2号线',201,221),
-	(203,'2号线-东段',229,221),
-	(204,'2号线-东段',221,229)
+	(203,'2号线',229,221),
+	(204,'2号线',221,229)
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

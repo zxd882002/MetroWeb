@@ -13,6 +13,32 @@ namespace MetroWebWcfService
         public int StationId { get; set; }
 
         [DataMember]
-        public string StationName { get; set; }
+        public StationGraph StationGraph { get; set; }
+
+        [DataMember]
+        public NameGraph NameGraph { get; set; }
+    }
+
+    [DataContract]
+    public class StationGraph
+    {
+        [DataMember]
+        public int x { get; set; }
+
+        [DataMember]
+        public int y { get; set; }
+    }
+
+    [DataContract]
+    public class NameGraph
+    {
+        [DataMember]
+        public int x { get; set; }
+
+        [DataMember]
+        public int y { get; set; }
+
+        [DataMember]
+        public string text { get; set; }
     }
 }

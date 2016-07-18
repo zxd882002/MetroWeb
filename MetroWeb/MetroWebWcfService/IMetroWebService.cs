@@ -8,6 +8,10 @@ namespace MetroWebWcfService
     {
         [OperationContract]
         [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
-        StationInfo GetStationNameByStationId(int stationId);
+        StationInfo GetStationByStationId(int stationId);
+
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        string GetNearestRoute(string fromStationName, int fromLine, string toStationName, int toLine);
     }
 }

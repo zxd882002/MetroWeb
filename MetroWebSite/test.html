@@ -8,10 +8,20 @@
     <script type="text/javascript" src="script/test.js"></script>
 </head>
 <body>
-    <div>
-        StationId：<input type="text" id="StationId" value="401" />
-        <input type="button" value="获取站名" onclick=" getStationName(); "/>
-        <span id="StationName"></span>
-    </div>
+<div>
+    StationId：<input type="text" id="StationId" value="401"/>
+    <input type="button" value="获取站名" onclick=" getStationName(); "/>
+    <span id="StationName"></span>
+</div>
+<p/>
+<div>
+    From Station Name <input type="text" id="FromStationName" value="金科路"/> on Line <input type="text" id="FromLine" value="2"/>
+    <br/>
+    To Station Name <input type="text" id="ToStationName" value="佘山"/> on Line <input type="text" id="ToLine" value="9"/>
+    <br/>
+    <input type="button" value="Get the nearest route:" onclick=" getRoute(); "/>
+    <br/>
+    <span id="route"></span>
+</div>
 </body>
 </html>
