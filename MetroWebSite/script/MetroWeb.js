@@ -1,6 +1,34 @@
-﻿function DrawStation(metroStation) {
-    $('#metroCanvas').draw(metroStation.StationGraph);
-    $('#metroCanvas').draw(metroStation.NameGraph);
+﻿var metroStationGraphBase = {
+	layer: true,
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'ellipse',
+    strokeStyle: 'black',
+    fillStyle: 'white',
+    strokeWidth: 2,
+    width: 15,
+    height: 15
+}
+
+var metroStationNameGraphBase = {
+	layer: true,
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'text',
+    strokeStyle: 'black',
+    strokeWidth: 1,    
+    fontSize: 4,
+    fontFamily: 'SimSun',
+}
+
+function DrawStation(metroStation) {
+	var metroStationGraph =	$.extend({}, metroStationGraphBase, metroStation.StationGraph);
+    $('#metroCanvas').draw(metroStationGraph);
+	
+	var metroStationName = $.extend({}, metroStationNameGraphBase, metroStation.NameGraph);
+    $('#metroCanvas').draw(metroStationName);
 }
 
 function DrawLine(stationLine) {
@@ -19,7 +47,6 @@ $(document).ready(function () {
     var scale1 = height / 528;
     var scale2 = width / 1366;
     var scaleVal = scale1 < scale2 ? scale1 : scale2;
-    // var scaleVal = 1.1;
     $('#metroCanvas').scaleCanvas({ scale: scaleVal });
 
     // draw a dragable element so that we could drag it on white places
