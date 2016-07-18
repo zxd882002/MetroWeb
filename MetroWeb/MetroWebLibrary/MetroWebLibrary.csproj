@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetTheNearestRouteBetween.cs" />
     <Compile Include="LineEntity.cs" />
     <Compile Include="MetroTransferEntity.cs" />
     <Compile Include="RouteFinder.cs" />
