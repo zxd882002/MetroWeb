@@ -29,7 +29,7 @@
 	{
         id: 106,
         StationGraph: {x: 340, y: 430},
-        NameGraph: {x: 370, y: 445, text: '漕宝路'}
+        NameGraph: {x: 315, y: 440, text: '漕宝路'}
     },
 	{
         id: 107,
@@ -211,7 +211,7 @@
 	{
         id: 214,
         StationGraph: {x: 820, y: 250},
-        NameGraph: {x: 845, y: 235, text: '东昌路'}
+        NameGraph: {x: 795, y: 265, text: '东昌路'}
     },
 	{
         id: 215,
@@ -293,17 +293,17 @@
 	{
         id: 301,
         StationGraph: {x: 400, y: 470},
-        NameGraph: {x: 430, y: 475, text: '石龙路'}
+        NameGraph: {x: 425, y: 480, text: '石龙路'}
     },
 	{
         id: 302,
         StationGraph: {x: 400, y: 430},
-        NameGraph: {x: 430, y: 445, text: '龙漕路'}
+        NameGraph: {x: 425, y: 440, text: '龙漕路'}
     },
 	{
         id: 303,
         StationGraph: {x: 380, y: 400},
-        NameGraph: {x: 410, y: 405, text: '漕溪路'}
+        NameGraph: {x: 360, y: 415, text: '漕溪路'}
     },
 	{
         id: 304,
@@ -419,8 +419,77 @@
         id: 326,
         StationGraph: {x: 680, y: -420},
         NameGraph: {x: 710, y: -435, text: '江杨北路'}
-    }
+    },
 	
 	// #4
-	
+	{
+        id: 401,
+        StationGraph: {x: 425, y: 390},
+        NameGraph: {x: 425, y: 405, text: '上海体育场'}
+    },
+	{
+        id: 402,
+        StationGraph: {x: 475, y: 390},
+        NameGraph: {x: 490, y: 405, text: '东安路'}
+    },
+	{
+        id: 403,
+        StationGraph: {x: 525, y: 390},
+        NameGraph: {x: 545, y: 405, text: '大木桥路'}
+    },
+	{
+        id: 404,
+        StationGraph: {x: 575, y: 390},
+        NameGraph: {x: 575, y: 375, text: '鲁班路'}
+    },
+	{
+        id: 405,
+        StationGraph: {x: 675, y: 390},
+        NameGraph: {x: 650, y: 405, text: '西藏南路'}
+    },
+	{
+        id: 406,
+        StationGraph: {x: 720, y: 390},
+        NameGraph: {x: 745, y: 405, text: '南浦大桥'}
+    },
+	{
+        id: 407,
+        StationGraph: {x: 790, y: 390},
+        NameGraph: {x: 805, y: 405, text: '塘桥'}
+    },
+	{
+        id: 408,
+        StationGraph: {x: 820, y: 365},
+        NameGraph: {x: 840, y: 380, text: '蓝村路'}
+    },
+	{
+        id: 409,
+        StationGraph: {x: 850, y: 340},
+        NameGraph: {x: 875, y: 355, text: '浦电路'}
+    },
+	{
+        id: 410,
+        StationGraph: {x: 850, y: 220},
+        NameGraph: {x: 875, y: 205, text: '浦东大道'}
+    },
+	{
+        id: 411,
+        StationGraph: {x: 850, y: 180},
+        NameGraph: {x: 875, y: 165, text: '杨树浦路'}
+    },
+	{
+        id: 412,
+        StationGraph: {x: 850, y: 140},
+        NameGraph: {x: 870, y: 125, text: '大连路'}
+    },
+	{
+        id: 413,
+        StationGraph: {x: 850, y: 105},
+        NameGraph: {x: 870, y: 90, text: '临平路'}
+    },
+	{
+        id: 414,
+        StationGraph: {x: 730, y: 105},
+        NameGraph: {x: 755, y: 115, text: '海伦路'}
+    },
 ];
