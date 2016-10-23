@@ -34,7 +34,7 @@
 	{
         id: 107,
         StationGraph: {x: 380, y: 360},
-        NameGraph: {x: 420, y: 365, text: '上海体育馆'}
+        NameGraph: {x: 420, y: 360, text: '上海体育馆'}
     },
 	{
         id: 108,
@@ -303,7 +303,7 @@
 	{
         id: 303,
         StationGraph: {x: 380, y: 400},
-        NameGraph: {x: 360, y: 415, text: '漕溪路'}
+        NameGraph: {x: 355, y: 390, text: '漕溪路'}
     },
 	{
         id: 304,
@@ -343,7 +343,7 @@
 	{
         id: 311,
         StationGraph: {x: 615, y: 105},
-        NameGraph: {x: 640, y: 115, text: '宝山路'}
+        NameGraph: {x: 640, y: 120, text: '宝山路'}
     },
 	{
         id: 312,
@@ -470,26 +470,80 @@
 	{
         id: 410,
         StationGraph: {x: 850, y: 220},
-        NameGraph: {x: 875, y: 205, text: '浦东大道'}
+        NameGraph: {x: 880, y: 205, text: '浦东大道'}
     },
 	{
         id: 411,
         StationGraph: {x: 850, y: 180},
-        NameGraph: {x: 875, y: 165, text: '杨树浦路'}
+        NameGraph: {x: 880, y: 165, text: '杨树浦路'}
     },
 	{
         id: 412,
         StationGraph: {x: 850, y: 140},
-        NameGraph: {x: 870, y: 125, text: '大连路'}
+        NameGraph: {x: 875, y: 125, text: '大连路'}
     },
 	{
         id: 413,
         StationGraph: {x: 850, y: 105},
-        NameGraph: {x: 870, y: 90, text: '临平路'}
+        NameGraph: {x: 875, y: 90, text: '临平路'}
     },
 	{
         id: 414,
         StationGraph: {x: 730, y: 105},
-        NameGraph: {x: 755, y: 115, text: '海伦路'}
+        NameGraph: {x: 755, y: 120, text: '海伦路'}
     },
+
+	// #5
+	{
+		id: 501,
+		StationGraph: {x: 180, y: 625},
+        NameGraph: {x: 205, y: 635, text: '春申路'}
+	},
+	{
+		id: 502,
+		StationGraph: {x: 180, y: 660},
+        NameGraph: {x: 205, y: 670, text: '银都路'}
+	},
+	{
+		id: 503,
+		StationGraph: {x: 180, y: 695},
+        NameGraph: {x: 205, y: 705, text: '颛桥'}
+	},
+	{
+		id: 504,
+		StationGraph: {x: 180, y: 730},
+        NameGraph: {x: 205, y: 740, text: '北桥'}
+	},
+	{
+		id: 505,
+		StationGraph: {x: 180, y: 765},
+        NameGraph: {x: 205, y: 775, text: '剑川路'}
+	},
+	{
+		id: 506,
+		StationGraph: {x: 180, y: 800},
+        NameGraph: {x: 205, y: 810, text: '东川路'}
+	},
+	{
+		id: 507,
+		StationGraph: {x: 140, y: 800},
+        NameGraph: {x: 140, y: 815, text: '金平路'}
+	},
+	{
+		id: 508,
+		StationGraph: {x: 100, y: 800},
+        NameGraph: {x: 100, y: 785, text: '华宁路'}
+	},
+	{
+		id: 509,
+		StationGraph: {x: 60, y: 800},
+        NameGraph: {x: 60, y: 815, text: '文井路'}
+	},
+	{
+		id: 510,
+		StationGraph: {x: 20, y: 800},
+        NameGraph: {x: 20, y: 785, text: '闵行开发区'}
+	},
+	
+	// #6
 ];

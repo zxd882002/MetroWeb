@@ -1,5 +1,6 @@
 ﻿var stationLineArray =
 [
+	// #1
     {
         LineGraph: {
             layer: true,
@@ -24,6 +25,7 @@
             }
         }
     },
+	// #2
 	{
         LineGraph: {
             layer: true,
@@ -45,6 +47,7 @@
             }
         }
     },
+	// #3
 	{
         LineGraph: {
             layer: true,
@@ -68,6 +71,7 @@
             }
         }
     },
+	// #4
 	{
         LineGraph: {
             layer: true,
@@ -87,6 +91,24 @@
 				x6: 352,	y6: 108,
 				x7: 352,	y7: 300,
 				x8: 355,	y8: 345
+            }
+        }
+    },
+	// #5
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#CC00CC',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 180,	y1: 590,
+				x2: 180,	y2: 800,
+				x3: 20,		y3: 800
             }
         }
     },
