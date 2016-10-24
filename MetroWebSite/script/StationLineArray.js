@@ -60,8 +60,8 @@
             p1: {
                 type: 'line',
 				x1: 340,	y1: 470,
-				x2: 400,	y2: 470,
-				x3: 400,	y3: 430,
+				x2: 380,	y2: 470,
+				x3: 380,	y3: 400,
 				x4: 345,	y4: 345,
 				x5: 347,	y5: 300,
 				x6: 347,	y6: 102,
@@ -109,6 +109,27 @@
 				x1: 180,	y1: 590,
 				x2: 180,	y2: 800,
 				x3: 20,		y3: 800
+            }
+        }
+    },
+	// #6
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#FF3366',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 1160,	y1: -140,
+				x2: 1160,	y2: 220,
+				x3: 910,	y3: 220,
+				x4: 820,	y4: 310,
+				x5: 820,	y5: 565,
+				x6: 620,	y6: 565
             }
         }
     },
