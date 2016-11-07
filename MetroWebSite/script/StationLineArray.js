@@ -41,9 +41,9 @@
 				x2: 5,		y2: 265,
                 x3: 70,		y3: 220,
                 x4: 790,	y4: 220,
-				x5: 940,	y5: 370,
-				x6: 1290,	y6: 370,
-				x7: 1290, 	y7: 670
+				x5: 960,	y5: 390,
+				x6: 1290,	y6: 390,
+				x7: 1290, 	y7: 690
             }
         }
     },
@@ -130,6 +130,52 @@
 				x4: 820,	y4: 310,
 				x5: 820,	y5: 565,
 				x6: 620,	y6: 565
+            }
+        }
+    },
+	// #7
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#FF7200',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 990,	y1: 360,
+				x2: 870,	y2: 485,
+				x3: 555,	y3: 485,
+				x4: 475,	y4: 390,
+				x5: 500,	y5: 270,
+				x6: 500,	y6: 140,
+				x7: 420,	y7: 105,
+				x8: 420,	y8: -420
+            }
+        }
+    },
+	// #8
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#0066CC',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 620,	y1: 805,
+				x2: 620,	y2: 525,
+				x3: 675,	y3: 525,
+				x4: 675,	y4: 255,
+				x5: 640,	y5: 220,
+				x6: 640,	y6: 35,
+				x7: 1060,	y7: 35,
+				x8: 1060,	y8: -105
             }
         }
     },
