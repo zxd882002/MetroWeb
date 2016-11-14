@@ -15,12 +15,13 @@
                 x1: 180, y1: 590,
                 x2: 340, y2: 470,
 				x3: 340, y3: 390,
-				x4: 500, y4: 270,
-				x5: 640, y5: 270,
-				x6: 640, y6: 220,
-				x7: 590, y7: 140,
-				x8: 535, y8: 105,
-				x9: 535, y9: -315
+				x4: 500, y4: 270,				
+				x5: 537, y5: 300,
+				x6: 640, y6: 255,
+				x7: 640, y7: 220,
+				x8: 590, y8: 140,
+				x9: 535, y9: 105,
+				x10: 535, y10: -315
             }
         }
     },
@@ -197,6 +198,48 @@
 				x5: 350,	y5: 340,
 				x6: -210,	y6: 340,
 				x7: -210,	y7: 585
+            }
+        }
+    },
+	// #10-1
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#C0A8D1',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 1010,	y1: -165,
+				x2: 1010,	y2: -60,
+				x3: 730,	y3: 105,
+				x4: 720,	y4: 140,
+				x5: 720,	y5: 300,
+				x6: 537,	y6: 300,
+				x7: 460,	y7: 270,
+				x8: 350,	y8: 300,
+				x9: 0,		y9: 300,
+            }
+        }
+    },
+	// #10-2
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#C0A8D1',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 150,	y1: 300,
+				x2: 100,	y2: 275,
+				x3: -70,	y3: 275
             }
         }
     },

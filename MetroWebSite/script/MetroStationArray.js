@@ -44,17 +44,17 @@
 	{
         id: 109,
         StationGraph: {x: 460, y: 300},
-        NameGraph: {x: 490, y: 305, text: '衡山路'}
+        NameGraph: {x: 460, y: 315, text: '衡山路'}
     },
 	{
         id: 110,
         StationGraph: {x: 500, y: 270},
-        NameGraph: {x: 520, y: 285, text: '常熟路'}
+        NameGraph: {x: 525, y: 270, text: '常熟路'}
     },
 	{
         id: 111,
-        StationGraph: {x: 550, y: 270},
-        NameGraph: {x: 580, y: 285, text: '陕西南路'}
+        StationGraph: {x: 537, y: 300},
+        NameGraph: {x: 537, y: 315, text: '陕西南路'}
     },
 	{
         id: 112,
@@ -868,7 +868,7 @@
 	{
         id: 811,
         StationGraph: {x: 675, y: 300},
-        NameGraph: {x: 700, y: 310, text: '老西门'}
+        NameGraph: {x: 695, y: 315, text: '老西门'}
     },
 	{
         id: 812,
@@ -1046,5 +1046,122 @@
         id: 921,
         StationGraph: {x: -210, y: 585},
         NameGraph: {x: -245, y: 585, text: '松江南站'}
+    },
+	
+	// #10
+	{
+        id: 1001,
+        StationGraph: {x: 1010, y: -165},
+        NameGraph: {x: 975, y: -165, text: '新江湾城'}
+    },
+	{
+        id: 1002,
+        StationGraph: {x: 1010, y: -130},
+        NameGraph: {x: 975, y: -130, text: '殷高东路'}
+    },
+	{
+        id: 1003,
+        StationGraph: {x: 1010, y: -95},
+        NameGraph: {x: 980, y: -95, text: '三门路'}
+    },
+	{
+        id: 1004,
+        StationGraph: {x: 1010, y: -60},
+        NameGraph: {x: 970, y: -60, text: '江湾体育场'}
+    },
+	{
+        id: 1005,
+        StationGraph: {x: 960, y: -30},
+        NameGraph: {x: 990, y: -20, text: '五角场'}
+    },
+	{
+        id: 1006,
+        StationGraph: {x: 920, y: -5},
+        NameGraph: {x: 950, y: 5, text: '国权路'}
+    },
+	{
+        id: 1007,
+        StationGraph: {x: 885, y: 15},
+        NameGraph: {x: 850, y: 15, text: '同济大学'}
+    },
+	{
+        id: 1008,
+        StationGraph: {x: 790, y: 70},
+        NameGraph: {x: 820, y: 80, text: '邮电新村'}
+    },
+	{
+        id: 1009,
+        StationGraph: {x: 720, y: 140},
+        NameGraph: {x: 750, y: 150, text: '四川北路'}
+    },
+	{
+        id: 1010,
+        StationGraph: {x: 720, y: 180},
+        NameGraph: {x: 750, y: 190, text: '天潼路'}
+    },
+	{
+        id: 1011,
+        StationGraph: {x: 720, y: 300},
+        NameGraph: {x: 740, y: 300, text: '豫园'}
+    },
+	{
+        id: 1012,
+        StationGraph: {x: 630, y: 300},
+        NameGraph: {x: 605, y: 310, text: '新天地'}
+    },
+	{
+        id: 1013,
+        StationGraph: {x: 460, y: 270},
+        NameGraph: {x: 460, y: 255, text: '上海图书馆'}
+    },
+	{
+        id: 1014,
+        StationGraph: {x: 420, y: 280},
+        NameGraph: {x: 390, y: 270, text: '交通大学'}
+    },
+	{
+        id: 1015,
+        StationGraph: {x: 300, y: 300},
+        NameGraph: {x: 275, y: 315, text: '宋园路'}
+    },
+	{
+        id: 1016,
+        StationGraph: {x: 250, y: 300},
+        NameGraph: {x: 225, y: 315, text: '伊犁路'}
+    },
+	{
+        id: 1017,
+        StationGraph: {x: 200, y: 300},
+        NameGraph: {x: 175, y: 315, text: '水城路'}
+    },
+	{
+        id: 1018,
+        StationGraph: {x: 150, y: 300},
+        NameGraph: {x: 150, y: 285, text: '龙溪路'}
+    },
+	{
+        id: 1019,
+        StationGraph: {x: 100, y: 275},
+        NameGraph: {x: 135, y: 265, text: '上海动物园'}
+    },
+	{
+        id: 1020,
+        StationGraph: {x: 50, y: 275},
+        NameGraph: {x: 50, y: 255, text: '虹桥1号航站楼'}
+    },
+	{
+        id: 1021,
+        StationGraph: {x: 100, y: 300},
+        NameGraph: {x: 100, y: 315, text: '龙柏新村'}
+    },
+	{
+        id: 1022,
+        StationGraph: {x: 50, y: 300},
+        NameGraph: {x: 50, y: 315, text: '紫藤路'}
+    },
+	{
+        id: 1023,
+        StationGraph: {x: 0, y: 300},
+        NameGraph: {x: 0, y: 315, text: '航中路'}
     },
 ];
