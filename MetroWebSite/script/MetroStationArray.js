@@ -34,7 +34,7 @@
 	{
         id: 107,
         StationGraph: {x: 380, y: 360},
-        NameGraph: {x: 420, y: 360, text: '上海体育馆'}
+        NameGraph: {x: 410, y: 350, text: '上海体育馆'}
     },
 	{
         id: 108,
@@ -48,8 +48,8 @@
     },
 	{
         id: 110,
-        StationGraph: {x: 500, y: 270},
-        NameGraph: {x: 525, y: 270, text: '常熟路'}
+        StationGraph: {x: 500, y: 300},
+        NameGraph: {x: 500, y: 285, text: '常熟路'}
     },
 	{
         id: 111,
@@ -425,7 +425,7 @@
 	{
         id: 401,
         StationGraph: {x: 425, y: 390},
-        NameGraph: {x: 425, y: 405, text: '上海体育场'}
+        NameGraph: {x: 425, y: 375, text: '上海体育场'}
     },
 	{
         id: 402,
@@ -725,8 +725,8 @@
     },
 	{
         id: 710,
-        StationGraph: {x: 487, y: 330},
-        NameGraph: {x: 487, y: 345, text: '肇嘉浜路'}
+        StationGraph: {x: 490, y: 330},
+        NameGraph: {x: 490, y: 345, text: '肇嘉浜路'}
     },
 	{
         id: 711,
@@ -1163,5 +1163,172 @@
         id: 1023,
         StationGraph: {x: 0, y: 300},
         NameGraph: {x: 0, y: 315, text: '航中路'}
+    },
+
+	// #11
+	{
+        id: 1101,
+        StationGraph: {x: 1110, y: 605},
+        NameGraph: {x: 1110, y: 620, text: '迪士尼'}
+    },
+	{
+        id: 1102,
+        StationGraph: {x: 1060, y: 605},
+        NameGraph: {x: 1060, y: 620, text: '康新公路'}
+    },
+	{
+        id: 1103,
+        StationGraph: {x: 1010, y: 605},
+        NameGraph: {x: 1010, y: 620, text: '秀沿路'}
+    },
+	{
+        id: 1104,
+        StationGraph: {x: 960, y: 605},
+        NameGraph: {x: 960, y: 620, text: '罗山路'}
+    },
+	{
+        id: 1105,
+        StationGraph: {x: 900, y: 605},
+        NameGraph: {x: 900, y: 620, text: '御桥'}
+    },
+	{
+        id: 1106,
+        StationGraph: {x: 820, y: 605},
+        NameGraph: {x: 820, y: 620, text: '浦三路'}
+    },
+	{
+        id: 1107,
+        StationGraph: {x: 770, y: 605},
+        NameGraph: {x: 770, y: 620, text: '三林东'}
+    },
+	{
+        id: 1108,
+        StationGraph: {x: 720, y: 605},
+        NameGraph: {x: 720, y: 620, text: '三林'}
+    },
+	{
+        id: 1109,
+        StationGraph: {x: 490, y: 485},
+        NameGraph: {x: 465, y: 495, text: '龙耀路'}
+    },
+	{
+        id: 1110,
+        StationGraph: {x: 480, y: 460},
+        NameGraph: {x: 455, y: 470, text: '云锦路'}
+    },
+	{
+        id: 1111,
+        StationGraph: {x: 465, y: 430},
+        NameGraph: {x: 445, y: 440, text: '龙华'}
+    },
+	{
+        id: 1112,
+        StationGraph: {x: 453, y: 405},
+        NameGraph: {x: 418, y: 415, text: '上海游泳馆'}
+    },
+	{
+        id: 1113,
+        StationGraph: {x: 385, y: 140},
+        NameGraph: {x: 385, y: 155, text: '隆德路'}
+    },
+	{
+        id: 1114,
+        StationGraph: {x: 320, y: 75},
+        NameGraph: {x: 295, y: 85, text: '枫桥路'}
+    },
+	{
+        id: 1115,
+        StationGraph: {x: 290, y: 45},
+        NameGraph: {x: 270, y: 55, text: '真如'}
+    },
+	{
+        id: 1116,
+        StationGraph: {x: 260, y: 15},
+        NameGraph: {x: 230, y: 25, text: '上海西站'}
+    },
+	{
+        id: 1117,
+        StationGraph: {x: 230, y: -15},
+        NameGraph: {x: 205, y: -5, text: '李子园'}
+    },
+	{
+        id: 1118,
+        StationGraph: {x: 200, y: -45},
+        NameGraph: {x: 170, y: -35, text: '祁连山路'}
+    },
+	{
+        id: 1119,
+        StationGraph: {x: 170, y: -75},
+        NameGraph: {x: 145, y: -65, text: '武威路'}
+    },
+	{
+        id: 1120,
+        StationGraph: {x: 140, y: -105},
+        NameGraph: {x: 110, y: -95, text: '桃浦新村'}
+    },
+	{
+        id: 1121,
+        StationGraph: {x: 110, y: -135},
+        NameGraph: {x: 90, y: -125, text: '南翔'}
+    },
+	{
+        id: 1122,
+        StationGraph: {x: 80, y: -165},
+        NameGraph: {x: 60, y: -155, text: '马陆'}
+    },
+	{
+        id: 1123,
+        StationGraph: {x: 50, y: -195},
+        NameGraph: {x: 85, y: -195, text: '嘉定新城'}
+    },
+	{
+        id: 1124,
+        StationGraph: {x: 50, y: -225},
+        NameGraph: {x: 80, y: -225, text: '白银路'}
+    },
+	{
+        id: 1125,
+        StationGraph: {x: 50, y: -255},
+        NameGraph: {x: 80, y: -255, text: '嘉定西'}
+    },
+	{
+        id: 1126,
+        StationGraph: {x: 50, y: -285},
+        NameGraph: {x: 80, y: -285, text: '嘉定北'}
+    },
+	{
+        id: 1127,
+        StationGraph: {x: 0, y: -195},
+        NameGraph: {x: 0, y: -180, text: '上海赛车场'}
+    },
+	{
+        id: 1128,
+        StationGraph: {x: -50, y: -195},
+        NameGraph: {x: -50, y: -215, text: '昌吉东路'}
+    },
+	{
+        id: 1129,
+        StationGraph: {x: -100, y: -195},
+        NameGraph: {x: -100, y: -180, text: '上海汽车城'}
+    },
+	{
+        id: 1130,
+        StationGraph: {x: -150, y: -195},
+        NameGraph: {x: -150, y: -215, text: '安亭'}
+    },
+	{
+        id: 1131,
+        StationGraph: {x: -200, y: -195},
+        NameGraph: {x: -200, y: -180, text: '兆丰路'}
+    },
+	{
+        id: 1132,
+        StationGraph: {x: -250, y: -195},
+        NameGraph: {x: -250, y: -215, text: '光明路'}
+    },
+	{
+        id: 1133,
+        StationGraph: {x: -300, y: -195},
+        NameGraph: {x: -300, y: -180, text: '花桥'}
     },
 ];
