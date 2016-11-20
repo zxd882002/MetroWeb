@@ -16,7 +16,7 @@
                 x2: 340, y2: 470,
 				x3: 340, y3: 390,
 				x4: 460, y4: 300,				
-				x5: 537, y5: 300,
+				x5: 535, y5: 300,
 				x6: 640, y6: 255,
 				x7: 640, y7: 220,
 				x8: 590, y8: 140,
@@ -150,7 +150,7 @@
 				x3: 555,	y3: 485,
 				x4: 475,	y4: 390,
 				x5: 500,	y5: 300,
-				x6: 500,	y6: 140,
+				x6: 500,	y6: 180,
 				x7: 420,	y7: 105,
 				x8: 420,	y8: -420
             }
@@ -218,10 +218,10 @@
 				x3: 730,	y3: 105,
 				x4: 720,	y4: 140,
 				x5: 720,	y5: 300,
-				x6: 537,	y6: 300,
+				x6: 535,	y6: 300,
 				x7: 460,	y7: 270,
 				x8: 350,	y8: 300,
-				x9: 0,		y9: 300,
+				x9: 0,		y9: 300
             }
         }
     },
@@ -283,4 +283,71 @@
             }
         }
     },
+	// #12
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#007c65',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 1400,	y1: 140,
+				x2: 790,	y2: 140,
+				x3: 790,	y3: 180,
+				x4: 720,	y4: 180,
+				x5: 640,	y5: 140,
+				x6: 590,	y6: 140,
+				x7: 558,	y7: 172,
+				x8: 510,	y8: 430,
+				x9: 170,	y9: 430,
+				x10: 170,	y10: 460,
+				x11: 20,	y11: 460
+            }
+        }
+    },
+	// #13
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#EF81C5',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 30,		y1: 140,
+				x2: 590,	y2: 140,
+				x3: 590,	y3: 190,
+				x4: 550,	y4: 220,
+				x5: 630,	y5: 300,
+				x6: 630,	y6: 440
+            }
+        }
+    },
+	// #16
+	{
+        LineGraph: {
+            layer: true,
+            draggable: true,
+            groups: ['Metros'],
+            dragGroups: ['Metros'],
+            type: 'path',
+            strokeStyle: '#92cec2',
+            strokeWidth: 5,
+            p1: {
+                type: 'line',
+				x1: 1200,	y1: 835,
+				x2: 1110,	y2: 745,
+				x3: 1110,	y3: 715,
+				x4: 960,	y4: 715,
+				x5: 960,	y5: 390
+            }
+        }
+    }
 ];
