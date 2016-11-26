@@ -201,7 +201,7 @@
             }
         }
     },
-	// #10-1
+	// #10
 	{
         LineGraph: {
             layer: true,
@@ -222,28 +222,16 @@
 				x7: 460,	y7: 270,
 				x8: 350,	y8: 300,
 				x9: 0,		y9: 300
-            }
-        }
-    },
-	// #10-2
-	{
-        LineGraph: {
-            layer: true,
-            draggable: true,
-            groups: ['Metros'],
-            dragGroups: ['Metros'],
-            type: 'path',
-            strokeStyle: '#C0A8D1',
-            strokeWidth: 5,
-            p1: {
+            },
+			p2: {
                 type: 'line',
 				x1: 150,	y1: 300,
 				x2: 100,	y2: 275,
 				x3: -70,	y3: 275
             }
         }
-    },
-	// #11-1
+    },	
+	// #11
 	{
         LineGraph: {
             layer: true,
@@ -263,20 +251,8 @@
 				x6: 420,	y6: 175,
 				x7: 50,		y7: -195,
 				x8: 50,		y8: -285
-            }
-        }
-    },
-	// #11-2
-	{
-        LineGraph: {
-            layer: true,
-            draggable: true,
-            groups: ['Metros'],
-            dragGroups: ['Metros'],
-            type: 'path',
-            strokeStyle: '#800000',
-            strokeWidth: 5,
-            p1: {
+            },
+			p2: {
                 type: 'line',
 				x1: 50,		y1: -195,
 				x2: -300,	y2: -195

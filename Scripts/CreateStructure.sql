@@ -17,6 +17,10 @@ CREATE TABLE Station -- 车站信息
 (
 	Station_Id	INT PRIMARY KEY,
 	Station_Name NVARCHAR(50),
+	Station_X	INT,
+	Station_Y	INT,
+	Station_Name_X	INT,
+	Station_Name_Y	INT
 )
 GO
 
@@ -25,7 +29,9 @@ CREATE TABLE Line -- 线路信息
 	Line_Id INT PRIMARY KEY,
 	Line_Name NVARCHAR(20),
 	Line_From_Station_Id INT FOREIGN KEY REFERENCES Station(Station_Id),
-	Line_To_Station_Id INT FOREIGN KEY REFERENCES Station(Station_Id)
+	Line_To_Station_Id INT FOREIGN KEY REFERENCES Station(Station_Id),
+	Line_Color NVARCHAR(10),
+	Line_Path NVARCHAR(400)
 )
 GO
 

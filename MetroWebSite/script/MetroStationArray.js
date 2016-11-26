@@ -1,5 +1,5 @@
-﻿var metroStationArray =
-[
+﻿var metroStationArray = [
+//{metroStations :[
     // #1
     {
         id: 101,
@@ -1547,4 +1547,5 @@
         StationGraph: {x: 960, y: 500},
         NameGraph: {x: 995, y: 500, text: '华夏中路'}
     }
-];
+]
+//}

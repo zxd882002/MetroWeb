@@ -8,7 +8,10 @@
     fillStyle: 'white',
     strokeWidth: 2,
     width: 15,
-    height: 15
+    height: 15,
+	click: function(node){
+		$('.footer').text("点击" + node.stationName);
+	}
 }
 
 var metroStationNameGraphBase = {
@@ -25,6 +28,8 @@ var metroStationNameGraphBase = {
 
 function DrawStation(metroStation) {
 	var metroStationGraph =	$.extend({}, metroStationGraphBase, metroStation.StationGraph);
+	metroStationGraph.stationId = metroStation.id;
+	metroStationGraph.stationName =  metroStation.NameGraph.text;
     $('#metroCanvas').draw(metroStationGraph);
 	
 	var metroStationName = $.extend({}, metroStationNameGraphBase, metroStation.NameGraph);
@@ -35,21 +40,23 @@ function DrawLine(stationLine) {
     $('#metroCanvas').draw(stationLine.LineGraph);
 }
 
-$(document).ready(function () {
-    // set the canvas to fill the whole page
+function ReDraw() {
+	$('#metroCanvas').clearCanvas().drawLayers();
+	
+	// set the canvas to fill the whole page
     var height = $(".canvasContainer").height();
     var width = $(".canvasContainer").width();
     $('#metroCanvas').attr({ height: height, width: width });
-
-    // calculate the scale value
+	
+	// calculate the scale value
     //height = 528
     //width = 1366
     var scale1 = height / 528;
     var scale2 = width / 1366;
     var scaleVal = scale1 < scale2 ? scale1 : scale2;
-    $('#metroCanvas').scaleCanvas({ scale: scaleVal });
-
-    // draw a dragable element so that we could drag it on white places
+    $('#metroCanvas').scaleCanvas({ scale: scaleVal }).drawLayers();
+	
+	// draw a dragable element so that we could drag it on white places
     $('#metroCanvas').drawRect({
         layer: true,
         draggable: true,
@@ -69,4 +76,27 @@ $(document).ready(function () {
     for (var i = 0; i < metroStationArray.length; i++) {
         DrawStation(metroStationArray[i]);
     }
+}
+
+$(document).ready(function () {
+	// when the window resizes
+	//$(window).resize(function(e){
+	//	
+	//	var height2 = $(".canvasContainer").height();
+	//	var width2 = $(".canvasContainer").width();
+	//	$('.footer').text("新大小：（" + width2 + " * " +height2 + ")" );
+	//	ReDraw();
+	//});
+	
+	// scroll
+    $('#metroCanvas').bind('mousewheel', function(e){
+		scaleVal  = e.originalEvent.wheelDelta > 0 ? 1.05 : 0.95;
+		$('.footer').text();
+		$('#metroCanvas').scaleCanvas({ 
+			x: e.clientX - $(".metroCanvas").position().left, 
+			y: e.clientY - $(".metroCanvas").position().top, 
+			scale: scaleVal }).drawLayers();
+    });	
+	
+	ReDraw();
 })
