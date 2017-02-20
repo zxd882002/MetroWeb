@@ -12,7 +12,7 @@ namespace DatabaseAccessLibrary.Table
             : base(connector)
         {
             SelectQuery = "SELECT * FROM Line";
-            InsertQuery = "INSERT INTO Line VALUES (@Line_Id, @Line_Name, @Line_From_Station_Id, @Line_To_Station_Id)";
+            InsertQuery = "INSERT INTO Line VALUES (@Line_Id, @Line_Name, @Line_From_Station_Id, @Line_To_Station_Id, @Line_Color, @Line_Path)";
             DeleteQuery = "DELETE FROM Line";
             UpdateQuery = "UPDATE Line";
             DataReaderHandler = () =>
@@ -25,12 +25,16 @@ namespace DatabaseAccessLibrary.Table
                     string lineName = Convert.ToString(reader["Line_Name"]);
                     int lineFromStationId = Convert.ToInt32(reader["Line_From_Station_Id"]);
                     int lineToStationId = Convert.ToInt32(reader["Line_To_Station_Id"]);
+                    string lineColor = Convert.ToString(reader["Line_Color"]);
+                    string linePath = Convert.ToString(reader["Line_Path"]);
                     lineList.Add(new Line
                     {
                         LineId = lineId,
                         LineName = lineName,
                         LineFromStationId = lineFromStationId,
-                        LineToStationId = lineToStationId
+                        LineToStationId = lineToStationId,
+                        LineColor = lineColor,
+                        LinePath = linePath
                     });
                 }
                 return lineList;
@@ -44,6 +48,8 @@ namespace DatabaseAccessLibrary.Table
             parameters.Add("@Line_Name", tableRow.LineName);
             parameters.Add("@Line_From_Station_Id", tableRow.LineFromStationId);
             parameters.Add("@Line_To_Station_Id", tableRow.LineToStationId);
+            parameters.Add("@Line_Color", tableRow.LineColor);
+            parameters.Add("@Line_Path", tableRow.LinePath);
             return parameters;
         }
     }

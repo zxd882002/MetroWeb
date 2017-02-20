@@ -73,6 +73,7 @@
     <Compile Include="IMetroWebService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StationInfo.cs" />
+    <Compile Include="LineInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

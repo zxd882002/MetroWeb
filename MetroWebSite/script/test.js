@@ -1,4 +1,36 @@
-﻿function getStationName() {
+﻿function getStations() {
+	$.ajax({
+        type: 'post',
+        url: 'http://localhost:8732/MetroWebService.svc/GetStationInfos',
+        contentType: 'text/json',
+        data: null,
+        success: function (msg) {
+            var stations = eval(msg.d);
+            $('#Stations').text(stations[0].NameGraph.text);
+        },
+        error: function (response) {
+            alert(response.statusText);
+        }
+    });
+}
+
+function getLines(){
+	$.ajax({
+        type: 'post',
+        url: 'http://localhost:8732/MetroWebService.svc/GetLineInfos',
+        contentType: 'text/json',
+        data: null,
+        success: function (msg) {
+            var lines = eval(msg.d);
+            $('#Lines').text(lines[0].LineGraph.strokeStyle);
+        },
+        error: function (response) {
+            alert(response.statusText);
+        }
+    });
+}
+
+function getStationName() {
     var sendData = '{"stationId":"' + $("#StationId").val() + '"}';
     //alert(sendData);
     $.ajax({

@@ -26,6 +26,15 @@ var metroStationNameGraphBase = {
     fontFamily: 'SimSun',
 }
 
+var metroStationLineGraphBase = {
+	layer: true,
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'path',
+    strokeWidth: 5,
+}
+
 function DrawStation(metroStation) {
 	var metroStationGraph =	$.extend({}, metroStationGraphBase, metroStation.StationGraph);
 	metroStationGraph.stationId = metroStation.id;
@@ -37,20 +46,16 @@ function DrawStation(metroStation) {
 }
 
 function DrawLine(stationLine) {
-    $('#metroCanvas').draw(stationLine.LineGraph);
+	var metroStationLineGraph = $.extend({}, metroStationLineGraphBase, stationLine.LineGraph);
+    $('#metroCanvas').draw(metroStationLineGraph);
 }
 
 function ReDraw() {
-	$('#metroCanvas').clearCanvas().drawLayers();
-	
-	// set the canvas to fill the whole page
-    var height = $(".canvasContainer").height();
-    var width = $(".canvasContainer").width();
-    $('#metroCanvas').attr({ height: height, width: width });
+	$('#metroCanvas').clearCanvas().drawLayers();	
 	
 	// calculate the scale value
-    //height = 528
-    //width = 1366
+	var height = $(".canvasContainer").height();
+    var width = $(".canvasContainer").width();
     var scale1 = height / 528;
     var scale2 = width / 1366;
     var scaleVal = scale1 < scale2 ? scale1 : scale2;
@@ -70,23 +75,30 @@ function ReDraw() {
     });
 
     // draw element
+	var stationLineArray = metroStationClient.MetroStationLineArray;
     for (var j = 0; j < stationLineArray.length; j++) {
         DrawLine(stationLineArray[j]);
     }
+	
+	var metroStationArray = metroStationClient.MetroStationArray;
     for (var i = 0; i < metroStationArray.length; i++) {
         DrawStation(metroStationArray[i]);
     }
 }
 
+var metroStationClient;
+
 $(document).ready(function () {
+	
 	// when the window resizes
-	//$(window).resize(function(e){
-	//	
-	//	var height2 = $(".canvasContainer").height();
-	//	var width2 = $(".canvasContainer").width();
-	//	$('.footer').text("新大小：（" + width2 + " * " +height2 + ")" );
-	//	ReDraw();
-	//});
+	/*
+	$(window).resize(function(e){		
+		var height2 = $(".canvasContainer").height();
+		var width2 = $(".canvasContainer").width();
+		$('.footer').text("新大小：（" + width2 + " * " +height2 + ")" );
+		ReDraw();
+	});
+	*/
 	
 	// scroll
     $('#metroCanvas').bind('mousewheel', function(e){
@@ -98,5 +110,29 @@ $(document).ready(function () {
 			scale: scaleVal }).drawLayers();
     });	
 	
-	ReDraw();
+	// set the canvas to fill the whole page
+    var height = $(".canvasContainer").height();
+    var width = $(".canvasContainer").width();
+    $('#metroCanvas').attr({ height: height, width: width });
+	
+	// Show waiting message	
+	$('#metroCanvas').draw({
+	layer: true,
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'text',
+    strokeStyle: 'black',
+    strokeWidth: 1,    
+    fontSize: 4,
+    fontFamily: 'SimSun',
+	text: "请稍等",
+	x: width / 2,
+	y: height / 2
+	});
+	
+	// Get the data from database
+	metroStationClient = new MetroStationClient(ReDraw);
+	metroStationClient.GetMetroStationArray();
+	metroStationClient.GetMetroStationLineArray();
 })

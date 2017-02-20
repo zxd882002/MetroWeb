@@ -28,7 +28,7 @@ namespace MetroWebTest.MetroWebWcfServiceTest
             StreamReader reader = new StreamReader(dataStream);
             string responseString = reader.ReadToEnd();
             Assert.AreEqual(
-                @"{""d"":{""__type"":""StationInfo:#MetroWebWcfService"",""NameGraph"":{""__type"":""NameGraph:#MetroWebWcfService"",""text"":""莘庄"",""x"":0,""y"":0},""StationGraph"":{""__type"":""StationGraph:#MetroWebWcfService"",""x"":0,""y"":0},""StationId"":101}}",
+                @"{""d"":{""__type"":""StationInfo:#MetroWebWcfService"",""NameGraph"":{""__type"":""NameGraph:#MetroWebWcfService"",""text"":""莘庄"",""x"":205,""y"":595},""StationGraph"":{""__type"":""StationGraph:#MetroWebWcfService"",""x"":180,""y"":590},""StationId"":101}}",
                 responseString);
         }
     }

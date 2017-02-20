@@ -8,6 +8,14 @@ namespace MetroWebWcfService
     {
         [OperationContract]
         [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        StationInfo[] GetStationInfos();
+
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
+        LineInfo[] GetLineInfos();
+
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         StationInfo GetStationByStationId(int stationId);
 
         [OperationContract]

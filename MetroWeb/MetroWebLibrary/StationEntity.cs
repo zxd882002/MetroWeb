@@ -9,6 +9,11 @@ namespace MetroWebLibrary
         private MetroWebEntity metroWeb;
         private int stationId;
         private string stationName;
+        private int stationX;
+        private int stationY;
+        private int stationNameX;
+        private int stationNameY;
+
         private List<StationLineEntity> stationLineList;
         private List<LineEntity> lineList;
 
@@ -17,6 +22,10 @@ namespace MetroWebLibrary
             this.metroWeb = metroWeb;
             this.stationId = station.StationId.Value;
             this.stationName = station.StationName;
+            this.stationX = station.StationX.Value;
+            this.stationY = station.StationY.Value;
+            this.stationNameX = station.StationNameX.Value;
+            this.stationNameY = station.StationNameY.Value;
         }
         
         public int StationId
@@ -27,6 +36,26 @@ namespace MetroWebLibrary
         public String StationName
         {
             get { return this.stationName; }
+        }
+
+        public int StationX
+        {
+            get { return this.stationX; }
+        }
+
+        public int StationY
+        {
+            get { return this.stationY; }
+        }
+
+        public int StationNameX
+        {
+            get { return this.stationNameX; }
+        }
+
+        public int StationNameY
+        {
+            get { return this.stationNameY; }
         }
 
         public List<StationLineEntity> StationLineList

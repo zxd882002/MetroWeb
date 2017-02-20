@@ -12,6 +12,8 @@ namespace MetroWebLibrary
         private StationEntity lineFromStation;
         private int lineToStationId;
         private StationEntity lineToStation;
+        private string lineColor;
+        private string linePath;
         private List<StationLineEntity> stationLineList;
         private List<StationEntity> stationList;
 
@@ -22,6 +24,8 @@ namespace MetroWebLibrary
             this.lineName = line.LineName;
             this.lineFromStationId = line.LineFromStationId.Value;
             this.lineToStationId = line.LineToStationId.Value;
+            this.lineColor = line.LineColor;
+            this.linePath = line.LinePath;
         }
 
         public int LineId
@@ -58,6 +62,16 @@ namespace MetroWebLibrary
             }
         }
 
+        public string LineColor
+        {
+            get { return this.lineColor; }
+        }
+
+        public string LinePath
+        {
+            get { return this.linePath; }
+        }
+
         public List<StationLineEntity> StationLineList
         {
             get
@@ -70,7 +84,8 @@ namespace MetroWebLibrary
             }
         }
 
-        public List<StationEntity> StationList {
+        public List<StationEntity> StationList
+        {
             get
             {
                 if (stationList == null)
