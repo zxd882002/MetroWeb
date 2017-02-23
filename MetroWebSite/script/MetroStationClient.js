@@ -6,35 +6,19 @@ function MetroStationClient(ReDraw)
 };
 
 MetroStationClient.prototype.GetMetroStationArray = function() {
-	var metroStationClient = this;
-	$.ajax({
-        type: 'post',
-        url: 'http://localhost:8732/MetroWebService.svc/GetStationInfos',
-        contentType: 'text/json',
-        data: null,
-        success: function (msg){
-			metroStationClient.OnGetMetroStationArraySuccess.call(metroStationClient, msg);
-			},
-        error: function (response){
-			metroStationClient.OnError.call(metroStationClient, response);
-			},
-    });
+	var url = 'http://localhost:8732/MetroWebService.svc/GetStationInfos';
+	var successCallback = this.OnGetMetroStationArraySuccess;
+	var errorCallback = this.OnError;
+    var ajaxHelper = new AjaxHelper(url, this, successCallback, errorCallback);
+	ajaxHelper.CallWCFAsync();
 };
 
 MetroStationClient.prototype.GetMetroStationLineArray = function(){
-	var metroStationClient = this;
-	$.ajax({
-        type: 'post',
-        url: 'http://localhost:8732/MetroWebService.svc/GetLineInfos',
-        contentType: 'text/json',
-        data: null,
-        success: function (msg){
-			metroStationClient.OnGetMetroStationLineArraySuccess.call(metroStationClient, msg);
-			},
-        error: function (response){
-			metroStationClient.OnError.call(metroStationClient, response);
-			},
-    });
+	var url = 'http://localhost:8732/MetroWebService.svc/GetLineInfos';
+	var successCallback = this.OnGetMetroStationLineArraySuccess;
+	var errorCallback = this.OnError;
+    var ajaxHelper = new AjaxHelper(url, this, successCallback, errorCallback);
+	ajaxHelper.CallWCFAsync();
 };
 
 MetroStationClient.prototype.OnGetMetroStationArraySuccess = function(msg){

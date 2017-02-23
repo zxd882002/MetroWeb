@@ -51,7 +51,7 @@ function DrawLine(stationLine) {
 }
 
 function ReDraw() {
-	$('#metroCanvas').clearCanvas().drawLayers();	
+	$('#metroCanvas').clearCanvas().drawLayers();		
 	
 	// calculate the scale value
 	var height = $(".canvasContainer").height();
@@ -99,16 +99,16 @@ $(document).ready(function () {
 		ReDraw();
 	});
 	*/
-	
-	// scroll
+
+    // scroll
     $('#metroCanvas').bind('mousewheel', function(e){
 		scaleVal  = e.originalEvent.wheelDelta > 0 ? 1.05 : 0.95;
 		$('.footer').text();
 		$('#metroCanvas').scaleCanvas({ 
-			x: e.clientX - $(".metroCanvas").position().left, 
-			y: e.clientY - $(".metroCanvas").position().top, 
+			x: e.clientX - $("#metroCanvas").position().left, 
+			y: e.clientY - $("#metroCanvas").position().top, 
 			scale: scaleVal }).drawLayers();
-    });	
+    });		
 	
 	// set the canvas to fill the whole page
     var height = $(".canvasContainer").height();
