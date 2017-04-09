@@ -41,10 +41,9 @@ function MetroPainter(metroCanvas, canvasContainer) {
     this.width = canvasContainer.width();
     this.height = canvasContainer.height();
 
-    MetroPainter.prototype.drawStationArray = function () {
-        var metroStationArray = metroStationClient.MetroStationArray;
+    MetroPainter.prototype.drawStationArray = function (metroStationArray) {
         for (var i = 0; i < metroStationArray.length; i++) {
-            DrawStation(metroStationArray[i]);
+            this.drawStation(metroStationArray[i]);
         }
     }
 
@@ -58,10 +57,9 @@ function MetroPainter(metroCanvas, canvasContainer) {
         this.metroCanvas.draw(metroStationName);
     }
 
-    MetroPainter.prototype.drawLineArray= function() {
-        var stationLineArray = metroStationClient.MetroStationLineArray;
-        for (var j = 0; j < stationLineArray.length; j++) {
-            DrawLine(stationLineArray[j]);
+    MetroPainter.prototype.drawLineArray= function(metroStationLineArray) {
+        for (var j = 0; j < metroStationLineArray.length; j++) {
+            this.drawLine(metroStationLineArray[j]);
         }
     }
 
@@ -94,7 +92,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
             draggable: true,
             groups: ['Metros'],
             dragGroups: ['Metros'],
-            fillStyle: 'white',
+            fillStyle: '#EEEEFF',
             x: this.width * -1,
             y: this.height * -1,
             width: this.width * 3,
@@ -129,10 +127,10 @@ function MetroPainter(metroCanvas, canvasContainer) {
         this.height = canvasContainer.height();
     }
 
-    MetroPainter.prototype.scaleCanvas= function(scaleVal) {
+    MetroPainter.prototype.scaleCanvas= function(x, y, scaleVal) {
         this.metroCanvas.scaleCanvas({
-            x: e.clientX - this.metroCanvas.position().left,
-            y: e.clientY - this.metroCanvas.position().top,
+            x: x,
+            y: y,
             scale: scaleVal
         }).drawLayers();
     }

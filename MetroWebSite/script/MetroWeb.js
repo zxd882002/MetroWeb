@@ -1,10 +1,7 @@
-﻿var metroPainter;
-var defaultController;
+﻿var defaultController;
 
 $(document).ready(function () {
-
-    metroPainter = new MetroPainter($('#metroCanvas'), $(".canvasContainer"));
-    defaultController = new DefaultController(metroPainter);
+    defaultController = new DefaultController($('#metroCanvas'), $(".canvasContainer"),$('.header'), $('.footer'));
 
     // scroll
     $('#metroCanvas').bind('mousewheel', function (e) {

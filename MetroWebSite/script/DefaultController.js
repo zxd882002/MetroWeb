@@ -1,5 +1,9 @@
-function DefaultController(metroPainter) {
-    this.metroPainter = metroPainter;
+function DefaultController(metroCanvas, canvasContainer, header, footer) {
+    this.metroCanvas = metroCanvas;
+    this.canvasContainer = canvasContainer;
+    this.header = header;
+    this.footer = footer;
+    this.metroPainter = new MetroPainter(metroCanvas, canvasContainer);
     this.metroWebWcfClient = new MetroWebWcfClient();
     this.metroStationArray = null;
     this.metroStationLineArray = null;
@@ -32,10 +36,10 @@ function DefaultController(metroPainter) {
         var scaleVal = e.originalEvent.wheelDelta > 0 ? 1.05 : 0.95;
 
         // output scale value
-        $('.footer').text(scaleVal);
+        footer.text("x=" + e.clientX + ", y=" + (e.clientY - header.height()) + ", scale=" + scaleVal);
 
         // scale canvas
-        this.metroPainter.scaleCanvas(scaleVal);
+        this.metroPainter.scaleCanvas(e.clientX, e.clientY - header.height(), scaleVal);
     }
 
     DefaultController.prototype.onResize = function (e) {
@@ -43,14 +47,17 @@ function DefaultController(metroPainter) {
         this.metroPainter.fullFillCanvas();
 
         // output the new size
-        var height = $(".canvasContainer").height();
-        var width = $(".canvasContainer").width();
-        $('.footer').text("新大小：（" + width + " * " + height + ")");
+        var height = canvasContainer.height();
+        var width = canvasContainer.width();
+        footer.text("新大小：（" + width + " * " + height + ")");
 
-        // ReDraw(false);
+        // this.onDrawCanvas();
     }
 
     DefaultController.prototype.onDrawCanvas = function () {
-        $('.footer').text("onDrawCanvas");
+        this.metroPainter.clearEntireCanvas();
+        this.metroPainter.drawBackGround();
+        this.metroPainter.drawLineArray(this.metroStationLineArray);
+        this.metroPainter.drawStationArray(this.metroStationArray);
     }
 }
