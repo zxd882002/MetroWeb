@@ -49,7 +49,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer) {
         // output the new size
         var height = canvasContainer.height();
         var width = canvasContainer.width();
-        footer.text("新大小：（" + width + " * " + height + ")");
+        this.footer.text("新大小：（" + width + " * " + height + ")");
 
         // this.onDrawCanvas();
     }
@@ -58,6 +58,10 @@ function DefaultController(metroCanvas, canvasContainer, header, footer) {
         this.metroPainter.clearEntireCanvas();
         this.metroPainter.drawBackGround();
         this.metroPainter.drawLineArray(this.metroStationLineArray);
-        this.metroPainter.drawStationArray(this.metroStationArray);
+        this.metroPainter.drawStationArray(this.metroStationArray, this.onClickNode, this);
+    }
+
+    DefaultController.prototype.onClickNode = function (node) {
+        this.footer.text("点击" + node.stationName);
     }
 }

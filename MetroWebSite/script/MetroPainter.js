@@ -9,8 +9,8 @@ var metroStationGraphBase = {
     strokeWidth: 2,
     width: 15,
     height: 15,
-    click: function (node) {
-        $('.footer').text("点击" + node.stationName);
+    click: function(node){
+        node.onClick.call(node.calleeObj, node)
     }
 }
 
@@ -41,14 +41,16 @@ function MetroPainter(metroCanvas, canvasContainer) {
     this.width = canvasContainer.width();
     this.height = canvasContainer.height();
 
-    MetroPainter.prototype.drawStationArray = function (metroStationArray) {
+    MetroPainter.prototype.drawStationArray = function (metroStationArray, onClickFunction, calleeObj) {
         for (var i = 0; i < metroStationArray.length; i++) {
-            this.drawStation(metroStationArray[i]);
+            this.drawStation(metroStationArray[i], onClickFunction, calleeObj);
         }
     }
 
-    MetroPainter.prototype.drawStation= function(metroStation) {
+    MetroPainter.prototype.drawStation= function(metroStation, onClickFunction, calleeObj) {
         var metroStationGraph = $.extend({}, metroStationGraphBase, metroStation.StationGraph);
+        metroStationGraph.onClick = onClickFunction;
+        metroStationGraph.calleeObj = calleeObj;
         metroStationGraph.stationId = metroStation.id;
         metroStationGraph.stationName = metroStation.NameGraph.text;
         this.metroCanvas.draw(metroStationGraph);
