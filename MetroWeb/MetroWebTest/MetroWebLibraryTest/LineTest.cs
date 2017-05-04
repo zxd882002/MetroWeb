@@ -11,14 +11,14 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetAllLineList()
         {
-            List<LineEntity> allLineList = MetroWebEntity.Instance().LineList.All;
+            List<LineEntity> allLineList = MetroWebEntity.Instance.LineList.All;
             Assert.AreEqual(36, allLineList.Count);
         }
 
         [TestMethod]
         public void GetLineListByLineName()
         {
-            List<LineEntity> line4List = MetroWebEntity.Instance().LineList["4号线"];
+            List<LineEntity> line4List = MetroWebEntity.Instance.LineList["4号线"];
             Assert.AreEqual(2, line4List.Count);
             List<int> lin4IdList = line4List.Select(line => line.LineId).ToList();
             lin4IdList.Sort();
@@ -32,7 +32,7 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetLineByLineId()
         {
-            LineEntity line = MetroWebEntity.Instance().LineList[401];
+            LineEntity line = MetroWebEntity.Instance.LineList[401];
 
             // LineId
             Assert.AreEqual(401, line.LineId);

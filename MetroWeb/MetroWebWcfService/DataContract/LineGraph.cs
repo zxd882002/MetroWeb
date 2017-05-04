@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Web;
+﻿using System.Runtime.Serialization;
 
 namespace MetroWebWcfService
 {
-    [DataContract]
-    public class LineInfo
-    {
-        [DataMember]
-        public LineGraph LineGraph { get; set; }
-    }
-
     [DataContract]
     public class LineGraph
     {

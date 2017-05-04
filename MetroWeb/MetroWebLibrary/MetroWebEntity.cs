@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using DatabaseAccessLibrary.Database;
+﻿using DatabaseAccessLibrary.Database;
 
 namespace MetroWebLibrary
 {
@@ -17,13 +16,16 @@ namespace MetroWebLibrary
             this.metroWebDatabase = new MetroWebDatabase();
         }
 
-        public static MetroWebEntity Instance()
+        public static MetroWebEntity Instance
         {
-            if (metroWebInstance == null)
+            get
             {
-                metroWebInstance = new MetroWebEntity();
+                if (metroWebInstance == null)
+                {
+                    metroWebInstance = new MetroWebEntity();
+                }
+                return metroWebInstance;
             }
-            return metroWebInstance;
         }
 
         public MetroWebDatabase MetroWebDatabase

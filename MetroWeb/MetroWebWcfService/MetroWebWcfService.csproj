@@ -64,16 +64,26 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContractAdapter\LineGraphAdapter.cs" />
+    <Compile Include="DataContractAdapter\LineInfoAdapter.cs" />
+    <Compile Include="DataContractAdapter\NameGraphAdapter.cs" />
+    <Compile Include="DataContractAdapter\StationGraphAdapter.cs" />
+    <Compile Include="DataContractAdapter\StationInfoAdapter.cs" />
+    <Compile Include="DataContractAdapter\StationLineInfoAdapter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="DataContract\LineGraph.cs" />
     <Compile Include="MetroWebService.svc.cs">
       <DependentUpon>MetroWebService.svc</DependentUpon>
     </Compile>
     <Compile Include="IMetroWebService.cs" />
+    <Compile Include="DataContract\NameGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StationInfo.cs" />
-    <Compile Include="LineInfo.cs" />
+    <Compile Include="DataContract\StationGraph.cs" />
+    <Compile Include="DataContract\StationInfo.cs" />
+    <Compile Include="DataContract\LineInfo.cs" />
+    <Compile Include="DataContract\StationLineInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

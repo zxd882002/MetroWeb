@@ -11,105 +11,35 @@ namespace MetroWebWcfService
     {
         public StationInfo[] GetStationInfos()
         {
-            List<StationEntity> stationEntityList = MetroWebEntity.Instance().StationList.All;
-            StationInfo[] stationInfos = new StationInfo[stationEntityList.Count];
-            for (int i = 0; i < stationEntityList.Count; i++)
+            List<StationEntity> stationEntityList = MetroWebEntity.Instance.StationList.All;
+            List<StationInfo> stationInfoList = new List<StationInfo>();
+            foreach (StationEntity stationEntity in stationEntityList)
             {
-                StationEntity stationEntity = stationEntityList[i];
-                StationInfo stationInfo = new StationInfo
-                {
-                    StationId = stationEntity.StationId,
-                    StationGraph = new StationGraph
-                    {
-                        x = stationEntity.StationX,
-                        y = stationEntity.StationY
-                    },
-                    NameGraph = new NameGraph
-                    {
-                        x = stationEntity.StationNameX,
-                        y = stationEntity.StationNameY,
-                        text = stationEntity.StationName
-                    }
-                };
-                stationInfos[i] = stationInfo;
+                StationInfo stationInfo = new StationInfoAdapter(stationEntity);
+                stationInfoList.Add(stationInfo);
             }
-            return stationInfos;
+            return stationInfoList.ToArray();
         }
 
         public LineInfo[] GetLineInfos()
         {
-            List<LineEntity> lineEntityList = MetroWebEntity.Instance().LineList.All;
+            List<LineEntity> lineEntityList = MetroWebEntity.Instance.LineList.All;
             List<LineInfo> lineInfoList = new List<LineInfo>();
             foreach (LineEntity lineEntity in lineEntityList)
             {
                 if (string.IsNullOrEmpty(lineEntity.LineColor))
-                    continue;
-
-                LineInfo lineInfo = new LineInfo();
-                lineInfo.LineGraph = new LineGraph();
-                lineInfo.LineGraph.strokeStyle = lineEntity.LineColor;
-
-                char startChar = 'p';
-                char leftQuote = '{';
-                char rightQuote = '}';
-                int leftIndex = -1;
-                int rightIndex = -1;
-                int pathNumber = 0;
-                string linePath = lineEntity.LinePath;
-                for (int index = 0; index < linePath.Length; index++)
                 {
-                    if (linePath[index] == startChar && pathNumber == 0)
-                    {
-                        pathNumber = linePath[index + 1] - '0';
-                        continue;
-                    }
-
-                    if (linePath[index] == leftQuote && pathNumber != 0)
-                    {
-                        leftIndex = index + 1;
-                        continue;
-                    }
-
-                    if (linePath[index] == rightQuote && pathNumber != 0)
-                    {
-                        rightIndex = index - 1;
-                        string path = linePath.Substring(leftIndex, rightIndex - leftIndex + 1);
-                        if (pathNumber == 1)
-                        {
-                            lineInfo.LineGraph.p1 = "{" + path + "}";
-                        }
-                        else if (pathNumber == 2)
-                        {
-                            lineInfo.LineGraph.p2 = "{" + path + "}";
-                        }
-                        pathNumber = 0;
-                    }
+                    LineInfo lineInfo = new LineInfoAdapter(lineEntity);
+                    lineInfoList.Add(lineInfo);
                 }
-                lineInfoList.Add(lineInfo);
             }
-
             return lineInfoList.ToArray();
         }
 
         public StationInfo GetStationByStationId(int stationId)
         {
-            StationEntity stationEntity = MetroWebEntity.Instance().StationList[stationId];
-            StationInfo stationInfo = new StationInfo
-            {
-                StationId = stationEntity.StationId,
-                StationGraph = new StationGraph
-                {
-                    x = stationEntity.StationX,
-                    y = stationEntity.StationY
-                },
-                NameGraph = new NameGraph
-                {
-                    x = stationEntity.StationNameX,
-                    y = stationEntity.StationNameY,
-                    text = stationEntity.StationName
-                }
-            };
-            return stationInfo;
+            StationEntity stationEntity = MetroWebEntity.Instance.StationList[stationId];
+            return new StationInfoAdapter(stationEntity);
         }
 
         public string GetNearestRoute(string fromStationName, int fromLine, string toStationName, int toLine)
@@ -117,7 +47,7 @@ namespace MetroWebWcfService
             StationEntity fromStationEntity;
             try
             {
-                fromStationEntity = MetroWebEntity.Instance().StationList[fromStationName, string.Format("{0}号线", fromLine)];
+                fromStationEntity = MetroWebEntity.Instance.StationList[fromStationName, string.Format("{0}号线", fromLine)];
             }
             catch
             {
@@ -127,7 +57,7 @@ namespace MetroWebWcfService
             StationEntity toStationEntity;
             try
             {
-                toStationEntity = MetroWebEntity.Instance().StationList[toStationName, string.Format("{0}号线", toLine)];
+                toStationEntity = MetroWebEntity.Instance.StationList[toStationName, string.Format("{0}号线", toLine)];
             }
             catch (Exception)
             {

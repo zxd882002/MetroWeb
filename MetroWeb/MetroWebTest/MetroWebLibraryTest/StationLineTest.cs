@@ -12,14 +12,14 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetAllStationList()
         {
-            List<StationLineEntity> allStationLineList = MetroWebEntity.Instance().StationLineList.All;
+            List<StationLineEntity> allStationLineList = MetroWebEntity.Instance.StationLineList.All;
             Assert.AreEqual(897, allStationLineList.Count);
         }
 
         [TestMethod]
         public void GetStationLineByStationLineId()
         {
-            StationLineEntity yiShangRoad = MetroWebEntity.Instance().StationLineList[40101];
+            StationLineEntity yiShangRoad = MetroWebEntity.Instance.StationLineList[40101];
 
             // StationLineId
             Assert.AreEqual(40101, yiShangRoad.StationLineId);
@@ -81,7 +81,7 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetStationLineListByStationId()
         {
-            List<StationLineEntity> centuryAvenueStationLineList = MetroWebEntity.Instance().StationLineList[215, IDType.StationId];
+            List<StationLineEntity> centuryAvenueStationLineList = MetroWebEntity.Instance.StationLineList[215, IDType.StationId];
             Assert.AreEqual(8, centuryAvenueStationLineList.Count);
 
             List<int> expectedStationLineIdList = new List<int>(new[] { 20107, 20216, 40112, 40215, 60117, 60212, 90102, 90225 });
@@ -95,7 +95,7 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetStationLineListByLineId()
         {
-            List<StationLineEntity> Line4StationLineList = MetroWebEntity.Instance().StationLineList[401, IDType.LineId];
+            List<StationLineEntity> Line4StationLineList = MetroWebEntity.Instance.StationLineList[401, IDType.LineId];
             Assert.AreEqual(26, Line4StationLineList.Count);
 
             int exptectedStationLineId = 40101;
@@ -109,7 +109,7 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetStationLineByStationIdAndLineId()
         {
-            StationLineEntity xinZhuang = MetroWebEntity.Instance().StationLineList[101, 501];
+            StationLineEntity xinZhuang = MetroWebEntity.Instance.StationLineList[101, 501];
 
             // StationLineId
             Assert.AreEqual(50101, xinZhuang.StationLineId);

@@ -11,14 +11,14 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetAllStationList()
         {
-            List<StationEntity> allStations = MetroWebEntity.Instance().StationList.All;
+            List<StationEntity> allStations = MetroWebEntity.Instance.StationList.All;
             Assert.AreEqual(304, allStations.Count);
         }
 
         [TestMethod]
         public void GetStationListByStationName()
         {
-            List<StationEntity> stationList = MetroWebEntity.Instance().StationList["浦电路"];
+            List<StationEntity> stationList = MetroWebEntity.Instance.StationList["浦电路"];
             Assert.AreEqual(2, stationList.Count);
             List<int> stationIdList = stationList.Select(station => station.StationId).ToList();
             stationIdList.Sort();
@@ -32,7 +32,7 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetStationByStationId()
         {
-            StationEntity peopleSquare = MetroWebEntity.Instance().StationList[113];
+            StationEntity peopleSquare = MetroWebEntity.Instance.StationList[113];
 
             // station id
             Assert.AreEqual(113, peopleSquare.StationId);
@@ -64,7 +64,7 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetStationByStationNameAndLineId()
         {
-            StationEntity peopleSquare = MetroWebEntity.Instance().StationList["人民广场", "1号线"];
+            StationEntity peopleSquare = MetroWebEntity.Instance.StationList["人民广场", "1号线"];
 
             // station id
             Assert.AreEqual(113, peopleSquare.StationId);

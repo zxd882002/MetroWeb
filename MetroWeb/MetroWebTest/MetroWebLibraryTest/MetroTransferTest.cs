@@ -12,7 +12,7 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetMetroTransferListByFromStationLineId()
         {
-            List<MetroTransferEntity> metroTransferList = MetroWebEntity.Instance().MetroTransferList[10128, StationLineIdType.FromStationLineId];
+            List<MetroTransferEntity> metroTransferList = MetroWebEntity.Instance.MetroTransferList[10128, StationLineIdType.FromStationLineId];
             Assert.AreEqual(1, metroTransferList.Count);
 
             MetroTransferEntity metroTransfer = metroTransferList[0];
@@ -36,7 +36,7 @@ namespace MetroWebTest.MetroWebLibraryTest
         [TestMethod]
         public void GetMetroTransferListByToStationLineId()
         {
-            List<MetroTransferEntity> metroTransferList = MetroWebEntity.Instance().MetroTransferList[10216, StationLineIdType.ToStationLineId];
+            List<MetroTransferEntity> metroTransferList = MetroWebEntity.Instance.MetroTransferList[10216, StationLineIdType.ToStationLineId];
             Assert.AreEqual(4, metroTransferList.Count);
             Assert.IsTrue(metroTransferList.All(metroTransfer => metroTransfer.InterChange == false));
             List<long> expectedMetroTransferIdList = new List<long>(new[] { 301010202L, 302010202L, 401010202L, 402010202L });
