@@ -1,23 +1,59 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="style/StyleSheet.css" />
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/16.7.3/jcanvas.min.js"></script> 
-    <script type="text/javascript" src="script/AjaxHelper.js"></script>   
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/16.7.3/jcanvas.min.js"></script>
+    <script type="text/javascript" src="script/AjaxHelper.js"></script>
     <script type="text/javascript" src="script/MetroWebWcfClient.js"></script>
     <script type="text/javascript" src="script/MetroPainter.js"></script>
     <script type="text/javascript" src="script/DefaultController.js"></script>
     <script type="text/javascript" src="script/MetroWeb.js"></script>
 </head>
+
 <body>
     <div class="header">
-        <span class ="title">上海地铁图</span>
-        </div>
+        <span class="title">上海地铁图</span>
+    </div>
     <div class="canvasContainer">
         <canvas class="canvasClass" id="metroCanvas"></canvas>
     </div>
+    <div class="rightPannel">
+        <div class="stationInfo">
+            <div class="stationInfoHeader">世纪大道</div>
+            <div class="stationInfoContainer">
+                <div class="station1">
+                    <span>2</span>
+                    <span>徐泾东</span>
+                    <span>6:00</span>
+                    <span>-</span>
+                    <span>23:00</span>
+                </div> 
+                <div class="station2">
+                    <span>2</span>
+                    <span>唐镇</span>
+                    <span>7:00</span>
+                    <span>-</span>
+                    <span>24:00</span>
+                </div>                  
+            </div>
+            <div class="SetStart">
+                <span>起</span>
+                <span>设为起点</span>
+            </div>
+            <div class="SetEnd">
+                <span>终</span>
+                <span>设为终点</span>
+            </div>
+            <div class="ClearSet">
+                <span>消</span>
+                <span>取消设置</span>
+            </div>
+        </div>        
+    </div>
     <div class="footer">This is footer</div>
 </body>
+
 </html>

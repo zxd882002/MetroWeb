@@ -2,12 +2,31 @@
 using System.Net;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MetroWebWcfService;
+using System;
+using System.Runtime.Serialization.Json;
 
 namespace MetroWebTest.MetroWebWcfServiceTest
 {
     [TestClass]
     public class GetStationByStationIdTest
     {
+        [TestMethod]
+        public void TestFunction()
+        {
+            IMetroWebService service = new MetroWebService();
+            StationInfo stationInfo = service.GetStationByStationId(101);
+
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(StationInfo));
+            MemoryStream stream1 = new MemoryStream();
+            ser.WriteObject(stream1, stationInfo);
+            stream1.Position = 0;
+            StreamReader sr = new StreamReader(stream1);
+            var json = sr.ReadToEnd();
+
+            Assert.AreEqual("莘庄", stationInfo.StationName);
+        }
+
         [TestMethod]
         public void TestAPI()
         {

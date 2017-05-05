@@ -38,6 +38,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -66,6 +68,10 @@
     <ProjectReference Include="..\MetroWebLibrary\MetroWebLibrary.csproj">
       <Project>{1A253E99-3E65-4849-ACD2-957D3D600E7E}</Project>
       <Name>MetroWebLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetroWebWcfService\MetroWebWcfService.csproj">
+      <Project>{7288F8B4-E382-45DA-B802-E8E024E6A2B1}</Project>
+      <Name>MetroWebWcfService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

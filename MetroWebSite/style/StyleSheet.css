@@ -27,10 +27,19 @@
 
 .canvasContainer {
     height: 86%;
+    width: 80%;
+    float: left;
+}
+
+.rightPannel{
+    width: auto;   /* width: 10%;  */
+    float: left;
 }
 
 .footer
 {
     height: 5%;
     background: #00fa9a;
+    width: 100%;
+    clear: both;
 }
