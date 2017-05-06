@@ -2,13 +2,23 @@
 
 namespace MetroWebWcfService
 {
-    public class StationLineInfoAdapter : StationLineInfo
+    public class StationLineInfoAdapter : IAdapter<StationLineInfo>
     {
+        private StationLineEntity stationLineEntity;
+
         public StationLineInfoAdapter(StationLineEntity stationLineEntity)
         {
-            LineInfo = new LineInfoAdapter(stationLineEntity.Line);
-            StartTime = stationLineEntity.StartTime;
-            EndTime = stationLineEntity.EndTime;
+            this.stationLineEntity = stationLineEntity;
+        }
+
+        public StationLineInfo ToObject()
+        {
+            return new StationLineInfo
+            {
+                LineInfo = new LineInfoAdapter(stationLineEntity.Line).ToObject(),
+                StartTime = stationLineEntity.StartTime,
+                EndTime = stationLineEntity.EndTime
+            };
         }
     }
 }

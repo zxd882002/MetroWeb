@@ -15,7 +15,7 @@ namespace MetroWebWcfService
             List<StationInfo> stationInfoList = new List<StationInfo>();
             foreach (StationEntity stationEntity in stationEntityList)
             {
-                StationInfo stationInfo = new StationInfoAdapter(stationEntity);
+                StationInfo stationInfo = new StationInfoAdapter(stationEntity).ToObject();
                 stationInfoList.Add(stationInfo);
             }
             return stationInfoList.ToArray();
@@ -27,9 +27,9 @@ namespace MetroWebWcfService
             List<LineInfo> lineInfoList = new List<LineInfo>();
             foreach (LineEntity lineEntity in lineEntityList)
             {
-                if (string.IsNullOrEmpty(lineEntity.LineColor))
+                if (!string.IsNullOrEmpty(lineEntity.LineColor))
                 {
-                    LineInfo lineInfo = new LineInfoAdapter(lineEntity);
+                    LineInfo lineInfo = new LineInfoAdapter(lineEntity).ToObject();
                     lineInfoList.Add(lineInfo);
                 }
             }
@@ -39,7 +39,7 @@ namespace MetroWebWcfService
         public StationInfo GetStationByStationId(int stationId)
         {
             StationEntity stationEntity = MetroWebEntity.Instance.StationList[stationId];
-            return new StationInfoAdapter(stationEntity);
+            return new StationInfoAdapter(stationEntity).ToObject();
         }
 
         public string GetNearestRoute(string fromStationName, int fromLine, string toStationName, int toLine)

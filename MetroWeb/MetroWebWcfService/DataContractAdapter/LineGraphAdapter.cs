@@ -2,11 +2,19 @@
 
 namespace MetroWebWcfService
 {
-    public class LineGraphAdapter : LineGraph
+    public class LineGraphAdapter: IAdapter<LineGraph>
     {
+        private readonly LineEntity lineEntity;
+
         public LineGraphAdapter(LineEntity lineEntity)
         {
-            strokeStyle = lineEntity.LineColor;
+            this.lineEntity = lineEntity;
+        }
+
+        public LineGraph ToObject()
+        {
+            LineGraph lineGraph = new LineGraph();
+            lineGraph.strokeStyle = lineEntity.LineColor;
 
             char startChar = 'p';
             char leftQuote = '{';
@@ -35,15 +43,16 @@ namespace MetroWebWcfService
                     string path = linePath.Substring(leftIndex, rightIndex - leftIndex + 1);
                     if (pathNumber == 1)
                     {
-                        p1 = "{" + path + "}";
+                        lineGraph.p1 = "{" + path + "}";
                     }
                     else if (pathNumber == 2)
                     {
-                        p2 = "{" + path + "}";
+                        lineGraph.p2 = "{" + path + "}";
                     }
                     pathNumber = 0;
                 }
             }
+            return lineGraph;
         }
     }
 }

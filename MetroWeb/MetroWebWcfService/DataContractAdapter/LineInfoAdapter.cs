@@ -2,11 +2,21 @@
 
 namespace MetroWebWcfService
 {
-    public class LineInfoAdapter : LineInfo
+    public class LineInfoAdapter : IAdapter<LineInfo>
     {
+        private LineEntity lineEntity;
+
         public LineInfoAdapter(LineEntity lineEntity)
         {
-            LineGraph = new LineGraphAdapter(lineEntity);
+            this.lineEntity = lineEntity;
+        }
+
+        public LineInfo ToObject()
+        {
+            return new LineInfo
+            {
+                LineGraph = new LineGraphAdapter(lineEntity).ToObject()
+            };
         }
     }
 }

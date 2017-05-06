@@ -2,13 +2,23 @@
 
 namespace MetroWebWcfService
 {
-    public class NameGraphAdapter : NameGraph
+    public class NameGraphAdapter : IAdapter<NameGraph>
     {
+        private StationEntity stationEntity;
+
         public NameGraphAdapter(StationEntity stationEntity)
         {
-            x = stationEntity.StationNameX;
-            y = stationEntity.StationNameY;
-            text = stationEntity.StationName;
+            this.stationEntity = stationEntity;
+        }
+
+        public NameGraph ToObject()
+        {
+            return new NameGraph
+            {
+                x = stationEntity.StationNameX,
+                y = stationEntity.StationNameY,
+                text = stationEntity.StationName
+            };
         }
     }
 }

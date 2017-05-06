@@ -64,6 +64,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContractAdapter\IAdapter.cs" />
     <Compile Include="DataContractAdapter\LineGraphAdapter.cs" />
     <Compile Include="DataContractAdapter\LineInfoAdapter.cs" />
     <Compile Include="DataContractAdapter\NameGraphAdapter.cs" />
