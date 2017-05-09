@@ -51,7 +51,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
         var metroStationGraph = $.extend({}, metroStationGraphBase, metroStation.StationGraph);
         metroStationGraph.onClick = onClickFunction;
         metroStationGraph.calleeObj = calleeObj;
-        metroStationGraph.stationId = metroStation.id;
+        metroStationGraph.stationId = metroStation.StationId;
         metroStationGraph.stationName = metroStation.NameGraph.text;
         this.metroCanvas.draw(metroStationGraph);
 

@@ -1,12 +1,16 @@
-function DefaultController(metroCanvas, canvasContainer, header, footer) {
+function DefaultController(metroCanvas, canvasContainer, header, footer, rightPanel) {
     this.metroCanvas = metroCanvas;
     this.canvasContainer = canvasContainer;
     this.header = header;
     this.footer = footer;
     this.metroPainter = new MetroPainter(metroCanvas, canvasContainer);
     this.metroWebWcfClient = new MetroWebWcfClient();
+    this.rightPanelUpdator = new RightPanelUpdator(rightPanel)
     this.metroStationArray = null;
     this.metroStationLineArray = null;
+    this.clickedMetroStation= null;
+    this.stationStart = null;
+    this.stationEnd = null;
 
     DefaultController.prototype.initializeCanvas = function () {
         // set the canvas to fill the whole page
@@ -61,7 +65,15 @@ function DefaultController(metroCanvas, canvasContainer, header, footer) {
         this.metroPainter.drawStationArray(this.metroStationArray, this.onClickNode, this);
     }
 
-    DefaultController.prototype.onClickNode = function (node) {
-        this.footer.text("点击" + node.stationName);
+    DefaultController.prototype.onClickNode = function (node) {        
+        this.metroStationArray.some(function(metroStation) {
+            if(metroStation.StationId == node.stationId)
+            {
+                this.clickedMetroStation = metroStation;
+                return true;
+            }          
+            return false;  
+        }, this);
+        this.rightPanelUpdator.update(this.clickedMetroStation);
     }
 }
