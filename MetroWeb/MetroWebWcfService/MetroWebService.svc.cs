@@ -36,12 +36,6 @@ namespace MetroWebWcfService
             return lineInfoList.ToArray();
         }
 
-        public StationInfo GetStationByStationId(int stationId)
-        {
-            StationEntity stationEntity = MetroWebEntity.Instance.StationList[stationId];
-            return new StationInfoAdapter(stationEntity).ToObject();
-        }
-
         public string GetNearestRoute(string fromStationName, int fromLine, string toStationName, int toLine)
         {
             StationEntity fromStationEntity;

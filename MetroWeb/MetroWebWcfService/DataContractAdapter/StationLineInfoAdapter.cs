@@ -16,9 +16,13 @@ namespace MetroWebWcfService
             return new StationLineInfo
             {
                 LineInfo = new LineInfoAdapter(stationLineEntity.Line).ToObject(),
-                StartTime = stationLineEntity.StartTime,
-                EndTime = stationLineEntity.EndTime
+                StartEndTime = GetStartEndTime()
             };
+        }
+
+        private string GetStartEndTime()
+        {
+            return string.Format("{0} - {1}", stationLineEntity.StartTime, stationLineEntity.EndTime);
         }
     }
 }

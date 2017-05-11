@@ -6,6 +6,12 @@ namespace MetroWebWcfService
     public class LineInfo
     {
         [DataMember]
+        public string LineId { get; set; }
+
+        [DataMember]
+        public string LineRoute { get; set; }
+
+        [DataMember]
         public LineGraph LineGraph { get; set; }
     }
 }

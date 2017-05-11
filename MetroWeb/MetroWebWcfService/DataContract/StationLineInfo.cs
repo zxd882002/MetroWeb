@@ -9,9 +9,6 @@ namespace MetroWebWcfService
         public LineInfo LineInfo { get; set; }
 
         [DataMember]
-        public DateTime StartTime { get; set; }
-
-        [DataMember]
-        public DateTime EndTime { get; set; }
+        public string StartEndTime { get; set; }
     }
 }
