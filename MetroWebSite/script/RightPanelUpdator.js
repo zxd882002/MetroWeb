@@ -13,7 +13,11 @@ function RightPanelUpdator(rightPanel) {
         for(var i = 0; i < stationInfo.StationLines.length; i++)
         {
             var stationLine = stationInfo.StationLines[i];
-            this.stationInfoContainer.append("<div>" + stationLine.StartTime + "</div>")
+            var div = $('<div/>');
+            var lineIdSpan = $('<span/>').text(stationLine.LineInfo.LineId).appendTo(div);
+            var routeSpan = $('<span/>').text(stationLine.LineInfo.LineRoute).appendTo(div);
+            var startEndTimeSpan = $('<span/>').text(stationLine.StartEndTime).appendTo(div);
+            div.appendTo(this.stationInfoContainer);  
         }
     }
 }

@@ -19,7 +19,7 @@ GO
 
 INSERT INTO Line VALUES
 	(1601,'16号线',1601,218,'#92cec2', 'p1: {type: ''line'', x1: 1200, y1: 835, x2: 1110, y2: 745, x3: 1110, y3: 715, x4: 960, y4: 715, x5: 960, y5: 390}'),
-	(1602,'16号线',218,1601, '', '')
+	(1602,'16号线',218,1601,'#92cec2', '')
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

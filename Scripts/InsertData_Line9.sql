@@ -32,7 +32,7 @@ GO
 
 INSERT INTO Line VALUES
 	(901,'9号线',901,921, '#95D3DB', 'p1: {type: ''line'', x1: 910, y1: 280, x2: 790, y2: 280, x3: 730, y3: 330, x4: 420, y4: 330, x5: 350, y5: 340, x6: -210, y6: 340, x7: -210, y7: 585}'),
-	(902,'9号线',921,901, '', '')
+	(902,'9号线',921,901, '#95D3DB', '')
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

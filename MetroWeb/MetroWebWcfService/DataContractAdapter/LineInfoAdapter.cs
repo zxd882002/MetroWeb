@@ -1,4 +1,6 @@
-﻿using MetroWebLibrary;
+﻿using System;
+using System.Linq;
+using MetroWebLibrary;
 
 namespace MetroWebWcfService
 {
@@ -16,8 +18,9 @@ namespace MetroWebWcfService
             return new LineInfo
             {
                 LineGraph = new LineGraphAdapter(lineEntity).ToObject(),
-                LineId = lineEntity.LineName.Substring(0, 1),
-                LineRoute = GetLineRoute()
+                LineId = new String(lineEntity.LineName.TakeWhile(Char.IsDigit).ToArray()),
+                LineRoute = GetLineRoute(),
+                LineColor = lineEntity.LineColor
             };
         }
 

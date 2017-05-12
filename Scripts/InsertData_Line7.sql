@@ -39,7 +39,7 @@ GO
 
 INSERT INTO Line VALUES
 	(701,'7号线',701,727,'#FF7200', 'p1: {  type: ''line'', x1: 990, y1: 360, x2: 870, y2: 485, x3: 555, y3: 485, x4: 475, y4: 390, x5: 500, y5: 300, x6: 500, y6: 180, x7: 420, y7: 105, x8: 420, y8: -420}'),
-	(702,'7号线',727,701, '', '')
+	(702,'7号线',727,701, '#FF7200', '')
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

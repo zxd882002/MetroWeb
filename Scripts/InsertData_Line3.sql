@@ -35,7 +35,7 @@ GO
 
 INSERT INTO Line VALUES
 	(301,'3号线',105,326, '#FFFF00', 'p1: { type: ''line'', x1: 340, y1: 470, x2: 380, y2: 470, x3: 380, y3: 400, x4: 345, y4: 345, x5: 347, y5: 300, x6: 347, y6: 102, x7: 620, y7: 102, x8:680, y8: 70, x9: 680, y9: -420}'),
-	(302,'3号线',326,105, '', '')
+	(302,'3号线',326,105, '#FFFF00', '')
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

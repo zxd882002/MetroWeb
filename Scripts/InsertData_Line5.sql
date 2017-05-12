@@ -17,7 +17,7 @@ GO
 
 INSERT INTO Line VALUES
 	(501,'5号线',101, 510, '#CC00CC', 'p1: { type: ''line'', x1: 180, y1: 590, x2: 180, y2: 800, x3: 20, y3: 800}'),
-	(502,'5号线',510, 101, '', '')
+	(502,'5号线',510, 101, '#CC00CC', '')
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

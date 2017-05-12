@@ -36,7 +36,7 @@ GO
 
 INSERT INTO Line VALUES
 	(801,'8号线',801,825,'#0066CC', 'p1: {type: ''line'', x1: 620, y1: 805, x2: 620, y2: 525, x3: 675, y3: 525, x4: 675, y4: 255, x5: 640, y5: 220, x6: 640, y6: 35, x7: 1060, y7: 35, x8: 1060, y8: -105}'),
-	(802,'8号线',825,801, '', '')
+	(802,'8号线',825,801, '#0066CC', '')
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

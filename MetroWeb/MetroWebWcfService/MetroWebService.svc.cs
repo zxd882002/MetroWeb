@@ -27,7 +27,7 @@ namespace MetroWebWcfService
             List<LineInfo> lineInfoList = new List<LineInfo>();
             foreach (LineEntity lineEntity in lineEntityList)
             {
-                if (!string.IsNullOrEmpty(lineEntity.LineColor))
+                if (!string.IsNullOrEmpty(lineEntity.LinePath))
                 {
                     LineInfo lineInfo = new LineInfoAdapter(lineEntity).ToObject();
                     lineInfoList.Add(lineInfo);

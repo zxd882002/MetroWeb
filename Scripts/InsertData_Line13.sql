@@ -25,7 +25,7 @@ GO
 
 INSERT INTO Line VALUES
 	(1301,'13号线',1301,1312, '#EF81C5', 'p1: { type: ''line'', x1: 30, y1: 140, x2: 590, y2: 140, x3: 590, y3: 190, x4: 550, y4: 220, x5: 630, y5: 300, x6: 630, y6: 440}'),
-	(1302,'13号线',1312,1301, '', '')
+	(1302,'13号线',1312,1301, '#EF81C5', '')
 GO
 
 -- id, line, station, duration, last_station_cost, start, end

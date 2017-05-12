@@ -22,7 +22,7 @@ namespace MetroWebWcfService
 
         private string GetStartEndTime()
         {
-            return string.Format("{0} - {1}", stationLineEntity.StartTime, stationLineEntity.EndTime);
+            return string.Format("{0} - {1}", stationLineEntity.StartTime.ToString("t"), stationLineEntity.EndTime.ToString("t"));
         }
     }
 }

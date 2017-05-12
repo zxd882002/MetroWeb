@@ -12,6 +12,9 @@ namespace MetroWebWcfService
         public string LineRoute { get; set; }
 
         [DataMember]
+        public string LineColor { get; set; }
+
+        [DataMember]
         public LineGraph LineGraph { get; set; }
     }
 }

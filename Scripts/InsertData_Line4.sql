@@ -32,7 +32,7 @@ INSERT INTO Station VALUES
 
 INSERT INTO Line VALUES
 	(401,'4号线',304,305,'#660066', 'p1: {type: ''line'', x1: 355,y1: 345, x2: 425,y2: 390, x3: 790,y3: 390, x4: 850,y4: 340, x5: 850,y5: 108, x6: 352,y6: 108, x7: 352,y7: 300, x8: 355,y8: 345}'),
-	(402,'4号线',305,304, '', '')
+	(402,'4号线',305,304, '#660066', '')
 GO
 
 -- id, line, station, duration, last_station_cost, start, end
