@@ -8,7 +8,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
     this.rightPanelUpdator = new RightPanelUpdator(rightPanel)
     this.metroStationArray = null;
     this.metroStationLineArray = null;
-    this.clickedMetroStation= null;
+    this.clickedMetroStation = null;
     this.stationStart = null;
     this.stationEnd = null;
 
@@ -33,6 +33,10 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
                 this.onDrawCanvas();
             }
         }, this);
+
+        // Hide the right pannel
+        // todo: currently we just clear all buttons
+        this.rightPanelUpdator.clearAllSetButtons();
     }
 
     DefaultController.prototype.onScroll = function (e) {
@@ -65,15 +69,20 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         this.metroPainter.drawStationArray(this.metroStationArray, this.onClickNode, this);
     }
 
-    DefaultController.prototype.onClickNode = function (node) {        
-        this.metroStationArray.some(function(metroStation) {
-            if(metroStation.StationId == node.stationId)
-            {
+    DefaultController.prototype.onClickNode = function (node) {
+        this.metroStationArray.some(function (metroStation) {
+            if (metroStation.StationId == node.stationId) {
                 this.clickedMetroStation = metroStation;
                 return true;
-            }          
-            return false;  
+            }
+            return false;
         }, this);
         this.rightPanelUpdator.update(this.clickedMetroStation);
+        this.rightPanelUpdator.clearAllSetButtons();
+        this.rightPanelUpdator.showSetStartButton();
+        this.rightPanelUpdator.showSetEndButton();
+        if (stationStart != null || stationEnd != null) {
+            this.rightPanelUpdator.showClearSetButton();
+        }
     }
 }

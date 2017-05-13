@@ -27,12 +27,12 @@
 
 .canvasContainer {
     height: 86%;
-    width: 80%;
+    width: 75%;
     float: left;
 }
 
 .rightPannel{
-    width: auto;   /* width: 10%;  */
+    width: auto;
     float: left;
 }
 

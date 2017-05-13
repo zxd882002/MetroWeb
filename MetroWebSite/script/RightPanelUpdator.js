@@ -10,14 +10,31 @@ function RightPanelUpdator(rightPanel) {
         this.stationInfoHeader.text(stationInfo.StationName);
 
         this.stationInfoContainer.text("");
-        for(var i = 0; i < stationInfo.StationLines.length; i++)
-        {
+        for (var i = 0; i < stationInfo.StationLines.length; i++) {
             var stationLine = stationInfo.StationLines[i];
             var div = $('<div/>');
             var lineIdSpan = $('<span/>').text(stationLine.LineInfo.LineId).appendTo(div);
             var routeSpan = $('<span/>').text(stationLine.LineInfo.LineRoute).appendTo(div);
             var startEndTimeSpan = $('<span/>').text(stationLine.StartEndTime).appendTo(div);
-            div.appendTo(this.stationInfoContainer);  
+            div.appendTo(this.stationInfoContainer);
         }
+    }
+
+    RightPanelUpdator.prototype.clearAllSetButtons = function () {
+        this.setStartButton.hide();
+        this.setEndButton.hide();
+        this.clearSetButton.hide();
+    }
+
+    RightPanelUpdator.prototype.showSetStartButton = function () {
+        this.setStartButton.show();
+    }
+
+    RightPanelUpdator.prototype.showSetEndButton = function () {
+        this.setEndButton.show();
+    }
+
+    RightPanelUpdator.prototype.showClearSetButton = function(){
+        this.clearSetButton.show();
     }
 }
