@@ -9,11 +9,8 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
     this.metroStationArray = null;
     this.metroStationLineArray = null;
     this.clickedMetroStation = null;
-    this.clickedMetroStationGraph = null;
     this.stationStart = null;
-    this.stationStartGraph = null;
     this.stationEnd = null;
-    this.stationEndGraph = null;
 
     DefaultController.prototype.initializeCanvas = function () {
         // set the canvas to fill the whole page
@@ -74,8 +71,8 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
 
     DefaultController.prototype.onClickNode = function (node) {
         // clear the select dot from painter
-        if(this.clickedMetroStation != null){
-            this.metroPainter.clearSelectedDot(this.clickedMetroStationGraph);
+        if (this.clickedMetroStation != null) {
+            this.metroPainter.clearSelectedDot();
         }
 
         // find the node
@@ -90,19 +87,24 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         }, this);
 
         // add a dot from the painter
-        this.clickedMetroStationGraph = this.metroPainter.drawSelectedDot(this.clickedMetroStation);
+        this.metroPainter.drawSelectedDot(this.clickedMetroStation);
 
         // update the right pannel
-        this.rightPanelUpdator.update(this.clickedMetroStation);        
-        this.updateStartEndButton();        
+        this.rightPanelUpdator.update(this.clickedMetroStation);
+        this.updateStartEndButton();
     }
 
     DefaultController.prototype.onClickSetStartButton = function () {
+        if (this.stationStart != null) {
+            this.metroPainter.clearStartLabel();
+        }
+
         this.stationStart = this.clickedMetroStation;
         if (this.clickNodeIsSetEnd()) {
             this.stationEnd = null;
         }
-        this.updateStartEndButton();  
+        this.metroPainter.drawStartLabel(this.stationStart);
+        this.updateStartEndButton();
     }
 
     DefaultController.prototype.onclickSetEndButton = function () {
@@ -110,7 +112,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         if (this.clickNodeIsSetStart()) {
             this.stationStart = null;
         }
-        this.updateStartEndButton();  
+        this.updateStartEndButton();
     }
 
     DefaultController.prototype.onClickClearSetButton = function () {
@@ -120,7 +122,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         if (this.clickNodeIsSetEnd()) {
             this.stationEnd = null;
         }
-        this.updateStartEndButton();  
+        this.updateStartEndButton();
     }
 
     DefaultController.prototype.clickNodeIsSetStart = function () {
@@ -131,7 +133,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         return this.stationEnd == this.clickedMetroStation;
     }
 
-    DefaultController.prototype.updateStartEndButton = function (){
+    DefaultController.prototype.updateStartEndButton = function () {
         this.rightPanelUpdator.clearAllSetButtons();
         if (!this.clickNodeIsSetStart()) {
             this.rightPanelUpdator.showSetStartButton();

@@ -25,10 +25,22 @@ var metroStationDotBase = {
     fillStyle: 'red',
     strokeWidth: 1,
     width: 5,
-    height: 5,
-    click: function (node) {
-        node.onClick.call(node.calleeObj, node)
-    }
+    height: 5
+}
+
+var startLabelBase = {
+    layer: true,
+    name: 'start',
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'polygon',
+    strokeStyle: 'green',
+    fillStyle: 'green',
+    strokeWidth: 1,
+    radius: 5,
+    sides: 3,
+    rotate: 90,
 }
 
 var metroStationNameGraphBase = {
@@ -155,12 +167,20 @@ function MetroPainter(metroCanvas, canvasContainer) {
     }
 
     MetroPainter.prototype.drawSelectedDot = function (selectedMetroStation) {
-        var metroStationGraph = $.extend({}, metroStationDotBase, selectedMetroStation.StationGraph);        
+        var metroStationGraph = $.extend({}, metroStationDotBase, selectedMetroStation.StationGraph);
         this.metroCanvas.draw(metroStationGraph);
-        return metroStationGraph;
     }
 
-    MetroPainter.prototype.clearSelectedDot = function (selectedMetroStationGraph) {
+    MetroPainter.prototype.clearSelectedDot = function () {
         this.metroCanvas.removeLayer('dot').drawLayers();
+    }
+
+    MetroPainter.prototype.drawStartLabel = function (startMetroStation) {
+        var metroStationGraph = $.extend({}, startLabelBase, startMetroStation.StationGraph);
+        this.metroCanvas.draw(metroStationGraph);
+    }
+
+    MetroPainter.prototype.clearStartLabel = function (){
+        this.metroCanvas.removeLayer('start').drawLayers();
     }
 }
