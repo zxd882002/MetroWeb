@@ -82,6 +82,8 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         this.metroStationArray.some(function (metroStation) {
             if (metroStation.StationId == node.stationId) {
                 this.clickedMetroStation = metroStation;
+                this.clickedMetroStation.StationGraph.x = node.x;
+                this.clickedMetroStation.StationGraph.y = node.y;
                 return true;
             }
             return false;
