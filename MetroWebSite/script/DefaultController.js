@@ -9,8 +9,11 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
     this.metroStationArray = null;
     this.metroStationLineArray = null;
     this.clickedMetroStation = null;
+    this.clickedMetroStationGraph = null;
     this.stationStart = null;
+    this.stationStartGraph = null;
     this.stationEnd = null;
+    this.stationEndGraph = null;
 
     DefaultController.prototype.initializeCanvas = function () {
         // set the canvas to fill the whole page
@@ -70,6 +73,12 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
     }
 
     DefaultController.prototype.onClickNode = function (node) {
+        // clear the select dot from painter
+        if(this.clickedMetroStation != null){
+            this.metroPainter.clearSelectedDot(this.clickedMetroStationGraph);
+        }
+
+        // find the node
         this.metroStationArray.some(function (metroStation) {
             if (metroStation.StationId == node.stationId) {
                 this.clickedMetroStation = metroStation;
@@ -77,11 +86,60 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
             }
             return false;
         }, this);
-        this.rightPanelUpdator.update(this.clickedMetroStation);
+
+        // add a dot from the painter
+        this.clickedMetroStationGraph = this.metroPainter.drawSelectedDot(this.clickedMetroStation);
+
+        // update the right pannel
+        this.rightPanelUpdator.update(this.clickedMetroStation);        
+        this.updateStartEndButton();        
+    }
+
+    DefaultController.prototype.onClickSetStartButton = function () {
+        this.stationStart = this.clickedMetroStation;
+        if (this.clickNodeIsSetEnd()) {
+            this.stationEnd = null;
+        }
+        this.updateStartEndButton();  
+    }
+
+    DefaultController.prototype.onclickSetEndButton = function () {
+        this.stationEnd = this.clickedMetroStation;
+        if (this.clickNodeIsSetStart()) {
+            this.stationStart = null;
+        }
+        this.updateStartEndButton();  
+    }
+
+    DefaultController.prototype.onClickClearSetButton = function () {
+        if (this.clickNodeIsSetStart()) {
+            this.stationStart = null;
+        }
+        if (this.clickNodeIsSetEnd()) {
+            this.stationEnd = null;
+        }
+        this.updateStartEndButton();  
+    }
+
+    DefaultController.prototype.clickNodeIsSetStart = function () {
+        return this.stationStart == this.clickedMetroStation;
+    }
+
+    DefaultController.prototype.clickNodeIsSetEnd = function () {
+        return this.stationEnd == this.clickedMetroStation;
+    }
+
+    DefaultController.prototype.updateStartEndButton = function (){
         this.rightPanelUpdator.clearAllSetButtons();
-        this.rightPanelUpdator.showSetStartButton();
-        this.rightPanelUpdator.showSetEndButton();
-        if (stationStart != null || stationEnd != null) {
+        if (!this.clickNodeIsSetStart()) {
+            this.rightPanelUpdator.showSetStartButton();
+        }
+
+        if (!this.clickNodeIsSetEnd()) {
+            this.rightPanelUpdator.showSetEndButton();
+        }
+
+        if (this.clickNodeIsSetStart() || this.clickNodeIsSetEnd()) {
             this.rightPanelUpdator.showClearSetButton();
         }
     }
