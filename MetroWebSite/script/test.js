@@ -32,7 +32,6 @@ function getLines(){
 
 function getStationName() {
     var sendData = '{"stationId":"' + $("#StationId").val() + '"}';
-    //alert(sendData);
     $.ajax({
         type: 'post',
         url: 'http://localhost:8732/MetroWebService.svc/GetStationByStationId',
@@ -55,7 +54,6 @@ function getRoute() {
     var toLine = $('#ToLine').val();
     var sendData = '{"fromStationName":"' + fromStationName + '","fromLine":"' + fromLine +
                    '","toStationName":"' + toStationName + '","toLine":"' + toLine + '"}';
-    //alert(sendData);
     $.ajax({
         type: 'post',
         url: 'http://localhost:8732/MetroWebService.svc/GetNearestRoute',

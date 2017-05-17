@@ -28,6 +28,11 @@ $(document).ready(function () {
         defaultController.onClickClearSetButton();
     });
 
+    // calculate button
+    $('.Calculate').on('click', function(){
+        defaultController.onClickCalculatorButton();
+    });
+
     // initialize canvas
     defaultController.initializeCanvas();
 })

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel.Activation;
 using MetroWebLibrary;
 
@@ -36,7 +35,7 @@ namespace MetroWebWcfService
             return lineInfoList.ToArray();
         }
 
-        public string GetNearestRoute(string fromStationName, int fromLine, string toStationName, int toLine)
+        public StationInfo[] GetNearestRoute(string fromStationName, int fromLine, string toStationName, int toLine)
         {
             StationEntity fromStationEntity;
             try
@@ -45,7 +44,7 @@ namespace MetroWebWcfService
             }
             catch
             {
-                return "From Station is invalid!";
+                throw new Exception("From Station is invalid!");
             }
 
             StationEntity toStationEntity;
@@ -53,14 +52,20 @@ namespace MetroWebWcfService
             {
                 toStationEntity = MetroWebEntity.Instance.StationList[toStationName, string.Format("{0}号线", toLine)];
             }
-            catch (Exception)
+            catch 
             {
-                return "To Station is invalid!";
+                throw new Exception("To Station is invalid!");
             }
 
             RouteFinder finder = new RouteFinder();
-            var stationNameList = finder.GetTheNearestRouteBetween(fromStationEntity, toStationEntity).Item1.Select(stationLine => stationLine.Station.StationName);
-            return string.Join(" -> ", stationNameList);
+            var stationLineList = finder.GetTheNearestRouteBetween(fromStationEntity, toStationEntity).Item1;
+            List<StationInfo> stationInfoList = new List<StationInfo>();
+            foreach (var stationLine in stationLineList)
+            {
+                StationInfo stationInfo = new StationInfoAdapter(stationLine.Station).ToObject();
+                stationInfoList.Add(stationInfo);
+            }
+            return stationInfoList.ToArray();
         }
     }
 }

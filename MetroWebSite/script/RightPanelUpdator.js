@@ -5,6 +5,7 @@ function RightPanelUpdator(rightPanel) {
     this.setStartButton = rightPanel.find(".startEndSet > .SetStart");
     this.setEndButton = rightPanel.find(".startEndSet > .SetEnd");
     this.clearSetButton = rightPanel.find(".startEndSet > .ClearSet");
+    this.calculateButton = rightPanel.find(".startEndSet > .Calculate");
 
     RightPanelUpdator.prototype.update = function (stationInfo) {
         this.stationInfoHeader.text(stationInfo.StationName);
@@ -24,6 +25,7 @@ function RightPanelUpdator(rightPanel) {
         this.setStartButton.hide();
         this.setEndButton.hide();
         this.clearSetButton.hide();
+        this.calculateButton.hide();
     }
 
     RightPanelUpdator.prototype.showSetStartButton = function () {
@@ -36,5 +38,9 @@ function RightPanelUpdator(rightPanel) {
 
     RightPanelUpdator.prototype.showClearSetButton = function(){
         this.clearSetButton.show();
+    }
+
+    RightPanelUpdator.prototype.showCalculateButton = function(){
+        this.calculateButton.show();
     }
 }

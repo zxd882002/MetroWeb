@@ -2,27 +2,45 @@ function MetroWebWcfClient() {
 	this.ajaxHelper = new AjaxHelper();
 	this.getStationInfosDeferred = $.Deferred();
 	this.getLineInfosDeferred = $.Deferred();
+	this.getNearestRouteDefferred = $.Deferred();
+	this.baseUrl = 'http://localhost:8732/MetroWebService.svc/'
 
 	MetroWebWcfClient.prototype.GetStationInfos = function (callback, callbackObj) {
 		this.getStationInfosDeferred.done(function (value) {
 			callback.call(callbackObj, value);
 		});
 
-		var url = 'http://localhost:8732/MetroWebService.svc/GetStationInfos';
+		var method = 'GetStationInfos';
 		var successCallback = this.OnGetMetroStationArraySuccess;
 		var errorCallback = this.OnError;
-		this.ajaxHelper.CallWCFAsync(url, this, successCallback, errorCallback);
+		this.ajaxHelper.CallWCFAsync(this.baseUrl + method, this, successCallback, errorCallback, null);
 	}
 
 	MetroWebWcfClient.prototype.GetLineInfos = function (callback, callbackObj) {
-		this.getLineInfosDeferred.done(function (value) {
+		this.getLineInfosDeferred.done(function (routeStationList) {
+			callback.call(callbackObj, routeStationList);
+		});
+
+		var method = 'GetLineInfos';
+		var successCallback = this.OnGetMetroStationLineArraySuccess;
+		var errorCallback = this.OnError;
+		this.ajaxHelper.CallWCFAsync(this.baseUrl + method, this, successCallback, errorCallback, null);
+	}
+
+	MetroWebWcfClient.prototype.GetNearestRoute = function (		
+		fromStationName, fromLine,
+		toStationName, toLine,
+		callback, callbackObj){
+		this.getNearestRouteDefferred.done(function (value) {
 			callback.call(callbackObj, value);
 		});
 
-		var url = 'http://localhost:8732/MetroWebService.svc/GetLineInfos';
-		var successCallback = this.OnGetMetroStationLineArraySuccess;
+		var method = 'GetNearestRoute';
+		var successCallback = this.OnGetNearestRouteSuccess;
 		var errorCallback = this.OnError;
-		this.ajaxHelper.CallWCFAsync(url, this, successCallback, errorCallback);
+		var sendData = '{"fromStationName":"' + fromStationName + '","fromLine":"' + fromLine +
+                   '","toStationName":"' + toStationName + '","toLine":"' + toLine + '"}';
+		this.ajaxHelper.CallWCFAsync(this.baseUrl + method, this, successCallback, errorCallback, sendData);
 	}
 
 	MetroWebWcfClient.prototype.OnGetMetroStationArraySuccess = function (msg) {
@@ -42,6 +60,11 @@ function MetroWebWcfClient() {
 		}
 
 		this.getLineInfosDeferred.resolve(metroStationLineArray);
+	}
+
+	MetroWebWcfClient.prototype.OnGetNearestRouteSuccess = function (msg){
+		var routeStationList = eval(msg.d);
+		this.getNearestRouteDefferred.resolve(routeStationList);
 	}
 
 	MetroWebWcfClient.prototype.OnError = function (response) {

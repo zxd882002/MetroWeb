@@ -102,27 +102,47 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         this.stationStart = this.clickedMetroStation;
         if (this.clickNodeIsSetEnd()) {
             this.stationEnd = null;
-        }
+            this.metroPainter.clearEndLabel();
+        }        
         this.metroPainter.drawStartLabel(this.stationStart);
         this.updateStartEndButton();
     }
 
     DefaultController.prototype.onclickSetEndButton = function () {
+        if (this.stationEnd != null) {
+            this.metroPainter.clearEndLabel();
+        }
+
         this.stationEnd = this.clickedMetroStation;
         if (this.clickNodeIsSetStart()) {
             this.stationStart = null;
+            this.metroPainter.clearStartLabel();
         }
+        this.metroPainter.drawEndLabel(this.stationEnd);
         this.updateStartEndButton();
     }
 
     DefaultController.prototype.onClickClearSetButton = function () {
         if (this.clickNodeIsSetStart()) {
             this.stationStart = null;
+            this.metroPainter.clearStartLabel();
         }
         if (this.clickNodeIsSetEnd()) {
             this.stationEnd = null;
+            this.metroPainter.clearEndLabel();
         }
         this.updateStartEndButton();
+    }
+
+    DefaultController.prototype.onClickCalculatorButton = function() {
+        this.metroWebWcfClient.GetNearestRoute(
+            this.stationStart.StationName, this.stationStart.StationLines[0].LineInfo.LineId,
+            this.stationEnd.StationName, this.stationEnd.StationLines[0].LineInfo.LineId,
+            function(routedStationList){
+                this.metroPainter.clearRoute();
+                this.metroPainter.drawRoute(routedStationList);
+            }
+            , this);
     }
 
     DefaultController.prototype.clickNodeIsSetStart = function () {
@@ -145,6 +165,11 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
 
         if (this.clickNodeIsSetStart() || this.clickNodeIsSetEnd()) {
             this.rightPanelUpdator.showClearSetButton();
+        }
+        
+        if(this.stationStart != null && this.stationEnd != null)
+        {
+            this.rightPanelUpdator.showCalculateButton();
         }
     }
 }

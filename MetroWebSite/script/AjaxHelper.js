@@ -1,10 +1,10 @@
 function AjaxHelper() {
-	AjaxHelper.prototype.CallWCFAsync = function (url, callbackObj, successCallback, errorCallback) {
+	AjaxHelper.prototype.CallWCFAsync = function (url, callbackObj, successCallback, errorCallback, sendData) {
 		$.ajax({
 			type: 'post',
 			url: url,
 			contentType: 'text/json',
-			data: null,
+			data: sendData,
 			success: function (msg) {
 				successCallback.call(callbackObj, msg)
 			},

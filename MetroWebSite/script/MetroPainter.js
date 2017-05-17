@@ -35,12 +35,41 @@ var startLabelBase = {
     groups: ['Metros'],
     dragGroups: ['Metros'],
     type: 'polygon',
-    strokeStyle: 'green',
-    fillStyle: 'green',
+    strokeStyle: 'purple',
+    fillStyle: 'purple',
     strokeWidth: 1,
     radius: 5,
     sides: 3,
     rotate: 90,
+}
+
+var endLabelBase = {
+    layer: true,
+    name: 'end',
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'polygon',
+    strokeStyle: 'purple',
+    fillStyle: 'purple',
+    strokeWidth: 1,
+    radius: 5,
+    sides: 4,
+    rotate: 90,
+}
+
+var routeLabelBase = {
+    layer: true,
+    name: 'route',
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'ellipse',
+    strokeStyle: 'purple',
+    fillStyle: 'purple',
+    strokeWidth: 1,
+    width: 5,
+    height: 5
 }
 
 var metroStationNameGraphBase = {
@@ -182,5 +211,26 @@ function MetroPainter(metroCanvas, canvasContainer) {
 
     MetroPainter.prototype.clearStartLabel = function (){
         this.metroCanvas.removeLayer('start').drawLayers();
+    }
+
+    MetroPainter.prototype.drawEndLabel = function (endMetroStation) {
+        var metroStationGraph = $.extend({}, endLabelBase, endMetroStation.StationGraph);
+        this.metroCanvas.draw(metroStationGraph);
+    }
+
+    MetroPainter.prototype.clearEndLabel = function (){
+        this.metroCanvas.removeLayer('end').drawLayers();
+    }
+    
+    MetroPainter.prototype.drawRoute = function (stationList){
+        for(var i = 0; i < stationList.length; i++)
+        {
+        var metroStationGraph = $.extend({}, routeLabelBase, stationList[i].StationGraph);
+        this.metroCanvas.draw(metroStationGraph);
+        }
+    }
+
+    MetroPainter.prototype.clearRoute = function (){
+        this.metroCanvas.removeLayer('route').drawLayers();
     }
 }
