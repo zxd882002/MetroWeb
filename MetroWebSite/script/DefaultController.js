@@ -1,11 +1,16 @@
 function DefaultController(metroCanvas, canvasContainer, header, footer, rightPanel) {
+    // website element
     this.metroCanvas = metroCanvas;
     this.canvasContainer = canvasContainer;
     this.header = header;
     this.footer = footer;
+
+    // lower objs
     this.metroPainter = new MetroPainter(metroCanvas, canvasContainer);
     this.metroWebWcfClient = new MetroWebWcfClient();
     this.rightPanelUpdator = new RightPanelUpdator(rightPanel)
+
+    // models
     this.metroStationArray = null;
     this.metroStationLineArray = null;
     this.clickedMetroStation = null;
@@ -35,7 +40,6 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         }, this);
 
         // Hide the right pannel
-        // todo: currently we just clear all buttons
         this.rightPanelUpdator.clearAllSetButtons();
     }
 
@@ -70,55 +74,54 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
     }
 
     DefaultController.prototype.onClickNode = function (node) {
-        // clear the select dot from painter
+        // clear the select node from painter
         if (this.clickedMetroStation != null) {
-            this.metroPainter.clearSelectedDot();
+            this.metroPainter.clearSelectedNode(this.getNodeByStation(this.clickedMetroStation));
+            this.clickedMetroStation = null;
         }
 
-        // find the node
-        this.metroStationArray.some(function (metroStation) {
-            if (metroStation.StationId == node.stationId) {
-                this.clickedMetroStation = metroStation;
-                this.clickedMetroStation.StationGraph.x = node.x;
-                this.clickedMetroStation.StationGraph.y = node.y;
-                return true;
-            }
-            return false;
-        }, this);
-
-        // add a dot from the painter
-        this.metroPainter.drawSelectedDot(this.clickedMetroStation);
+        // draw node from the painter
+        this.metroPainter.drawSelectedNode(node);
 
         // update the right pannel
+        this.clickedMetroStation = this.getStationByNode(node);
         this.rightPanelUpdator.update(this.clickedMetroStation);
         this.updateStartEndButton();
     }
 
     DefaultController.prototype.onClickSetStartButton = function () {
+        // clear start button if set in other node
         if (this.stationStart != null) {
             this.metroPainter.clearStartLabel();
+            this.stationStart = null;
         }
 
+        // clear start and end button if current node has already been set
+        this.clearCurrentLabel();
+
+        // set current node to start node
         this.stationStart = this.clickedMetroStation;
-        if (this.clickNodeIsSetEnd()) {
-            this.stationEnd = null;
-            this.metroPainter.clearEndLabel();
-        }        
         this.metroPainter.drawStartLabel(this.stationStart);
+
+        // update button
         this.updateStartEndButton();
     }
 
     DefaultController.prototype.onclickSetEndButton = function () {
+        // clear end button if set in other node
         if (this.stationEnd != null) {
             this.metroPainter.clearEndLabel();
+            this.stationEnd = null;
         }
 
+        // clear start and end button if current node has already been set
+        this.clearCurrentLabel();
+
+        // set current node to end node
         this.stationEnd = this.clickedMetroStation;
-        if (this.clickNodeIsSetStart()) {
-            this.stationStart = null;
-            this.metroPainter.clearStartLabel();
-        }
         this.metroPainter.drawEndLabel(this.stationEnd);
+
+        // update button
         this.updateStartEndButton();
     }
 
@@ -134,15 +137,22 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         this.updateStartEndButton();
     }
 
-    DefaultController.prototype.onClickCalculatorButton = function() {
+    DefaultController.prototype.onClickCalculatorButton = function () {
         this.metroWebWcfClient.GetNearestRoute(
             this.stationStart.StationName, this.stationStart.StationLines[0].LineInfo.LineId,
             this.stationEnd.StationName, this.stationEnd.StationLines[0].LineInfo.LineId,
-            function(routedStationList){
+            function (routedStationList) {
+                // get the correct note path
+                var routedNodeList = new Array(routedStationList.length - 2);
+                for (var i = 1; i < routedStationList.length - 1; i++) {
+                    var node = this.getNodeByStation(routedStationList[i]);
+                    routedNodeList[i] = new Object();
+                    routedNodeList[i].x = node.x;
+                    routedNodeList[i].y = node.y;
+                }
                 this.metroPainter.clearRoute();
-                this.metroPainter.drawRoute(routedStationList);
-            }
-            , this);
+                this.metroPainter.drawRoute(routedNodeList);
+            }, this);
     }
 
     DefaultController.prototype.clickNodeIsSetStart = function () {
@@ -151,6 +161,18 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
 
     DefaultController.prototype.clickNodeIsSetEnd = function () {
         return this.stationEnd == this.clickedMetroStation;
+    }
+
+    DefaultController.prototype.clearCurrentLabel = function () {
+        if (this.clickNodeIsSetEnd()) {
+            this.stationEnd = null;
+            this.metroPainter.clearEndLabel();
+        }
+
+        if (this.clickNodeIsSetStart()) {
+            this.stationStart = null;
+            this.metroPainter.clearStartLabel();
+        }
     }
 
     DefaultController.prototype.updateStartEndButton = function () {
@@ -166,10 +188,36 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         if (this.clickNodeIsSetStart() || this.clickNodeIsSetEnd()) {
             this.rightPanelUpdator.showClearSetButton();
         }
-        
-        if(this.stationStart != null && this.stationEnd != null)
-        {
+
+        if (this.stationStart != null && this.stationEnd != null) {
             this.rightPanelUpdator.showCalculateButton();
         }
+    }
+
+    DefaultController.prototype.getNodeByStation = function (station) {
+        var node = null;
+        var layers = this.metroCanvas.getLayers();
+        layers.some(function (layer) {
+            if (typeof layer.stationId !== 'undefined') {
+                if (station.StationId == layer.stationId) {
+                    node = layer;
+                    return true;
+                }
+            }
+            return false;
+        }, this);
+        return node;
+    }
+
+    DefaultController.prototype.getStationByNode = function (node) {
+        var station = null;
+        this.metroStationArray.some(function (metroStation) {
+            if (metroStation.StationId == node.stationId) {
+                station = metroStation;
+                return true;
+            }
+            return false;
+        }, this);
+        return station;
     }
 }

@@ -65,6 +65,7 @@ function MetroWebWcfClient() {
 	MetroWebWcfClient.prototype.OnGetNearestRouteSuccess = function (msg){
 		var routeStationList = eval(msg.d);
 		this.getNearestRouteDefferred.resolve(routeStationList);
+		this.getNearestRouteDefferred = $.Deferred();
 	}
 
 	MetroWebWcfClient.prototype.OnError = function (response) {

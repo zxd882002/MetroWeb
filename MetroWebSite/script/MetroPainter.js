@@ -14,20 +14,6 @@ var metroStationGraphBase = {
     }
 }
 
-var metroStationDotBase = {
-    layer: true,
-    name: 'dot',
-    draggable: true,
-    groups: ['Metros'],
-    dragGroups: ['Metros'],
-    type: 'ellipse',
-    strokeStyle: 'red',
-    fillStyle: 'red',
-    strokeWidth: 1,
-    width: 5,
-    height: 5
-}
-
 var startLabelBase = {
     layer: true,
     name: 'start',
@@ -98,6 +84,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
     this.canvasContainer = canvasContainer;
     this.width = canvasContainer.width();
     this.height = canvasContainer.height();
+    this.routeArray = new Array();
 
     MetroPainter.prototype.drawStationArray = function (metroStationArray, onClickFunction, calleeObj) {
         for (var i = 0; i < metroStationArray.length; i++) {
@@ -107,14 +94,16 @@ function MetroPainter(metroCanvas, canvasContainer) {
 
     MetroPainter.prototype.drawStation = function (metroStation, onClickFunction, calleeObj) {
         var metroStationGraph = $.extend({}, metroStationGraphBase, metroStation.StationGraph);
+        metroStationGraph.name = 'stationNode_' + metroStation.StationId + '_' + metroStation.NameGraph.text;
         metroStationGraph.onClick = onClickFunction;
         metroStationGraph.calleeObj = calleeObj;
         metroStationGraph.stationId = metroStation.StationId;
         metroStationGraph.stationName = metroStation.NameGraph.text;
-        this.metroCanvas.draw(metroStationGraph);
+        this.metroCanvas.draw(metroStationGraph);        
 
         var metroStationName = $.extend({}, metroStationNameGraphBase, metroStation.NameGraph);
-        this.metroCanvas.draw(metroStationName);
+        metroStationName.name = 'stationName_' + metroStation.StationId + '_' + metroStation.NameGraph.text;
+        this.metroCanvas.draw(metroStationName);  
     }
 
     MetroPainter.prototype.drawLineArray = function (metroStationLineArray) {
@@ -125,6 +114,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
 
     MetroPainter.prototype.drawLine = function (stationLine) {
         var metroStationLineGraph = $.extend({}, metroStationLineGraphBase, stationLine.LineGraph);
+        metroStationLineGraph.name = 'line_' + stationLine.LineId;
         this.metroCanvas.draw(metroStationLineGraph);
     }
 
@@ -149,6 +139,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
     MetroPainter.prototype.drawBackGround = function () {
         this.metroCanvas.drawRect({
             layer: true,
+            name: 'background',
             draggable: true,
             groups: ['Metros'],
             dragGroups: ['Metros'],
@@ -164,6 +155,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
     MetroPainter.prototype.drawWaitingMessage = function () {
         this.metroCanvas.draw({
             layer: true,
+            name: 'waitingMessage',
             draggable: true,
             groups: ['Metros'],
             dragGroups: ['Metros'],
@@ -195,13 +187,14 @@ function MetroPainter(metroCanvas, canvasContainer) {
         }).drawLayers();
     }
 
-    MetroPainter.prototype.drawSelectedDot = function (selectedMetroStation) {
-        var metroStationGraph = $.extend({}, metroStationDotBase, selectedMetroStation.StationGraph);
-        this.metroCanvas.draw(metroStationGraph);
+    MetroPainter.prototype.drawSelectedNode = function (selectedMetroStation) {        
+        //selectedMetroStation.strokeStyle = 'black';
+        selectedMetroStation.strokeWidth = 5;
     }
 
-    MetroPainter.prototype.clearSelectedDot = function () {
-        this.metroCanvas.removeLayer('dot').drawLayers();
+    MetroPainter.prototype.clearSelectedNode = function (selectedMetroStation) {
+        //selectedMetroStation.strokeStyle = 'black';
+        selectedMetroStation.strokeWidth = 2;
     }
 
     MetroPainter.prototype.drawStartLabel = function (startMetroStation) {
@@ -209,7 +202,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
         this.metroCanvas.draw(metroStationGraph);
     }
 
-    MetroPainter.prototype.clearStartLabel = function (){
+    MetroPainter.prototype.clearStartLabel = function () {
         this.metroCanvas.removeLayer('start').drawLayers();
     }
 
@@ -218,19 +211,23 @@ function MetroPainter(metroCanvas, canvasContainer) {
         this.metroCanvas.draw(metroStationGraph);
     }
 
-    MetroPainter.prototype.clearEndLabel = function (){
+    MetroPainter.prototype.clearEndLabel = function () {
         this.metroCanvas.removeLayer('end').drawLayers();
     }
-    
-    MetroPainter.prototype.drawRoute = function (stationList){
-        for(var i = 0; i < stationList.length; i++)
-        {
-        var metroStationGraph = $.extend({}, routeLabelBase, stationList[i].StationGraph);
-        this.metroCanvas.draw(metroStationGraph);
+
+    MetroPainter.prototype.drawRoute = function (stationList) {
+        for (var i = 0; i < stationList.length; i++) {
+            var metroStationGraph = $.extend({}, routeLabelBase, stationList[i]);
+            metroStationGraph.name = "route_" + i;
+            this.metroCanvas.draw(metroStationGraph);
+            this.routeArray.push(metroStationGraph);
         }
     }
 
-    MetroPainter.prototype.clearRoute = function (){
-        this.metroCanvas.removeLayer('route').drawLayers();
+    MetroPainter.prototype.clearRoute = function () {
+        this.routeArray.forEach(function(route) {
+            this.metroCanvas.removeLayer(route.name).drawLayers();
+        }, this);
+        this.routeArray = [];
     }
 }
