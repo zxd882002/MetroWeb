@@ -5,7 +5,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
     this.header = header;
     this.footer = footer;
 
-    // lower objs
+    // lower objects
     this.metroPainter = new MetroPainter(metroCanvas, canvasContainer);
     this.metroWebWcfClient = new MetroWebWcfClient();
     this.rightPanelUpdator = new RightPanelUpdator(rightPanel)
@@ -101,7 +101,11 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
 
         // set current node to start node
         this.stationStart = this.clickedMetroStation;
-        this.metroPainter.drawStartLabel(this.stationStart);
+        var clickedNode = this.getNodeByStation(this.clickedMetroStation);
+        var startLabel = new Object();
+        startLabel.x = clickedNode.x;
+        startLabel.y = clickedNode.y;
+        this.metroPainter.drawStartLabel(startLabel);
 
         // update button
         this.updateStartEndButton();
@@ -119,7 +123,11 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
 
         // set current node to end node
         this.stationEnd = this.clickedMetroStation;
-        this.metroPainter.drawEndLabel(this.stationEnd);
+        var clickedNode = this.getNodeByStation(this.clickedMetroStation);
+        var endLabel = new Object();
+        endLabel.x = clickedNode.x;
+        endLabel.y = clickedNode.y;
+        this.metroPainter.drawEndLabel(endLabel);
 
         // update button
         this.updateStartEndButton();
@@ -146,9 +154,9 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
                 var routedNodeList = new Array(routedStationList.length - 2);
                 for (var i = 1; i < routedStationList.length - 1; i++) {
                     var node = this.getNodeByStation(routedStationList[i]);
-                    routedNodeList[i] = new Object();
-                    routedNodeList[i].x = node.x;
-                    routedNodeList[i].y = node.y;
+                    routedNodeList[i - 1] = new Object();
+                    routedNodeList[i - 1].x = node.x;
+                    routedNodeList[i - 1].y = node.y;
                 }
                 this.metroPainter.clearRoute();
                 this.metroPainter.drawRoute(routedNodeList);

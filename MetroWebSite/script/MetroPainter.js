@@ -198,7 +198,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
     }
 
     MetroPainter.prototype.drawStartLabel = function (startMetroStation) {
-        var metroStationGraph = $.extend({}, startLabelBase, startMetroStation.StationGraph);
+        var metroStationGraph = $.extend({}, startLabelBase, startMetroStation);
         this.metroCanvas.draw(metroStationGraph);
     }
 
@@ -207,7 +207,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
     }
 
     MetroPainter.prototype.drawEndLabel = function (endMetroStation) {
-        var metroStationGraph = $.extend({}, endLabelBase, endMetroStation.StationGraph);
+        var metroStationGraph = $.extend({}, endLabelBase, endMetroStation);
         this.metroCanvas.draw(metroStationGraph);
     }
 
