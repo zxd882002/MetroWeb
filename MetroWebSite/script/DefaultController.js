@@ -16,6 +16,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
     this.clickedMetroStation = null;
     this.stationStart = null;
     this.stationEnd = null;
+    this.routedNodeList = [];
 
     DefaultController.prototype.initializeCanvas = function () {
         // set the canvas to fill the whole page
@@ -73,12 +74,15 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         this.metroPainter.drawStationArray(this.metroStationArray, this.onClickNode, this);
     }
 
-    DefaultController.prototype.onClickNode = function (node) {
+    DefaultController.prototype.onClickNode = function (nodeLabel) {
         // clear the select node from painter
         if (this.clickedMetroStation != null) {
             this.metroPainter.clearSelectedNode(this.getNodeByStation(this.clickedMetroStation));
             this.clickedMetroStation = null;
         }
+        
+        // find node by the selected node or label position
+        var node = this.findNodeByPosition(nodeLabel.x, nodeLabel.y);
 
         // draw node from the painter
         this.metroPainter.drawSelectedNode(node);
@@ -96,6 +100,13 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
             this.stationStart = null;
         }
 
+        // clear route label
+        if (this.routedNodeList != null && this.routedNodeList.length > 0)
+        {
+            this.metroPainter.clearRoute();
+            this.routedNodeList = [];
+        }
+
         // clear start and end button if current node has already been set
         this.clearCurrentLabel();
 
@@ -105,7 +116,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         var startLabel = new Object();
         startLabel.x = clickedNode.x;
         startLabel.y = clickedNode.y;
-        this.metroPainter.drawStartLabel(startLabel);
+        this.metroPainter.drawStartLabel(startLabel, this.onClickNode, this);
 
         // update button
         this.updateStartEndButton();
@@ -117,6 +128,13 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
             this.metroPainter.clearEndLabel();
             this.stationEnd = null;
         }
+        
+        // clear route label
+        if (this.routedNodeList != null && this.routedNodeList.length > 0)
+        {
+            this.metroPainter.clearRoute();
+            this.routedNodeList = [];
+        }
 
         // clear start and end button if current node has already been set
         this.clearCurrentLabel();
@@ -127,7 +145,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         var endLabel = new Object();
         endLabel.x = clickedNode.x;
         endLabel.y = clickedNode.y;
-        this.metroPainter.drawEndLabel(endLabel);
+        this.metroPainter.drawEndLabel(endLabel, this.onClickNode, this);
 
         // update button
         this.updateStartEndButton();
@@ -151,15 +169,15 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
             this.stationEnd.StationName, this.stationEnd.StationLines[0].LineInfo.LineId,
             function (routedStationList) {
                 // get the correct note path
-                var routedNodeList = new Array(routedStationList.length - 2);
+                this.routedNodeList = new Array(routedStationList.length - 2);
                 for (var i = 1; i < routedStationList.length - 1; i++) {
                     var node = this.getNodeByStation(routedStationList[i]);
-                    routedNodeList[i - 1] = new Object();
-                    routedNodeList[i - 1].x = node.x;
-                    routedNodeList[i - 1].y = node.y;
+                    this.routedNodeList[i - 1] = new Object();
+                    this.routedNodeList[i - 1].x = node.x;
+                    this.routedNodeList[i - 1].y = node.y;
                 }
                 this.metroPainter.clearRoute();
-                this.metroPainter.drawRoute(routedNodeList);
+                this.metroPainter.drawRoute(this.routedNodeList, this.onClickNode, this);
             }, this);
     }
 
@@ -200,6 +218,23 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         if (this.stationStart != null && this.stationEnd != null) {
             this.rightPanelUpdator.showCalculateButton();
         }
+    }
+
+    DefaultController.prototype.findNodeByPosition = function(x, y){
+        var node = null;
+        var layers = this.metroCanvas.getLayers();
+        layers.some(function (layer) {
+            if (typeof layer.stationId !== 'undefined' && 
+                typeof layer.x !== 'undefined' && 
+                typeof layer.y !== 'undefined') {
+                if (layer.x == x && layer.y == y) {
+                    node = layer;
+                    return true;
+                }
+            }
+            return false;
+        }, this);
+        return node;
     }
 
     DefaultController.prototype.getNodeByStation = function (station) {

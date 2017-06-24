@@ -27,6 +27,9 @@ var startLabelBase = {
     radius: 5,
     sides: 3,
     rotate: 90,
+    click: function (node) {
+        node.onClick.call(node.calleeObj, node)
+    }
 }
 
 var endLabelBase = {
@@ -42,6 +45,9 @@ var endLabelBase = {
     radius: 5,
     sides: 4,
     rotate: 90,
+    click: function (node) {
+        node.onClick.call(node.calleeObj, node)
+    }
 }
 
 var routeLabelBase = {
@@ -55,7 +61,10 @@ var routeLabelBase = {
     fillStyle: 'purple',
     strokeWidth: 1,
     width: 5,
-    height: 5
+    height: 5,
+    click: function (node) {
+        node.onClick.call(node.calleeObj, node)
+    }
 }
 
 var metroStationNameGraphBase = {
@@ -197,8 +206,10 @@ function MetroPainter(metroCanvas, canvasContainer) {
         selectedMetroStation.strokeWidth = 2;
     }
 
-    MetroPainter.prototype.drawStartLabel = function (startMetroStation) {
+    MetroPainter.prototype.drawStartLabel = function (startMetroStation, onClickFunction, calleeObj) {
         var metroStationGraph = $.extend({}, startLabelBase, startMetroStation);
+        metroStationGraph.onClick = onClickFunction;
+        metroStationGraph.calleeObj = calleeObj;
         this.metroCanvas.draw(metroStationGraph);
     }
 
@@ -206,8 +217,10 @@ function MetroPainter(metroCanvas, canvasContainer) {
         this.metroCanvas.removeLayer('start').drawLayers();
     }
 
-    MetroPainter.prototype.drawEndLabel = function (endMetroStation) {
+    MetroPainter.prototype.drawEndLabel = function (endMetroStation, onClickFunction, calleeObj) {
         var metroStationGraph = $.extend({}, endLabelBase, endMetroStation);
+        metroStationGraph.onClick = onClickFunction;
+        metroStationGraph.calleeObj = calleeObj;
         this.metroCanvas.draw(metroStationGraph);
     }
 
@@ -215,10 +228,12 @@ function MetroPainter(metroCanvas, canvasContainer) {
         this.metroCanvas.removeLayer('end').drawLayers();
     }
 
-    MetroPainter.prototype.drawRoute = function (stationList) {
+    MetroPainter.prototype.drawRoute = function (stationList, onClickFunction, calleeObj) {
         for (var i = 0; i < stationList.length; i++) {
             var metroStationGraph = $.extend({}, routeLabelBase, stationList[i]);
             metroStationGraph.name = "route_" + i;
+            metroStationGraph.onClick = onClickFunction;
+            metroStationGraph.calleeObj = calleeObj;
             this.metroCanvas.draw(metroStationGraph);
             this.routeArray.push(metroStationGraph);
         }
