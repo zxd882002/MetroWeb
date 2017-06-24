@@ -89,6 +89,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
 
         // update the right pannel
         this.clickedMetroStation = this.getStationByNode(node);
+        this.rightPanelUpdator.show(node.eventX, node.eventY + this.header.height());
         this.rightPanelUpdator.update(this.clickedMetroStation);
         this.updateStartEndButton();
     }

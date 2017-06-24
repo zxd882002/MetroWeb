@@ -1,14 +1,24 @@
 function RightPanelUpdator(rightPanel) {
     this.rightPanel = rightPanel;
-    this.stationInfoHeader = rightPanel.find(".stationInfo > .stationInfoHeader");
+    this.stationInfoHeaderStationName = rightPanel.find(".stationInfo > .stationInfoHeader > .stationName");
     this.stationInfoContainer = rightPanel.find(".stationInfo > .stationInfoContainer");
     this.setStartButton = rightPanel.find(".startEndSet > .SetStart");
     this.setEndButton = rightPanel.find(".startEndSet > .SetEnd");
     this.clearSetButton = rightPanel.find(".startEndSet > .ClearSet");
     this.calculateButton = rightPanel.find(".startEndSet > .Calculate");
 
+    RightPanelUpdator.prototype.show = function (x, y) {
+        this.rightPanel.css('left', x);
+        this.rightPanel.css('top', y);
+        this.rightPanel.show();
+    }
+
+    RightPanelUpdator.prototype.hide = function () {
+        this.rightPanel.hide();
+    }
+
     RightPanelUpdator.prototype.update = function (stationInfo) {
-        this.stationInfoHeader.text(stationInfo.StationName);
+        this.stationInfoHeaderStationName.text(stationInfo.StationName);
 
         this.stationInfoContainer.text("");
         for (var i = 0; i < stationInfo.StationLines.length; i++) {
@@ -36,11 +46,11 @@ function RightPanelUpdator(rightPanel) {
         this.setEndButton.show();
     }
 
-    RightPanelUpdator.prototype.showClearSetButton = function(){
+    RightPanelUpdator.prototype.showClearSetButton = function () {
         this.clearSetButton.show();
     }
 
-    RightPanelUpdator.prototype.showCalculateButton = function(){
+    RightPanelUpdator.prototype.showCalculateButton = function () {
         this.calculateButton.show();
     }
 }

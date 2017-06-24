@@ -1,13 +1,61 @@
 <HTML>
 
 <HEAD>
-  <TITLE>测试表格内的滚动条</TITLE>
+  <TITLE>test scroll bar</TITLE>
+  <style type="text/css">
+    .tip {
+      width: 200px;
+      height: 80px;
+      display: none;
+      background-color: #f6f7f7;
+      color: #333333;
+      line-height: 18px;
+      border: 1px solid #e1e3e2;
+      padding: 5px;
+    }
+  </style>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.0.0.js"></script>
+  <script type="text/javascript">
+    //获取鼠标坐标  
+    function mousePosition(ev) {
+      ev = ev || window.event;
+      if (ev.pageX || ev.pageY) {
+        return {
+          x: ev.pageX,
+          y: ev.pageY
+        };
+      }
+      return {
+        x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y: ev.clientY + document.body.scrollTop - document.body.clientTop
+      };
+    }
+
+    $(function () {  
+    //hover某处显示悬浮框  
+    $("#createtable").mouseover(function(e){  
+        //获取鼠标位置函数  
+        var mousePos = mousePosition(e);  
+        var  xOffset = 20;  
+        var  yOffset = 25;  
+        $("#tooltip").css("display","block").css("position","absolute").css("top",(mousePos.y - yOffset) + "px").css("left",(mousePos.x + xOffset) + "px");  
+        $("#tooltip").append("show content");  
+              
+     });  
+     //鼠标离开表格隐藏悬浮框  
+     $("#createtable").mouseout(function(){  
+         $("#tooltip").empty();  
+         $("#tooltip").css("display","none");  
+     });  
+  
+});  
+  </script>
 </HEAD>
 
 <BODY>
   <table>
     <tr>
-      <td>表格内的滚动条:</td>
+      <td>scrollbar in table:</td>
       <td>
         <div id="wins" style="position:absolute;height:300px;width:300px;overflow:auto;background:#EEEEEE;">
           <p>pppppppppppppppppppppppppppppppppppppppppppppppppp </p>
@@ -27,13 +75,15 @@
     </tr>
     <tr>
       <td colspan="2" align="right">
-        <span onmouseover='scrollb=setInterval("wins.scrollLeft-=10",100)' onmouseout=clearInterval(scrollb)>向左</span>
-        <span onmouseover='scrollb=setInterval("wins.scrollTop-=10",100)' onmouseout=clearInterval(scrollb)>向上</span>
-        <span onmouseover='scrollb=setInterval("wins.scrollLeft+=10",100)' onmouseout=clearInterval(scrollb)>向右</span>
-        <span onmouseover='scrollb=setInterval("wins.scrollTop+=10",100)' onmouseout=clearInterval(scrollb)>向下</span>
+        <span onmouseover='scrollb=setInterval("wins.scrollLeft-=10",100)' onmouseout=clearInterval(scrollb)>left</span>
+        <span onmouseover='scrollb=setInterval("wins.scrollTop-=10",100)' onmouseout=clearInterval(scrollb)>top</span>
+        <span onmouseover='scrollb=setInterval("wins.scrollLeft+=10",100)' onmouseout=clearInterval(scrollb)>right</span>
+        <span onmouseover='scrollb=setInterval("wins.scrollTop+=10",100)' onmouseout=clearInterval(scrollb)>down</span>
       </td>
     </tr>
   </table>
+  <div id="tooltip" class="tip">test </div>
+  <div id="createtable">test2</div>
 </BODY>
 
 </HTML>

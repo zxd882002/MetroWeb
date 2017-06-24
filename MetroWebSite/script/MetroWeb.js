@@ -33,6 +33,11 @@ $(document).ready(function () {
         defaultController.onClickCalculatorButton();
     });
 
+    // close right pannel button
+    $('.closeButton').on('click', function(){
+        defaultController.rightPanelUpdator.hide();
+    })
+
     // initialize canvas
     defaultController.initializeCanvas();
 })
