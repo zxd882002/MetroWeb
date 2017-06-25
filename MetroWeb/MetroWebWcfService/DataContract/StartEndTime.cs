@@ -4,12 +4,12 @@ using System.Runtime.Serialization;
 namespace MetroWebWcfService
 {
     [DataContract]
-    public class StationLineInfo
+    public class StartEndTime
     {
         [DataMember]
-        public LineInfo LineInfo { get; set; }
+        public string StartTime { get; set; }
 
         [DataMember]
-        public StartEndTime StartEndTime { get; set; }
+        public string EndTime { get; set; }
     }
 }

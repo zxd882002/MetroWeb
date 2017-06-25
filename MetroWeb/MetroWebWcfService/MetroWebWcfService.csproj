@@ -71,6 +71,8 @@
     <Compile Include="DataContractAdapter\StationGraphAdapter.cs" />
     <Compile Include="DataContractAdapter\StationInfoAdapter.cs" />
     <Compile Include="DataContractAdapter\StationLineInfoAdapter.cs" />
+    <Compile Include="DataContract\LineRoute.cs" />
+    <Compile Include="DataContract\StartEndTime.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -20,9 +20,13 @@ namespace MetroWebWcfService
             };
         }
 
-        private string GetStartEndTime()
+        private StartEndTime GetStartEndTime()
         {
-            return string.Format("{0} - {1}", stationLineEntity.StartTime.ToString("t"), stationLineEntity.EndTime.ToString("t"));
+            return new StartEndTime
+            {
+                StartTime = stationLineEntity.StartTime.ToString("t"),
+                EndTime = stationLineEntity.EndTime.ToString("t")
+            };
         }
     }
 }

@@ -24,17 +24,21 @@ namespace MetroWebWcfService
             };
         }
 
-        private string GetLineRoute()
+        private LineRoute GetLineRoute()
         {
             if (lineEntity.LineId == 401) // 4号线 外圈 
             {
-                return "外圈";
+                return new LineRoute { FromStationName = "外圈", ToStationName = "外圈" };
             }
             if (lineEntity.LineId == 402) // 4号线 内圈 
             {
-                return "内圈";
+                return new LineRoute { FromStationName = "内圈", ToStationName = "内圈" };
             }
-            return string.Format("{0} -> {1}", lineEntity.LineFromStation.StationName, lineEntity.LineToStation.StationName);
+            return new LineRoute
+            {
+                FromStationName = lineEntity.LineFromStation.StationName,
+                ToStationName = lineEntity.LineToStation.StationName
+            };
         }
     }
 }

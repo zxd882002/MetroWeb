@@ -9,7 +9,7 @@ namespace MetroWebWcfService
         public string LineId { get; set; }
 
         [DataMember]
-        public string LineRoute { get; set; }
+        public LineRoute LineRoute { get; set; }
 
         [DataMember]
         public string LineColor { get; set; }
