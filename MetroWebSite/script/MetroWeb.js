@@ -23,11 +23,6 @@ $(document).ready(function () {
         defaultController.onclickSetEndButton();
     });
 
-    // clear set button
-    $('.ClearSet').on('click', function(){
-        defaultController.onClickClearSetButton();
-    });
-
     // calculate button
     $('.Calculate').on('click', function(){
         defaultController.onClickCalculatorButton();

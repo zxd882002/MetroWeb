@@ -39,9 +39,6 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
                 this.onDrawCanvas();
             }
         }, this);
-
-        // Hide the right pannel
-        this.rightPanelUpdator.clearAllSetButtons();
     }
 
     DefaultController.prototype.onScroll = function (e) {
@@ -80,7 +77,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
             this.metroPainter.clearSelectedNode(this.getNodeByStation(this.clickedMetroStation));
             this.clickedMetroStation = null;
         }
-        
+
         // find node by the selected node or label position
         var node = this.findNodeByPosition(nodeLabel.x, nodeLabel.y);
 
@@ -89,79 +86,81 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
 
         // update the right pannel
         this.clickedMetroStation = this.getStationByNode(node);
-        this.rightPanelUpdator.show(node.eventX, node.eventY + this.header.height());
-        this.rightPanelUpdator.update(this.clickedMetroStation);
-        this.updateStartEndButton();
+        this.rightPanelUpdator.show(
+            this.clickedMetroStation,
+            this.clickNodeIsSetStart(),
+            this.clickNodeIsSetEnd(),
+            node.eventX,
+            node.eventY + this.header.height());
     }
 
     DefaultController.prototype.onClickSetStartButton = function () {
-        // clear start button if set in other node
-        if (this.stationStart != null) {
-            this.metroPainter.clearStartLabel();
-            this.stationStart = null;
-        }
-
         // clear route label
-        if (this.routedNodeList != null && this.routedNodeList.length > 0)
-        {
+        if (this.routedNodeList != null && this.routedNodeList.length > 0) {
             this.metroPainter.clearRoute();
             this.routedNodeList = [];
         }
 
-        // clear start and end button if current node has already been set
-        this.clearCurrentLabel();
+        if (this.clickNodeIsSetStart()) {
+            // if the node is selected
+            this.metroPainter.clearStartLabel();
+            this.stationStart = null;
+        } else {
+            // clear start button if set in other node
+            if (this.stationStart != null) {
+                this.metroPainter.clearStartLabel();
+                this.stationStart = null;
+            }
 
-        // set current node to start node
-        this.stationStart = this.clickedMetroStation;
-        var clickedNode = this.getNodeByStation(this.clickedMetroStation);
-        var startLabel = new Object();
-        startLabel.x = clickedNode.x;
-        startLabel.y = clickedNode.y;
-        this.metroPainter.drawStartLabel(startLabel, this.onClickNode, this);
+            // clear start and end button if current node has already been set
+            this.clearCurrentLabel();
 
-        // update button
-        this.updateStartEndButton();
+            // set current node to start node
+            this.stationStart = this.clickedMetroStation;
+
+            // set current node label
+            var clickedNode = this.getNodeByStation(this.clickedMetroStation);
+            var startLabel = new Object();
+            startLabel.x = clickedNode.x;
+            startLabel.y = clickedNode.y;
+            this.metroPainter.drawStartLabel(startLabel, this.onClickNode, this);
+        }
+
+        this.rightPanelUpdator.hide();
     }
 
     DefaultController.prototype.onclickSetEndButton = function () {
-        // clear end button if set in other node
-        if (this.stationEnd != null) {
-            this.metroPainter.clearEndLabel();
-            this.stationEnd = null;
-        }
-        
         // clear route label
-        if (this.routedNodeList != null && this.routedNodeList.length > 0)
-        {
+        if (this.routedNodeList != null && this.routedNodeList.length > 0) {
             this.metroPainter.clearRoute();
             this.routedNodeList = [];
         }
 
-        // clear start and end button if current node has already been set
-        this.clearCurrentLabel();
-
-        // set current node to end node
-        this.stationEnd = this.clickedMetroStation;
-        var clickedNode = this.getNodeByStation(this.clickedMetroStation);
-        var endLabel = new Object();
-        endLabel.x = clickedNode.x;
-        endLabel.y = clickedNode.y;
-        this.metroPainter.drawEndLabel(endLabel, this.onClickNode, this);
-
-        // update button
-        this.updateStartEndButton();
-    }
-
-    DefaultController.prototype.onClickClearSetButton = function () {
-        if (this.clickNodeIsSetStart()) {
-            this.stationStart = null;
-            this.metroPainter.clearStartLabel();
-        }
         if (this.clickNodeIsSetEnd()) {
-            this.stationEnd = null;
+            // if the node is selected
             this.metroPainter.clearEndLabel();
+            this.stationEnd = null;
+        } else {
+            // clear end button if set in other node
+            if (this.stationEnd != null) {
+                this.metroPainter.clearEndLabel();
+                this.stationEnd = null;
+            }
+
+            // clear start and end button if current node has already been set
+            this.clearCurrentLabel();
+
+            // set current node to end node
+            this.stationEnd = this.clickedMetroStation;
+
+            // set current node label
+            var clickedNode = this.getNodeByStation(this.clickedMetroStation);
+            var endLabel = new Object();
+            endLabel.x = clickedNode.x;
+            endLabel.y = clickedNode.y;
+            this.metroPainter.drawEndLabel(endLabel, this.onClickNode, this);
         }
-        this.updateStartEndButton();
+        this.rightPanelUpdator.hide();
     }
 
     DefaultController.prototype.onClickCalculatorButton = function () {
@@ -202,31 +201,12 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         }
     }
 
-    DefaultController.prototype.updateStartEndButton = function () {
-        this.rightPanelUpdator.clearAllSetButtons();
-        if (!this.clickNodeIsSetStart()) {
-            this.rightPanelUpdator.showSetStartButton();
-        }
-
-        if (!this.clickNodeIsSetEnd()) {
-            this.rightPanelUpdator.showSetEndButton();
-        }
-
-        if (this.clickNodeIsSetStart() || this.clickNodeIsSetEnd()) {
-            this.rightPanelUpdator.showClearSetButton();
-        }
-
-        if (this.stationStart != null && this.stationEnd != null) {
-            this.rightPanelUpdator.showCalculateButton();
-        }
-    }
-
-    DefaultController.prototype.findNodeByPosition = function(x, y){
+    DefaultController.prototype.findNodeByPosition = function (x, y) {
         var node = null;
         var layers = this.metroCanvas.getLayers();
         layers.some(function (layer) {
-            if (typeof layer.stationId !== 'undefined' && 
-                typeof layer.x !== 'undefined' && 
+            if (typeof layer.stationId !== 'undefined' &&
+                typeof layer.x !== 'undefined' &&
                 typeof layer.y !== 'undefined') {
                 if (layer.x == x && layer.y == y) {
                     node = layer;
