@@ -66,7 +66,36 @@
     font-size: 4px;
     cursor: hand;
     cursor: pointer;
-    text-decoration:underline
+    text-decoration:underline;
+}
+
+.SetStart:hover{
+    border-bottom: blue solid; 
+}
+
+.SetEnd:hover{
+    border-bottom: darkorange solid; 
+}
+
+.SetStartImage,.SetEndImage{
+    cursor: hand;
+    cursor: pointer;
+    height: 25px;
+    width: 15px;
+}
+
+.SetStartContent,.SetEndContent{
+    cursor: hand;
+    cursor: pointer;
+    font-size: 15px
+}
+
+.blue{
+    color: blue;
+}
+
+.orange{
+    color: darkorange;
 }
 
 .footer
