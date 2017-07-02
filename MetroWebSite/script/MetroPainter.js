@@ -20,13 +20,8 @@ var startLabelBase = {
     draggable: true,
     groups: ['Metros'],
     dragGroups: ['Metros'],
-    type: 'polygon',
-    strokeStyle: 'purple',
-    fillStyle: 'purple',
-    strokeWidth: 1,
-    radius: 5,
-    sides: 3,
-    rotate: 90,
+    type: 'image',
+    source: 'img/location-blue.png',
     click: function (node) {
         node.onClick.call(node.calleeObj, node)
     }
@@ -38,13 +33,8 @@ var endLabelBase = {
     draggable: true,
     groups: ['Metros'],
     dragGroups: ['Metros'],
-    type: 'polygon',
-    strokeStyle: 'purple',
-    fillStyle: 'purple',
-    strokeWidth: 1,
-    radius: 5,
-    sides: 4,
-    rotate: 90,
+    type: 'image',
+    source: 'img/location-orange.png',
     click: function (node) {
         node.onClick.call(node.calleeObj, node)
     }
@@ -56,12 +46,8 @@ var routeLabelBase = {
     draggable: true,
     groups: ['Metros'],
     dragGroups: ['Metros'],
-    type: 'ellipse',
-    strokeStyle: 'purple',
-    fillStyle: 'purple',
-    strokeWidth: 1,
-    width: 5,
-    height: 5,
+    type: 'image',
+    source: 'img/position.png',
     click: function (node) {
         node.onClick.call(node.calleeObj, node)
     }
@@ -108,11 +94,11 @@ function MetroPainter(metroCanvas, canvasContainer) {
         metroStationGraph.calleeObj = calleeObj;
         metroStationGraph.stationId = metroStation.StationId;
         metroStationGraph.stationName = metroStation.NameGraph.text;
-        this.metroCanvas.draw(metroStationGraph);        
+        this.metroCanvas.draw(metroStationGraph);
 
         var metroStationName = $.extend({}, metroStationNameGraphBase, metroStation.NameGraph);
         metroStationName.name = 'stationName_' + metroStation.StationId + '_' + metroStation.NameGraph.text;
-        this.metroCanvas.draw(metroStationName);  
+        this.metroCanvas.draw(metroStationName);
     }
 
     MetroPainter.prototype.drawLineArray = function (metroStationLineArray) {
@@ -196,7 +182,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
         }).drawLayers();
     }
 
-    MetroPainter.prototype.drawSelectedNode = function (selectedMetroStation) {        
+    MetroPainter.prototype.drawSelectedNode = function (selectedMetroStation) {
         //selectedMetroStation.strokeStyle = 'black';
         selectedMetroStation.strokeWidth = 5;
     }
@@ -208,6 +194,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
 
     MetroPainter.prototype.drawStartLabel = function (startMetroStation, onClickFunction, calleeObj) {
         var metroStationGraph = $.extend({}, startLabelBase, startMetroStation);
+        metroStationGraph.y -= 20;
         metroStationGraph.onClick = onClickFunction;
         metroStationGraph.calleeObj = calleeObj;
         this.metroCanvas.draw(metroStationGraph);
@@ -219,6 +206,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
 
     MetroPainter.prototype.drawEndLabel = function (endMetroStation, onClickFunction, calleeObj) {
         var metroStationGraph = $.extend({}, endLabelBase, endMetroStation);
+        metroStationGraph.y -= 20;
         metroStationGraph.onClick = onClickFunction;
         metroStationGraph.calleeObj = calleeObj;
         this.metroCanvas.draw(metroStationGraph);
@@ -231,6 +219,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
     MetroPainter.prototype.drawRoute = function (stationList, onClickFunction, calleeObj) {
         for (var i = 0; i < stationList.length; i++) {
             var metroStationGraph = $.extend({}, routeLabelBase, stationList[i]);
+            metroStationGraph.y -= 15;
             metroStationGraph.name = "route_" + i;
             metroStationGraph.onClick = onClickFunction;
             metroStationGraph.calleeObj = calleeObj;
@@ -240,7 +229,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
     }
 
     MetroPainter.prototype.clearRoute = function () {
-        this.routeArray.forEach(function(route) {
+        this.routeArray.forEach(function (route) {
             this.metroCanvas.removeLayer(route.name).drawLayers();
         }, this);
         this.routeArray = [];

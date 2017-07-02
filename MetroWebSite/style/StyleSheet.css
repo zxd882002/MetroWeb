@@ -30,7 +30,7 @@
     height: 86%;
 }
 
-.rightPannel{ 
+.contextPannel{ 
     display: none;
     position: absolute;    
     background-color: white; 

@@ -6,7 +6,7 @@ $(document).ready(function () {
         $(".canvasContainer"),
         $('.header'), 
         $('.footer'), 
-        $(".rightPannel"));
+        $(".contextPannel"));
 
     // scroll
     $('#metroCanvas').bind('mousewheel', function (e) {
@@ -28,9 +28,9 @@ $(document).ready(function () {
         defaultController.onClickCalculatorButton();
     });
 
-    // close right pannel button
+    // close context pannel button
     $('.closeButton').on('click', function(){
-        defaultController.rightPanelUpdator.hide();
+        defaultController.contextPanelUpdator.hide();
     })
 
     // initialize canvas

@@ -1,11 +1,11 @@
-function RightPanelUpdator(rightPanel) {
-    this.rightPanel = rightPanel;
-    this.stationInfoHeaderStationName = rightPanel.find(".stationInfo > .stationInfoHeader > .stationName");
-    this.stationInfoContainer = rightPanel.find(".stationInfo > .stationInfoContainer");
-    this.setStartButton = rightPanel.find(".startEndSet > .SetStart");
-    this.setEndButton = rightPanel.find(".startEndSet > .SetEnd");
+function ContextPanelUpdator(contextPanel) {
+    this.contextPanel = contextPanel;
+    this.stationInfoHeaderStationName = contextPanel.find(".stationInfo > .stationInfoHeader > .stationName");
+    this.stationInfoContainer = contextPanel.find(".stationInfo > .stationInfoContainer");
+    this.setStartButton = contextPanel.find(".startEndSet > .SetStart");
+    this.setEndButton = contextPanel.find(".startEndSet > .SetEnd");
 
-    RightPanelUpdator.prototype.show = function (stationInfo, isSetStartButton, isSetEndButton, x, y) {
+    ContextPanelUpdator.prototype.show = function (stationInfo, isSetStartButton, isSetEndButton, x, y) {
         // station name
         this.stationInfoHeaderStationName.text(stationInfo.StationName);
 
@@ -51,12 +51,12 @@ function RightPanelUpdator(rightPanel) {
         }
 
         // shown on correct position
-        this.rightPanel.css('left', x);
-        this.rightPanel.css('top', y);
-        this.rightPanel.show();
+        this.contextPanel.css('left', x);
+        this.contextPanel.css('top', y);
+        this.contextPanel.show();
     }
 
-    RightPanelUpdator.prototype.hide = function () {
-        this.rightPanel.hide();
+    ContextPanelUpdator.prototype.hide = function () {
+        this.contextPanel.hide();
     }
 }

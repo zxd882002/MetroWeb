@@ -1,4 +1,4 @@
-function DefaultController(metroCanvas, canvasContainer, header, footer, rightPanel) {
+function DefaultController(metroCanvas, canvasContainer, header, footer, contextPanel) {
     // website element
     this.metroCanvas = metroCanvas;
     this.canvasContainer = canvasContainer;
@@ -8,7 +8,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
     // lower objects
     this.metroPainter = new MetroPainter(metroCanvas, canvasContainer);
     this.metroWebWcfClient = new MetroWebWcfClient();
-    this.rightPanelUpdator = new RightPanelUpdator(rightPanel)
+    this.contextPanelUpdator = new ContextPanelUpdator(contextPanel)
 
     // models
     this.metroStationArray = null;
@@ -84,9 +84,9 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
         // draw node from the painter
         this.metroPainter.drawSelectedNode(node);
 
-        // update the right pannel
+        // update the context pannel
         this.clickedMetroStation = this.getStationByNode(node);
-        this.rightPanelUpdator.show(
+        this.contextPanelUpdator.show(
             this.clickedMetroStation,
             this.clickNodeIsSetStart(),
             this.clickNodeIsSetEnd(),
@@ -126,7 +126,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
             this.metroPainter.drawStartLabel(startLabel, this.onClickNode, this);
         }
 
-        this.rightPanelUpdator.hide();
+        this.contextPanelUpdator.hide();
     }
 
     DefaultController.prototype.onclickSetEndButton = function () {
@@ -160,7 +160,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, rightPa
             endLabel.y = clickedNode.y;
             this.metroPainter.drawEndLabel(endLabel, this.onClickNode, this);
         }
-        this.rightPanelUpdator.hide();
+        this.contextPanelUpdator.hide();
     }
 
     DefaultController.prototype.onClickCalculatorButton = function () {
