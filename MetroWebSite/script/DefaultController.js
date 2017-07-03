@@ -8,7 +8,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
     // lower objects
     this.metroPainter = new MetroPainter(metroCanvas, canvasContainer);
     this.metroWebWcfClient = new MetroWebWcfClient();
-    this.contextPanelUpdator = new ContextPanelUpdator(contextPanel)
+    this.contextPanelUpdator = new ContextPanelUpdator(contextPanel);
 
     // models
     this.metroStationArray = null;
@@ -21,6 +21,8 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
     DefaultController.prototype.initializeCanvas = function () {
         // set the canvas to fill the whole page
         this.metroPainter.fullFillCanvas();
+        this.contextPanelUpdator.canvasRight = this.metroCanvas.position().left + this.metroCanvas.width();
+        this.contextPanelUpdator.canvasBotton = this.metroCanvas.position().top + this.metroCanvas.height();
 
         // Show waiting message	
         this.metroPainter.drawWaitingMessage();
@@ -50,6 +52,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
 
         // scale canvas
         this.metroPainter.scaleCanvas(e.clientX, e.clientY - header.height(), scaleVal);
+        this.contextPanelUpdator.hide();
     }
 
     DefaultController.prototype.onResize = function (e) {
@@ -62,13 +65,19 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
         this.footer.text("新大小：（" + width + " * " + height + ")");
 
         // this.onDrawCanvas();
+
+        this.contextPanelUpdator.hide();
+    }
+
+    DefaultController.prototype.onDrag = function(node) {
+        this.contextPanelUpdator.hide();
     }
 
     DefaultController.prototype.onDrawCanvas = function () {
         this.metroPainter.clearEntireCanvas();
-        this.metroPainter.drawBackGround();
-        this.metroPainter.drawLineArray(this.metroStationLineArray);
-        this.metroPainter.drawStationArray(this.metroStationArray, this.onClickNode, this);
+        this.metroPainter.drawBackGround(this.onDrag, this);
+        this.metroPainter.drawLineArray(this.metroStationLineArray, this.onDrag, this);
+        this.metroPainter.drawStationArray(this.metroStationArray, this.onClickNode, this.onDrag, this);
     }
 
     DefaultController.prototype.onClickNode = function (nodeLabel) {

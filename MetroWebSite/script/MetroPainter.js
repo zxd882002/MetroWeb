@@ -11,6 +11,36 @@ var metroStationGraphBase = {
     height: 15,
     click: function (node) {
         node.onClick.call(node.calleeObj, node)
+    },
+    dragstart: function(node) {
+        node.onDrag.call(node.calleeObj, node)
+    }
+}
+
+var metroStationNameGraphBase = {
+    layer: true,
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'text',
+    strokeStyle: 'black',
+    strokeWidth: 1,
+    fontSize: 4,
+    fontFamily: 'SimSun',
+    dragstart: function(node) {
+        node.onDrag.call(node.calleeObj, node)
+    }
+}
+
+var metroStationLineGraphBase = {
+    layer: true,
+    draggable: true,
+    groups: ['Metros'],
+    dragGroups: ['Metros'],
+    type: 'path',
+    strokeWidth: 5,
+     dragstart: function(node) {
+        node.onDrag.call(node.calleeObj, node)
     }
 }
 
@@ -53,27 +83,6 @@ var routeLabelBase = {
     }
 }
 
-var metroStationNameGraphBase = {
-    layer: true,
-    draggable: true,
-    groups: ['Metros'],
-    dragGroups: ['Metros'],
-    type: 'text',
-    strokeStyle: 'black',
-    strokeWidth: 1,
-    fontSize: 4,
-    fontFamily: 'SimSun',
-}
-
-var metroStationLineGraphBase = {
-    layer: true,
-    draggable: true,
-    groups: ['Metros'],
-    dragGroups: ['Metros'],
-    type: 'path',
-    strokeWidth: 5,
-}
-
 function MetroPainter(metroCanvas, canvasContainer) {
     this.metroCanvas = metroCanvas;
     this.canvasContainer = canvasContainer;
@@ -81,16 +90,17 @@ function MetroPainter(metroCanvas, canvasContainer) {
     this.height = canvasContainer.height();
     this.routeArray = new Array();
 
-    MetroPainter.prototype.drawStationArray = function (metroStationArray, onClickFunction, calleeObj) {
+    MetroPainter.prototype.drawStationArray = function (metroStationArray, onClickFunction, onDragFunction, calleeObj) {
         for (var i = 0; i < metroStationArray.length; i++) {
-            this.drawStation(metroStationArray[i], onClickFunction, calleeObj);
+            this.drawStation(metroStationArray[i], onClickFunction, onDragFunction, calleeObj);
         }
     }
 
-    MetroPainter.prototype.drawStation = function (metroStation, onClickFunction, calleeObj) {
+    MetroPainter.prototype.drawStation = function (metroStation, onClickFunction, onDragFunction, calleeObj) {
         var metroStationGraph = $.extend({}, metroStationGraphBase, metroStation.StationGraph);
         metroStationGraph.name = 'stationNode_' + metroStation.StationId + '_' + metroStation.NameGraph.text;
         metroStationGraph.onClick = onClickFunction;
+        metroStationGraph.onDrag = onDragFunction;
         metroStationGraph.calleeObj = calleeObj;
         metroStationGraph.stationId = metroStation.StationId;
         metroStationGraph.stationName = metroStation.NameGraph.text;
@@ -98,18 +108,22 @@ function MetroPainter(metroCanvas, canvasContainer) {
 
         var metroStationName = $.extend({}, metroStationNameGraphBase, metroStation.NameGraph);
         metroStationName.name = 'stationName_' + metroStation.StationId + '_' + metroStation.NameGraph.text;
+        metroStationGraph.onDrag = onDragFunction;
+        metroStationGraph.calleeObj = calleeObj;
         this.metroCanvas.draw(metroStationName);
     }
 
-    MetroPainter.prototype.drawLineArray = function (metroStationLineArray) {
+    MetroPainter.prototype.drawLineArray = function (metroStationLineArray, onDragFunction, calleeObj) {
         for (var j = 0; j < metroStationLineArray.length; j++) {
-            this.drawLine(metroStationLineArray[j]);
+            this.drawLine(metroStationLineArray[j], onDragFunction, calleeObj);
         }
     }
 
-    MetroPainter.prototype.drawLine = function (stationLine) {
+    MetroPainter.prototype.drawLine = function (stationLine, onDragFunction, calleeObj) {
         var metroStationLineGraph = $.extend({}, metroStationLineGraphBase, stationLine.LineGraph);
         metroStationLineGraph.name = 'line_' + stationLine.LineId;
+        metroStationLineGraph.onDrag = onDragFunction;
+        metroStationLineGraph.calleeObj = calleeObj;
         this.metroCanvas.draw(metroStationLineGraph);
     }
 
@@ -131,7 +145,7 @@ function MetroPainter(metroCanvas, canvasContainer) {
         }
     }
 
-    MetroPainter.prototype.drawBackGround = function () {
+    MetroPainter.prototype.drawBackGround = function (onDragFunction, calleeObj) {
         this.metroCanvas.drawRect({
             layer: true,
             name: 'background',
@@ -143,7 +157,10 @@ function MetroPainter(metroCanvas, canvasContainer) {
             y: this.height * -1,
             width: this.width * 3,
             height: this.height * 3,
-            fromCenter: false
+            fromCenter: false,
+            dragstart: function(node) {
+                onDragFunction.call(calleeObj, node)
+            }
         });
     }
 

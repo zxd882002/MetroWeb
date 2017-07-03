@@ -4,6 +4,8 @@ function ContextPanelUpdator(contextPanel) {
     this.stationInfoContainer = contextPanel.find(".stationInfo > .stationInfoContainer");
     this.setStartButton = contextPanel.find(".startEndSet > .SetStart");
     this.setEndButton = contextPanel.find(".startEndSet > .SetEnd");
+    this.canvasRight = 0;
+    this.canvasBotton = 0;
 
     ContextPanelUpdator.prototype.show = function (stationInfo, isSetStartButton, isSetEndButton, x, y) {
         // station name
@@ -51,6 +53,15 @@ function ContextPanelUpdator(contextPanel) {
         }
 
         // shown on correct position
+        var width = this.contextPanel.outerWidth();
+        var height = this.contextPanel.outerHeight();
+
+        if(x + width > this.canvasRight)
+            x -= width;
+
+        if(y + height > this.canvasBotton)
+            y -= height;
+
         this.contextPanel.css('left', x);
         this.contextPanel.css('top', y);
         this.contextPanel.show();
