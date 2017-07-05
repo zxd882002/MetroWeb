@@ -10,6 +10,7 @@
     <script type="text/javascript" src="script/MetroWebWcfClient.js"></script>
     <script type="text/javascript" src="script/MetroPainter.js"></script>
     <script tyep="text/javascript" src="script/ContextPanelUpdator.js"></script>
+    <script tyep="text/javascript" src="script/CalculateToolTipUpdater.js"></script>
     <script type="text/javascript" src="script/DefaultController.js"></script>
     <script type="text/javascript" src="script/MetroWeb.js"></script>
 </head>
@@ -30,21 +31,23 @@
             <div class="stationInfoContainer"></div>
         </div>
         <div class="startEndSet">
-            <span class="SetStart">
-                <img src="img\location-blue.png" class="SetStartImage">
-                <span class="SetStartContent blue">设为起点</span>
+            <span class="setStart">
+                <img src="img\location-blue.png" class="setStartImage">
+                <span class="setStartContent blue">设为起点</span>
             </span>
-            <span class="SetEnd">
-                <img src="img\location-orange.png" class="SetEndImage">
-                <span class="SetEndContent orange">设为终点</span>
+            <span class="setEnd">
+                <img src="img\location-orange.png" class="setEndImage">
+                <span class="setEndContent orange">设为终点</span>
             </span>
         </div>
     </div>
+    <div class="calculateToolTip">
+        <span class="calculate">计算最快路线</span>
+        <span class="calculating">计算中,请稍等</span>
+        <span class="calculated">计算完成</span>
+    </div>
     <div class="footer">
         <span>This is footer</span>
-        <div class="Calculate">
-            <span>计算最快路线</span>
-        </div>
     </div>
 </body>
 

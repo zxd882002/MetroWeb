@@ -1,4 +1,4 @@
-function DefaultController(metroCanvas, canvasContainer, header, footer, contextPanel) {
+function DefaultController(metroCanvas, canvasContainer, header, footer, contextPanel, toolTip) {
     // website element
     this.metroCanvas = metroCanvas;
     this.canvasContainer = canvasContainer;
@@ -9,6 +9,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
     this.metroPainter = new MetroPainter(metroCanvas, canvasContainer);
     this.metroWebWcfClient = new MetroWebWcfClient();
     this.contextPanelUpdator = new ContextPanelUpdator(contextPanel);
+    this.calculateToolTipUpdator = new CalculateToolTipUpdater(toolTip);
 
     // models
     this.metroStationArray = null;

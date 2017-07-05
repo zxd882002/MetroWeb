@@ -3,10 +3,11 @@
 $(document).ready(function () {
     defaultController = new DefaultController(
         $('#metroCanvas'), 
-        $(".canvasContainer"),
+        $('.canvasContainer'),
         $('.header'), 
         $('.footer'), 
-        $(".contextPannel"));
+        $('.contextPannel'),
+        $('.calculateToolTip'));
 
     // scroll
     $('#metroCanvas').bind('mousewheel', function (e) {
@@ -14,17 +15,17 @@ $(document).ready(function () {
     });
 
     // set start button
-    $('.SetStart').on('click', function(){
+    $('.setStart').on('click', function(){
         defaultController.onClickSetStartButton();
     });
 
     // set end button
-    $('.SetEnd').on('click', function(){
+    $('.setEnd').on('click', function(){
         defaultController.onclickSetEndButton();
     });
 
     // calculate button
-    $('.Calculate').on('click', function(){
+    $('.calculate').on('click', function(){
         defaultController.onClickCalculatorButton();
     });
 

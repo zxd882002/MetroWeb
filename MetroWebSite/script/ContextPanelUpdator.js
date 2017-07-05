@@ -2,8 +2,8 @@ function ContextPanelUpdator(contextPanel) {
     this.contextPanel = contextPanel;
     this.stationInfoHeaderStationName = contextPanel.find(".stationInfo > .stationInfoHeader > .stationName");
     this.stationInfoContainer = contextPanel.find(".stationInfo > .stationInfoContainer");
-    this.setStartButton = contextPanel.find(".startEndSet > .SetStart");
-    this.setEndButton = contextPanel.find(".startEndSet > .SetEnd");
+    this.setStartButton = contextPanel.find(".startEndSet > .setStart");
+    this.setEndButton = contextPanel.find(".startEndSet > .setEnd");
     this.canvasRight = 0;
     this.canvasBotton = 0;
 
@@ -40,16 +40,16 @@ function ContextPanelUpdator(contextPanel) {
 
         // Start button content
         if (isSetStartButton) {
-            this.setStartButton.children('.SetStartContent').text('取消设为起点');
+            this.setStartButton.children('.setStartContent').text('取消设为起点');
         } else {
-            this.setStartButton.children('.SetStartContent').text('设为起点');
+            this.setStartButton.children('.setStartContent').text('设为起点');
         }
 
         // End button content
         if (isSetEndButton) {
-            this.setEndButton.children('.SetEndContent').text('取消设为终点');
+            this.setEndButton.children('.setEndContent').text('取消设为终点');
         } else {
-            this.setEndButton.children('.SetEndContent').text('设为终点');
+            this.setEndButton.children('.setEndContent').text('设为终点');
         }
 
         // shown on correct position
