@@ -1,3 +1,0 @@
-function CalculateToolTipUpdater(toolTip){
-    
-}

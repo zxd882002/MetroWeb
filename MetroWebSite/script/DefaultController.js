@@ -9,7 +9,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
     this.metroPainter = new MetroPainter(metroCanvas, canvasContainer);
     this.metroWebWcfClient = new MetroWebWcfClient();
     this.contextPanelUpdator = new ContextPanelUpdator(contextPanel);
-    this.calculateToolTipUpdator = new CalculateToolTipUpdater(toolTip);
+    this.calculateToolTipUpdator = new CalculateToolTipUpdator(toolTip);
 
     // models
     this.metroStationArray = null;
@@ -24,6 +24,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
         this.metroPainter.fullFillCanvas();
         this.contextPanelUpdator.canvasRight = this.metroCanvas.position().left + this.metroCanvas.width();
         this.contextPanelUpdator.canvasBotton = this.metroCanvas.position().top + this.metroCanvas.height();
+        this.calculateToolTipUpdator.show(this.metroCanvas.position().left + this.metroCanvas.width());
 
         // Show waiting message	
         this.metroPainter.drawWaitingMessage();
@@ -70,7 +71,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
         this.contextPanelUpdator.hide();
     }
 
-    DefaultController.prototype.onDrag = function(node) {
+    DefaultController.prototype.onDrag = function (node) {
         this.contextPanelUpdator.hide();
     }
 
@@ -89,7 +90,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
         }
 
         // find node by the selected node or label position
-        var node = this.findNodeByPosition(nodeLabel.x, nodeLabel.y);
+        var node = this.findNodeByPosition(nodeLabel.x, nodeLabel.y, nodeLabel.type == 'image');
 
         // draw node from the painter
         this.metroPainter.drawSelectedNode(node);
@@ -115,6 +116,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
             // if the node is selected
             this.metroPainter.clearStartLabel();
             this.stationStart = null;
+            this.calculateToolTipUpdator.fadeOut(this.calculateToolTipUpdator.hideCalculateButton, this.calculateToolTipUpdator);
         } else {
             // clear start button if set in other node
             if (this.stationStart != null) {
@@ -137,6 +139,11 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
         }
 
         this.contextPanelUpdator.hide();
+
+        if (this.stationStart != null && this.stationEnd != null) {
+            this.calculateToolTipUpdator.showCalculateButton();
+            this.calculateToolTipUpdator.fadeIn(null, null);
+        }
     }
 
     DefaultController.prototype.onclickSetEndButton = function () {
@@ -150,6 +157,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
             // if the node is selected
             this.metroPainter.clearEndLabel();
             this.stationEnd = null;
+            this.calculateToolTipUpdator.fadeOut(this.calculateToolTipUpdator.hideCalculateButton, this.calculateToolTipUpdator);
         } else {
             // clear end button if set in other node
             if (this.stationEnd != null) {
@@ -171,9 +179,17 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
             this.metroPainter.drawEndLabel(endLabel, this.onClickNode, this);
         }
         this.contextPanelUpdator.hide();
+
+        if (this.stationStart != null && this.stationEnd != null) {
+            this.calculateToolTipUpdator.showCalculateButton();
+            this.calculateToolTipUpdator.fadeIn(null, null);
+        }
     }
 
     DefaultController.prototype.onClickCalculatorButton = function () {
+        this.calculateToolTipUpdator.hideCalculateButton();
+        this.calculateToolTipUpdator.showCalculatingSpan();
+
         this.metroWebWcfClient.GetNearestRoute(
             this.stationStart.StationName, this.stationStart.StationLines[0].LineInfo.LineId,
             this.stationEnd.StationName, this.stationEnd.StationLines[0].LineInfo.LineId,
@@ -188,6 +204,14 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
                 }
                 this.metroPainter.clearRoute();
                 this.metroPainter.drawRoute(this.routedNodeList, this.onClickNode, this);
+
+                this.calculateToolTipUpdator.hideCalculatingSpan();
+                this.calculateToolTipUpdator.showCalculatedSpan();
+                var that = this;
+                setTimeout(
+                    function () {
+                        that.calculateToolTipUpdator.fadeOut(that.calculateToolTipUpdator.hideCalculatedSpan, that.calculateToolTipUpdator);
+                    }, 1000);
             }, this);
     }
 
@@ -211,7 +235,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
         }
     }
 
-    DefaultController.prototype.findNodeByPosition = function (x, y) {
+    DefaultController.prototype.findNodeByPosition = function (x, y, isLabel) {
         var node = null;
         var layers = this.metroCanvas.getLayers();
         layers.some(function (layer) {
@@ -219,6 +243,10 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
                 typeof layer.x !== 'undefined' &&
                 typeof layer.y !== 'undefined') {
                 if (layer.x == x && layer.y == y) {
+                    node = layer;
+                    return true;
+                }
+                if (isLabel && layer.x == x && layer.y == y + 20) {
                     node = layer;
                     return true;
                 }

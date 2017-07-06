@@ -77,10 +77,7 @@ var routeLabelBase = {
     groups: ['Metros'],
     dragGroups: ['Metros'],
     type: 'image',
-    source: 'img/position.png',
-    click: function (node) {
-        node.onClick.call(node.calleeObj, node)
-    }
+    source: 'img/position.png'
 }
 
 function MetroPainter(metroCanvas, canvasContainer) {

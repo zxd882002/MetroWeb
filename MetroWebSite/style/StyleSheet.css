@@ -91,17 +91,22 @@
 }
 
 .calculateToolTip{
-    position: absolute;   
-    right: 0px;
+    position: absolute; 
+    width: 200px; 
+    height: 20px;
     bottom: 5%; 
-    background-color: white; 
-    border: 2px solid black;
-    border-radius: 10px;
+    background-color: rgba(64,128,255,0.8);     
     padding: 10px;
+    display: none;
+    text-align: center;
 }
 
-.calculate{
+.calculate,.calculating,.calculated{
     color: blue;
+    display: none;
+}
+
+.calculate{    
     cursor: hand;
     cursor: pointer;
     border-bottom: blue solid; 
