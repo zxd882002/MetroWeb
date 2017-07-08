@@ -50,7 +50,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
         var scaleVal = e.originalEvent.wheelDelta > 0 ? 1.05 : 0.95;
 
         // output scale value
-        footer.text("x=" + e.clientX + ", y=" + (e.clientY - header.height()) + ", scale=" + scaleVal);
+        //footer.text("x=" + e.clientX + ", y=" + (e.clientY - header.height()) + ", scale=" + scaleVal);
 
         // scale canvas
         this.metroPainter.scaleCanvas(e.clientX, e.clientY - header.height(), scaleVal);
@@ -64,7 +64,7 @@ function DefaultController(metroCanvas, canvasContainer, header, footer, context
         // output the new size
         var height = canvasContainer.height();
         var width = canvasContainer.width();
-        this.footer.text("新大小：（" + width + " * " + height + ")");
+        //this.footer.text("新大小：（" + width + " * " + height + ")");
 
         // this.onDrawCanvas();
 
